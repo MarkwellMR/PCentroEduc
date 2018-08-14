@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <f:event type="preRenderView" listener="#{controllerEnc.cargarDatos()}"/>
+        <h:form id="frmGuardar">
+            <p:outputLabel for="txtCode" value="Codigo:" />
+            <p:inputText id="txtCode" value="#{controllerEnc.enc.codigo}"/>
+            <br/>
+            <p:outputLabel for="txtNombre" value="Nombre:"/>
+            <p:inputText id="txtNombre" value="#{controllerEnc.enc.nombre}"/>
+            <br/>
+            <p:outputLabel for="txtApellido" value="Apellido:"/>
+            <p:inputText id="txtApellido" value="#{controllerEnc.enc.apellido}"/>
+            <br/>
+            <p:outputLabel for="txtDir" value="Direccion:"/>
+            <p:inputText id="txtDir" value="#{controllerEnc.enc.direccion}"/>
+            <br/>
+            <p:outputLabel for="txtEmail" value="Email"/>
+            <p:inputText id="txtEmail" value="#{controllerEnc.enc.email}"/>
+            <br/>
+            <p:outputLabel for="txtTC" value="Telefono Casa"/>
+            <p:inputText id="txtTC" value="#{controllerEnc.enc.telCasa}"/>
+            <br/>
+            <p:outputLabel for="txtMV" value="Telefono Movil"/>
+            <p:inputText id="txtMV" value="#{controllerEnc.enc.telMovil}"/>
+            <br/>
+            <p:outputLabel for="txtFechNac" value="Fecha de Nacimiento:"/>
+            <p:inputText id="txtFechNac" value="#{controllerEnc.enc.fechanac}"/>
+            <br/>
+            <p:outputLabel for="txtCUI" value="CUI"/>
+            <p:inputText id="txtCUI" value="#{controllerEnc.enc.cui}"/>
+            <br/>
+            <p:outputLabel for="txtCsecre" value="Codigo de Secretaria"/>
+            <p:inputText id="txtCsecre" value="#{controllerEnc.sec.codigo}"/>
+            <br/>
+            <p:commandButton actionListener="#{controllerEnc.guardarEnc()}" value="Crear"/>
+        </h:form>
+        <br/><br/><br/><br/><br/><br/><br/>
+        <h:form id="frmTabla">
+            <p:dataTable var="encargado" value="#{controllerEnc.listaEnc}" id="tblEnc">
+                <p:column headerText="Codigo">
+                    <h:outputText value="#{encargado.codigo}"/>
+                </p:column>
+                <p:column headerText="Nombre">
+                    <h:outputText value="#{encargado.nombre}"/>
+                </p:column>
+                <p:column headerText="Apellido">
+                    <h:outputText value="#{encargado.apellido}"/>
+                </p:column>
+                <p:column headerText="Direccion">
+                    <h:outputText value="#{encargado.direccion}"/>
+                </p:column>
+                <p:column headerText="Email">
+                    <h:outputText value="#{encargado.email}"/>
+                </p:column>
+                <p:column headerText="Telefono Casa">
+                    <h:outputText value="#{encargado.telCasa}"/>
+                </p:column>
+                <p:column headerText="Telefono Movil">
+                    <h:outputText value="#{encargado.telMovil}"/>
+                </p:column>
+                <p:column headerText="Fecha de Nacimiento">
+                    <h:outputText value="#{encargado.fechanac}"/>
+                </p:column>
+                <p:column headerText="CUI">
+                    <h:outputText value="#{encargado.cui}"/>
+                </p:column>
+                <p:column>
+                    <p:commandButton value="Actualizar" actionListener="#{controllerEnc.searchEnc(encargado)}" oncomplete="PF('dlgUpdEnc').show();" update=":updEnc" />
+                    <p:commandButton value="Eliminar"/>
+                </p:column>      
+            </p:dataTable>
+        </h:form>
+
+        <p:dialog header="Actualizar Datos" id="updEnc" widgetVar="dlgUpdEnc" showEffect="explode" hideEffect="none" height="500" width="600">
+            <h:form>
+                <p:outputLabel for="txtCodea" value="Codigo:" />
+                <p:inputText id="txtCodea" value="#{controllerEnc.enc.codigo}"/>
+                <br/>
+                <p:outputLabel for="txtNombrea" value="Nombre:"/>
+                <p:inputText id="txtNombrea" value="#{controllerEnc.enc.nombre}"/>
+                <br/>
+                <p:outputLabel for="txtApellidoa" value="Apellido:"/>
+                <p:inputText id="txtApellidoa" value="#{controllerEnc.enc.apellido}"/>
+                <br/>
+                <p:outputLabel for="txtDira" value="Direccion:"/>
+                <p:inputText id="txtDira" value="#{controllerEnc.enc.direccion}"/>
+                <br/>
+                <p:outputLabel for="txtEmaila" value="Email"/>
+                <p:inputText id="txtEmaila" value="#{controllerEnc.enc.email}"/>
+                <br/>
+                <p:outputLabel for="txtTCa" value="Telefono Casa"/>
+                <p:inputText id="txtTCa" value="#{controllerEnc.enc.telCasa}"/>
+                <br/>
+                <p:outputLabel for="txtMVa" value="Telefono Movil"/>
+                <p:inputText id="txtMVa" value="#{controllerEnc.enc.telMovil}"/>
+                <br/>
+                <p:outputLabel for="txtFechNaca" value="Fecha de Nacimiento:"/>
+                <p:inputText id="txtFechNaca" value="#{controllerEnc.enc.fechanac}"/>
+                <br/>
+                <p:outputLabel for="txtCUIa" value="CUI"/>
+                <p:inputText id="txtCUIa" value="#{controllerEnc.enc.cui}"/>
+                
+                <p:commandButton actionListener="#{controllerAdmin.updateAdmin()}" value="Actualizar" update=":frmTabla:tblCl" oncomplete="PF('dlgUpdate').hide();"/>
+                <p:commandButton value="Cancelar" update=":frmTabla:tblCl" oncomplete="PF('dlgUpdate').hide();"/>
+
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>
+
