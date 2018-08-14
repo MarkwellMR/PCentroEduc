@@ -9,7 +9,7 @@ public class Conexion {
 
   private Connection miconexion;
   
-  private static final String URL = "jdbc:mysql://172.16.32.51:3306/centro_educativo";
+  private static final String URL = "jdbc:mysql://10.12.44.182:3306/centro_educativo";
   private static final String USER = "Markwell";
   private static final String PASSWORD = "Henry118";
 //    private static final String URL = "jdbc:mysql://localhost:3306/centro_educativo";
