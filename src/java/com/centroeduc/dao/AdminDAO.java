@@ -23,7 +23,7 @@ public class AdminDAO extends Conexion{
         respuesta = null;
         try {
             this.Conectar();
-            sql = "insert into administrador values(?,?,?,?,?,?,?,?,?,MD5(?))";
+            sql = "insert into administrador values(?,?,?,?,?,?,?,?,?,MD5(?),?)";
             ejecutar = this.getMiconexion().prepareStatement(sql);
             ejecutar.setString(1, admin.getCodigo());
             ejecutar.setString(2, admin.getNombre());
@@ -35,6 +35,7 @@ public class AdminDAO extends Conexion{
             ejecutar.setString(8, admin.getFechanac());
             ejecutar.setLong(9, admin.getCui());
             ejecutar.setString(10, admin.getPass());
+            ejecutar.setInt(11, admin.getEstado());
             
             ejecutar.executeUpdate();
             respuesta="Registro almacenado con Exito";
@@ -71,7 +72,7 @@ public class AdminDAO extends Conexion{
                 admin.setFechanac(resultado.getString("fechanac"));
                 admin.setCui(resultado.getLong("cui"));
                 admin.setPass(resultado.getString("password"));
-                
+                admin.setEstado(Integer.getInteger("estado"));
                 lista.add(admin);
                 
             }
@@ -107,7 +108,7 @@ public class AdminDAO extends Conexion{
         respuesta = null;
         try {
             this.Conectar();
-            sql="update administrador set nombre=?, apellido=?, direccion=?, email=?, tel_casa=?, tel_movil=?, fechanac=?, cui=?, password=MD5(?) where cod_admin=?";
+            sql="update administrador set nombre=?, apellido=?, direccion=?, email=?, tel_casa=?, tel_movil=?, fechanac=?, cui=?, password=MD5(?), estado=? where cod_admin=?";
             ejecutar = this.getMiconexion().prepareStatement(sql);
             
             ejecutar.setString(1, admin.getNombre());
@@ -120,6 +121,7 @@ public class AdminDAO extends Conexion{
             ejecutar.setLong(8, admin.getCui());
             ejecutar.setString(9, admin.getPass());
             ejecutar.setString(10, admin.getCodigo());
+            ejecutar.setInt(11, admin.getEstado());
             
             ejecutar.executeUpdate();
             respuesta = "datos modificados con exito";
@@ -152,6 +154,7 @@ public class AdminDAO extends Conexion{
                 admin.setFechanac(this.valores.getString("fechanac"));
                 admin.setCui(this.valores.getLong("cui"));
                 admin.setPass(this.valores.getString("password"));
+                admin.setEstado(this.valores.getInt("estado"));
             }else{
                 System.out.println("No se encontraron registros");
             }
@@ -185,6 +188,7 @@ public class AdminDAO extends Conexion{
                 admin.setFechanac(this.valores.getString("fechanac"));
                 admin.setCui(this.valores.getLong("cui"));
                 admin.setPass(this.valores.getString("password"));
+                admin.setEstado(this.valores.getInt("estado"));
             }else{
                 System.out.println("No se encontraron registros");
             }

@@ -12,6 +12,7 @@ public class Persona {
     private String fechanac;
     private Long cui;
     private String pass;
+    private Integer estado;
 
     public Persona() {
         this.codigo=null;
@@ -24,6 +25,7 @@ public class Persona {
         this.fechanac=null;
         this.cui=null;
         this.pass=null;
+        this.estado=null;
     }
 
     public String getCodigo() {
@@ -105,6 +107,15 @@ public class Persona {
     public void setPass(String pass) {
         this.pass = pass;
     }
+
+    public Integer getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Integer estado) {
+        this.estado = estado;
+    }
+
     
   
 }
