@@ -14,6 +14,8 @@ import org.primefaces.event.ToggleEvent;
 @ViewScoped
 public class ControllerAdmin {
     ArrayList<Administrador> listAdmin = new ArrayList();
+    AdminDAO dao = new AdminDAO();
+    Administrador admin = new Administrador();
 
     public ArrayList<Administrador> getListAdmin() {
         return listAdmin;
@@ -24,12 +26,9 @@ public class ControllerAdmin {
     }
     
     public void loadAdmin(){
-        AdminDAO dao = new AdminDAO();
         listAdmin= dao.listAdmin();
     }
     
-    Administrador admin = new Administrador();
-
     public Administrador getAdmin() {
         return admin;
     }
@@ -39,7 +38,6 @@ public class ControllerAdmin {
     }
     
     public void saveAdmin(){
-        AdminDAO dao = new AdminDAO();
         try {
             dao.registerAdmin(admin);
         } catch (Exception e) {
@@ -48,7 +46,6 @@ public class ControllerAdmin {
     }
     
     public void searchAdmin(Administrador datos){
-        AdminDAO dao = new AdminDAO();
         try {
             admin = dao.searchId(datos.getCodigo());
         } catch (Exception e) {
@@ -56,7 +53,7 @@ public class ControllerAdmin {
         }
     }
     public void updateAdmin(){
-        AdminDAO dao = new AdminDAO();
+        
         try {
             dao.updateAdmin(admin);
         } catch (Exception e) {
@@ -64,14 +61,15 @@ public class ControllerAdmin {
         }
     }
     
-    public void deleteAdmin(){
-        AdminDAO dao = new AdminDAO();
+    public void changeState(){
         try {
-            dao.deleteAdmin(admin.getCodigo());
+            dao.changeState(admin);
         } catch (Exception e) {
-            System.out.println("Error en ControllerAdmin(delete): " + e);
+            System.out.println("Error ControllerAdmin(change): " + e);
         }
-    }
+}
+    
+    
     
     //mensaje :v
 //    public void handleToggle(ToggleEvent event) {

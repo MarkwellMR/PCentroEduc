@@ -12,6 +12,7 @@
         <f:event type="preRenderView" listener="#{controllerAdmin.loadAdmin()}"/>
         <h1>Ingrese sus Datos</h1>
         <h:form id="frmIngreso">
+            
             <p:outputLabel for="txtCode" value="Codigo:"/>
             <p:inputText id="txtCode" value="#{controllerAdmin.admin.codigo}"/>
             <br/>
@@ -42,52 +43,45 @@
             <p:outputLabel for="txtPass" value="Contraseña:"/>
             <p:inputText id="txtPass" value="#{controllerAdmin.admin.pass}" type="password"/>
             <br/>
-            <p:outputLabel for="txtState" value="Estado:"/>
-            <p:inputText id="txtState" value="#{controllerAdmin.admin.estado}"/>
-            <br/>
             <p:commandButton actionListener="#{controllerAdmin.saveAdmin()}" value="Guardar" update=":frmTabla:tblCl" />
         </h:form>
         <br/><br/>
         <h:form id="frmTabla">
-                <p:dataTable var="admin" value="#{controllerAdmin.listAdmin}" id="tblCl">
-                    <p:column headerText="Codigo">
-                        <h:outputText value="#{admin.codigo}"/>
-                    </p:column>
-                    <p:column headerText="Nombre">
-                        <h:outputText value="#{admin.nombre}"/>
-                    </p:column>
-                    <p:column headerText="Apellido">
-                        <h:outputText value="#{admin.apellido}"/>
-                    </p:column>
-                    <p:column headerText="Direccion">
-                        <h:outputText value="#{admin.direccion}"/>
-                    </p:column>
-                    <p:column headerText="Email">
-                        <h:outputText value="#{admin.email}"/>
-                    </p:column>
-                    <p:column headerText="telefono de Casa">
-                        <h:outputText value="#{admin.telCasa}"/>
-                    </p:column>
-                    <p:column headerText="Telefono Movil">
-                        <h:outputText value="#{admin.telMovil}"/>
-                    </p:column>
-                    <p:column headerText="Fecha de Nacimiento">
-                        <h:outputText value="#{admin.fechanac}"/>
-                    </p:column>
-                    <p:column headerText="CUI">
-                        <h:outputText value="#{admin.cui}"/>
-                    </p:column>
-<!--                    <p:column headerText="Contraseña">
-                        <h:outputText value="#{admin.pass}"/>
-                    </p:column>-->
-                    <p:column headerText="Estado">
-                        <h:outputText value="#{admin.estado}"/>
-                    </p:column>
-                    <p:column headerText="Acciones">
-                        <p:commandButton title="Actualizar" actionListener="#{controllerAdmin.searchAdmin(admin)}" oncomplete="PF('dlgUpdate').show();" update=":update" icon="ui-icon-print"/>
-                        <p:commandButton title="Eliminar" actionListener="#{controllerAdmin.searchAdmin(admin)}" oncomplete="PF('dlgDelete').show();" update=":delete" icon="ui-icon-trash"/>
-                    </p:column>
-                </p:dataTable>
+            <p:dataTable var="admin" value="#{controllerAdmin.listAdmin}" id="tblCl">
+                <p:column headerText="Codigo">
+                    <h:outputText value="#{admin.codigo}"/>
+                </p:column>
+                <p:column headerText="Nombre">
+                    <h:outputText value="#{admin.nombre}"/>
+                </p:column>
+                <p:column headerText="Apellido">
+                    <h:outputText value="#{admin.apellido}"/>
+                </p:column>
+                <p:column headerText="Direccion">
+                    <h:outputText value="#{admin.direccion}"/>
+                </p:column>
+                <p:column headerText="Email">
+                    <h:outputText value="#{admin.email}"/>
+                </p:column>
+                <p:column headerText="telefono de Casa">
+                    <h:outputText value="#{admin.telCasa}"/>
+                </p:column>
+                <p:column headerText="Telefono Movil">
+                    <h:outputText value="#{admin.telMovil}"/>
+                </p:column>
+                <p:column headerText="Fecha de Nacimiento">
+                    <h:outputText value="#{admin.fechanac}"/>
+                </p:column>
+                <p:column headerText="CUI">
+                    <h:outputText value="#{admin.cui}"/>
+                </p:column>
+                <p:column headerText="Estado">
+                    <h:outputText value="#{admin.estado}"/>
+                </p:column>
+                <p:column headerText="Acciones">
+                    <p:commandButton title="Actualizar" actionListener="#{controllerAdmin.searchAdmin(admin)}" oncomplete="PF('dlgUpdate').show();" update=":update" icon="ui-icon-print"/>
+                </p:column>
+            </p:dataTable>
         </h:form>
         <p:dialog header="Actualizar Datos" id="update" widgetVar="dlgUpdate" showEffect="explode" hideEffect="bounce" height="400" width="500">
             <h:form>
@@ -121,19 +115,12 @@
                 <p:outputLabel for="txtPassA" value="Contraseña:"/>
                 <p:inputText id="txtPassA" value="#{controllerAdmin.admin.pass}" type="password"/>
                 <br/>
+                <p:outputLabel for="txtState" value="Estado:"/>
+                <p:inputText id="txtState" value="#{controllerAdmin.admin.estado}"/>
+                <br/>
                 <p:commandButton actionListener="#{controllerAdmin.updateAdmin()}" value="Actualizar" update=":frmTabla:tblCl" oncomplete="PF('dlgUpdate').hide();"/>
+                <p:commandButton actionListener="#{controllerAdmin.changeState()}" value="Eliminar" update=":frmTabla:tblCl" oncomplete="PF('dlgUpdate').hide();"/>
                 <p:commandButton value="Cancelar" update=":frmTabla:tblCl" oncomplete="PF('dlgUpdate').hide();"/>
-            </h:form>
-        </p:dialog>
-        <p:dialog header="Eliminar" id="delete" widgetVar="dlgDelete" showEffect="explode" hideEffect="bounce" height="250" width="500">
-            <h:form>
-                <h:outputText value="¿Esta seguro que desea Eliminarlo?"/>
-                <br/>
-                <p:outputLabel for="txtCodeE" value="Codigo:"/>
-                <p:inputText id="txtCodeE" value="#{controllerAdmin.admin.codigo}"/>
-                <br/>
-                <p:commandButton actionListener="#{controllerAdmin.deleteAdmin()}" value="Eliminar" update=":frmTabla:tblCl" oncomplete="PF('dlgDelete').hide();"/>
-                <p:commandButton value="Cancelar" update=":frmTabla:tblCl" oncomplete="PF('dlgDelete').hide();"/>
             </h:form>
         </p:dialog>
     </h:body>
