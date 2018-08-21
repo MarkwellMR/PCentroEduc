@@ -62,5 +62,21 @@ public class ControllerEnc {
         }
     }
     
+    public void updEnc(){
+        try {
+            encdao.UpEnc(enc);
+        } catch (Exception e) {
+            System.out.println("Error en Actualizar "+e );
+        }
+    }
+    
+    public void deleteEnc(){
+        try {
+            encdao.delEnc(enc.getCodigo());
+        } catch (Exception e) {
+            
+        }
+    }
+    
     
 }
