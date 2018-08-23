@@ -5,6 +5,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
+        
         <title>ALUMNO</title>
         <script>
             function borrarFormulario() {
@@ -15,13 +16,14 @@
     <h:body>
 
         <f:event type="preRenderView" listener="#{controllerAlumno.cargarAlumnos()}"/>
-
-        <h3 style="margin-top:0">Informe de Alumnos</h3>
-
+        <center>
+             <br/>
+        <h3 style="margin-top:0" >INFORME DE ALUMNOS</h3>
+        </center>
 
         <p:accordionPanel id="acordion">
             <p:tab title="Buscar Estudiante">
-                <h:panelGrid columns="1" cellpadding="10" >
+                <h:panelGrid columns="1" cellpadding="10">
 
                     <h:form id="frmBuscar">
                         <p:outputLabel value="Código" for="txtCodigoBusqueda"/>
@@ -29,9 +31,9 @@
                         <p:commandButton value="Buscaar" actionListener="#{controllerAlumno.busquedaCodigo()}" oncomplete="PF('dlgBusqueda').show();" update=":acordion:dglBusqueda1" />
                     </h:form>
 
-                    <p:dialog header="Estudiantes" id="dglBusqueda1" widgetVar="dlgBusqueda" showEffect="explode" hideEffect="bounce" height="600" width="250">
+                    <p:dialog header="Estudiantes" id="dglBusqueda1" widgetVar="dlgBusqueda" showEffect="explode" hideEffect="bounce" height="670" width="280" >
 
-                        <h:form id="frmEliminaModifica">
+                        <h:form id="frmEliminaModifica" >
 
 
                             <p:outputLabel for="txtCodigoB" value="Codigo:"/>
@@ -74,7 +76,14 @@
                             <br/>
                             <p:inputTextarea id="txtPadecimientoB" value="#{controllerAlumno.alum.padecimiento}"/>
                             <br/>
-                            <p:commandButton actionListener="#{controllerAlumno.ActualizarAlumno()}" value="Modificar" update=":frmTablaDatos:tblAlumnos"/>
+                            <br/>
+                            <center>
+                                <p:commandButton actionListener="#{controllerAlumno.actualizarDatosAlumno()}" value="Modificar" update=":frmTablaDatos:tblAlumnos"/>
+                                 <br/>
+                                  <br/>
+                                <p:commandButton actionListener="#{controllerAlumno.cambioEstado()}" value="Cambio de Estado" update=":frmTablaDatos:tblAlumnos"/>
+                                <br/>
+                        </center>
                         </h:form>  
 
                     </p:dialog>
@@ -85,11 +94,9 @@
 
 
             <p:tab title="Agregar un Nuevo Estudiantes">
-                <h:panelGrid columns="1" cellpadding="10">
+                <h:panelGrid columns="1" cellpadding="10" bgcolor="linen">
                     <h:form id="frmIngresoDatos">
-                        <p:outputLabel for="txtCodigo" value="Codigo:"/>
-                        <br/>
-                        <p:inputText id="txtCodigo" value="#{controllerAlumno.alum.codigo}"/>
+                        
                         <br/>
                         <p:outputLabel for="txtNombre" value="Nombre:"/>
                         <br/>
@@ -126,10 +133,6 @@
                         <p:outputLabel for="txtPadecimiento" value="Padecimientos:"/>
                         <br/>
                         <p:inputTextarea id="txtPadecimiento" value="#{controllerAlumno.alum.padecimiento}"/>
-                        <br/>
-                        <p:outputLabel for="txtEstado" value="Estado:"/>
-                        <br/>
-                        <p:inputText id="txtEstado" value="#{controllerAlumno.alum.estado}"/>
                         <br/>
                         <p:commandButton actionListener="#{controllerAlumno.guardarAlumno()}" value="Guardar Datos" update=":frmTablaDatos:tblAlumnos"/>
                     </h:form>

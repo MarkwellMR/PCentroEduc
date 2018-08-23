@@ -29,19 +29,18 @@ public class AlumnoDAO extends Conexion{
         respuesta = null;
         try {
             this.Conectar();
-            sql = "insert into alumno values(?,?,?,?,?,?,?,?,?,?,?)";
+            sql = "insert into alumno(nombre, apellido, direccion, email, tel_emergencia, cod_enc, cod_secre, fechanac, padecimiento, estado) values(?,?,?,?,?,?,?,?,?,?)";
             ejecutar = this.getMiconexion().prepareStatement(sql);
-            ejecutar.setString(1, alum.getCodigo());
-            ejecutar.setString(2, alum.getNombre());
-            ejecutar.setString(3,alum.getApellido());
-            ejecutar.setString(4, alum.getDireccion());
-            ejecutar.setString(5, alum.getEmail());
-            ejecutar.setInt(6, alum.getTelEmergencia());
-            ejecutar.setString(7, alum.getCodEncargado());
-            ejecutar.setString(8, alum.getCodSecretaria());
-            ejecutar.setString(9, alum.getFechanac());
-            ejecutar.setString(10, alum.getPadecimiento());
-            ejecutar.setString(11, alum.getPadecimiento());
+            ejecutar.setString(1, alum.getNombre());
+            ejecutar.setString(2,alum.getApellido());
+            ejecutar.setString(3, alum.getDireccion());
+            ejecutar.setString(4, alum.getEmail());
+            ejecutar.setInt(5, alum.getTelEmergencia());
+            ejecutar.setString(6, alum.getCodEncargado());
+            ejecutar.setString(7, alum.getCodSecretaria());
+            ejecutar.setString(8, alum.getFechanac());
+            ejecutar.setString(9, alum.getPadecimiento());
+            ejecutar.setInt(10, 1);
             
             
             ejecutar.executeUpdate();
@@ -57,14 +56,15 @@ public class AlumnoDAO extends Conexion{
         return respuesta;
     }
      
-      public String estadoAlumno(Alumno estado ){
+      public String estadoAlumno(Alumno estado){
         respuesta = null;
         try {
             this.Conectar();
             sql="update alumno set estado=? where cod_alumno=?";
             ejecutar = this.getMiconexion().prepareStatement(sql);
-            ejecutar.setInt(3, estado.getEstado());
-            ejecutar.setString(3,estado.getCodigo());
+            ejecutar.setInt(1, 2);
+            ejecutar.setString(2, estado.getCodigo());
+            
              
             ejecutar.executeUpdate();
             respuesta="Se han actualizado los datos correctamente";
@@ -81,7 +81,7 @@ public class AlumnoDAO extends Conexion{
           
         try {
             this.Conectar();  
-            sql ="update alumno set nombre=?, apellido=?, email=?, direccion=?, tel_emergencia=?, fechanac=?, padecimiento=? where cod_alumno=?";
+            sql ="update alumno set nombre=?, apellido=?, email=?, direccion=?, tel_emergencia=?, fechanac=?, padecimiento=?, estado=? where cod_alumno=?";
             ejecutar= this.getMiconexion().prepareStatement(sql);
             ejecutar.setString(1, dato.getNombre());
             ejecutar.setString(2, dato.getApellido());
@@ -90,11 +90,13 @@ public class AlumnoDAO extends Conexion{
             ejecutar.setInt(5, dato.getTelEmergencia());
             ejecutar.setString(6, dato.getFechanac());
             ejecutar.setString(7, dato.getPadecimiento());
-            ejecutar.setString(8, dato.getCodigo());
+            ejecutar.setInt(8, dato.getEstado());
+            ejecutar.setString(9, dato.getCodigo());
+            
             ejecutar.executeUpdate();
             respuesta="Datos actualizados correctamente";
         } catch (SQLException ex) {
-            //Logger.getLogger(DaoActualizarMaestro.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("error en conexion" + ex);
             respuesta = "error en conexion, datos no se actualizaron"+ ex;
         }finally{
           this.cerrarConex();
@@ -121,6 +123,7 @@ public class AlumnoDAO extends Conexion{
             alum.setDireccion(clonarTabla.getString("direccion"));
             alum.setFechanac(clonarTabla.getString("fechanac"));
             alum.setPadecimiento(clonarTabla.getString("padecimiento"));
+            alum.setEstado(clonarTabla.getInt("estado"));
             
             }
             // cerrar el preparedStatement
@@ -129,7 +132,7 @@ public class AlumnoDAO extends Conexion{
             clonarTabla.close();
 
         } catch (SQLException e) {
-            System.out.println("error en el clientedao buscarCodigo"+ e);
+            System.out.println("error en el alumnodao buscar datos"+ e);
         } finally {
             this.cerrarConex();
         }
@@ -140,7 +143,7 @@ public class AlumnoDAO extends Conexion{
 
         try {
             this.Conectar();
-            sql = "select* from alumno";
+            sql = "select* from alumno where estado=1";
             ejecutar = this.getMiconexion().prepareStatement(sql);
             clonarTabla = this.ejecutar.executeQuery();
             while(clonarTabla.next()){// se posiciona en el primero
@@ -155,6 +158,7 @@ public class AlumnoDAO extends Conexion{
                alum.setDireccion(clonarTabla.getString("direccion"));
                alum.setFechanac(clonarTabla.getString("fechanac"));
                alum.setPadecimiento(clonarTabla.getString("padecimiento"));
+               alum.setEstado(clonarTabla.getInt("estado"));
                alumno.add(alum);
                
             }

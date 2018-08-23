@@ -49,23 +49,6 @@ public class ControllerAlumno {
             System.out.println("Error en el controlador de busqueda de datos "+e);
         }
     }
-    public void ActualizarAlumno(Alumno datos){
-        AlumnoDAO alumnodao=new AlumnoDAO();
-        try{
-            alumnodao.modificarAlumno(alum);
-        }catch (Exception e){
-            System.out.println("Error en el controlador de actualizar Alumno"+e);
-        }
-    }
-    public void EstadoAlumno(){
-        AlumnoDAO alumnodao = new AlumnoDAO();
-        try{
-            alumnodao.estadoAlumno(alum);
-        }catch(Exception e){
-            System.out.println("error en el controlador Estado Alumno "+e);
-            
-        }
-    }
     public void busquedaCodigo(){
         AlumnoDAO alum1=new AlumnoDAO();
         try{
@@ -75,6 +58,22 @@ public class ControllerAlumno {
             System.out.println("alumno: " + alum.getNombre());
         }catch(Exception ex ){
             System.out.println("Error controlador: " + ex);
+        }
+    }
+    public void actualizarDatosAlumno(){
+        AlumnoDAO alumdao= new AlumnoDAO();
+        try{
+        alumdao.modificarAlumno(alum);
+       }catch(Exception e){
+            System.out.println("Error controlador actualizar Alumno"+e);
+       }
+    }
+    public void cambioEstado(){
+        AlumnoDAO alumn= new AlumnoDAO();
+        try{
+            alumn.estadoAlumno(alum);
+        }catch (Exception e){
+            System.out.println("error en el controlador de cambio de estado"+e);
         }
     }
 }
