@@ -40,7 +40,7 @@
             <p:outputLabel for="txtCsecre" value="Codigo de Secretaria"/>
             <p:inputText id="txtCsecre" value="#{controllerEnc.sec.codigo}"/>
             <br/>
-            <p:commandButton actionListener="#{controllerEnc.guardarEnc()}" value="Crear"/>
+            <p:commandButton actionListener="#{controllerEnc.guardarEnc()}" value="Crear" update="frmTabla:tblEnc"/>
         </h:form>
         <br/><br/><br/><br/><br/><br/><br/>
         <h:form id="frmTabla">
@@ -74,7 +74,6 @@
                 </p:column>
                 <p:column>
                     <p:commandButton value="Actualizar" actionListener="#{controllerEnc.searchEnc(encargado)}" oncomplete="PF('dlgUpdEnc').show();" update=":updEnc" />
-                    <p:commandButton value="Eliminar"/>
                 </p:column>      
             </p:dataTable>
         </h:form>
@@ -108,9 +107,9 @@
                 <p:outputLabel for="txtCUIa" value="CUI"/>
                 <p:inputText id="txtCUIa" value="#{controllerEnc.enc.cui}"/>
                 
-                <p:commandButton actionListener="#{controllerAdmin.updateAdmin()}" value="Actualizar" update=":frmTabla:tblCl" oncomplete="PF('dlgUpdate').hide();"/>
-                <p:commandButton value="Cancelar" update=":frmTabla:tblCl" oncomplete="PF('dlgUpdate').hide();"/>
-
+                <p:commandButton title="Eliminar" actionListener="#{controllerEnc.deleteEnc()}" update="frmTabla:tblEnc" oncomplete="PF('dlgUpdEnc').hide();"/>          
+               <p:commandButton title="Actualizar" actionListener="#{controllerEnc.updEnc()}" update="frmTabla:tblEnc" oncomplete="PF('dlgUpdEnc').hide();"/>
+               <p:commandButton title="Cancelar" update="frmTabla:tblEnc" oncomplete="PF('dlgUpdate').hide();"/>
             </h:form>
         </p:dialog>
     </h:body>

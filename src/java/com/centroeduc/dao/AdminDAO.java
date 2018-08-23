@@ -35,7 +35,7 @@ public class AdminDAO extends Conexion{
             ejecutar.setString(8, admin.getFechanac());
             ejecutar.setLong(9, admin.getCui());
             ejecutar.setString(10, admin.getPass());
-            ejecutar.setInt(11, admin.getEstado());
+            ejecutar.setInt(11, 1);
             
             ejecutar.executeUpdate();
             respuesta="Registro almacenado con Exito";
@@ -55,7 +55,7 @@ public class AdminDAO extends Conexion{
         ResultSet resultado;
         try {
             this.Conectar();
-            sql = "select * from administrador";
+            sql = "select * from administrador where estado=1";
             ejecutar = this.getMiconexion().prepareStatement(sql);
             resultado = ejecutar.executeQuery();
             lista = new ArrayList();
@@ -72,7 +72,7 @@ public class AdminDAO extends Conexion{
                 admin.setFechanac(resultado.getString("fechanac"));
                 admin.setCui(resultado.getLong("cui"));
                 admin.setPass(resultado.getString("password"));
-                admin.setEstado(Integer.getInteger("estado"));
+                admin.setEstado(resultado.getInt("estado"));
                 lista.add(admin);
                 
             }
@@ -83,25 +83,6 @@ public class AdminDAO extends Conexion{
         }
         return lista;
         
-    }
-    //eliminar
-    public String deleteAdmin(String codigo){
-        respuesta = null;
-        try {
-            this.Conectar();
-            sql="delete from administrador where cod_admin=?";
-            ejecutar = this.getMiconexion().prepareStatement(sql);
-            ejecutar.setString(1, codigo);
-            ejecutar.executeUpdate();
-            respuesta="Registro Eliminado";
-            
-        } catch (SQLException ex) {
-            System.out.println("Error en AdminDAO(Eliminar): " + ex);
-            respuesta="Error, no se puede eliminar el registro";
-        }finally{
-            this.cerrarConex();
-        }
-         return respuesta;
     }
     
     public String updateAdmin(Administrador admin){
@@ -120,8 +101,9 @@ public class AdminDAO extends Conexion{
             ejecutar.setString(7, admin.getFechanac());
             ejecutar.setLong(8, admin.getCui());
             ejecutar.setString(9, admin.getPass());
-            ejecutar.setString(10, admin.getCodigo());
-            ejecutar.setInt(11, admin.getEstado());
+            ejecutar.setInt(10, admin.getEstado());
+            ejecutar.setString(11, admin.getCodigo());
+            
             
             ejecutar.executeUpdate();
             respuesta = "datos modificados con exito";
@@ -201,6 +183,29 @@ public class AdminDAO extends Conexion{
             this.cerrarConex();
         }
         return admin;
+    }
+    
+    public String changeState(Administrador admin){
+        respuesta = null;
+        try {
+            this.Conectar();
+            sql="update administrador set estado=? where cod_admin=?";
+            ejecutar = this.getMiconexion().prepareStatement(sql);
+            
+            ejecutar.setInt(1, 2);
+            ejecutar.setString(2, admin.getCodigo());
+            
+            
+            ejecutar.executeUpdate();
+            respuesta = "Se dio de Baja con Exito";
+            ejecutar.close();
+        } catch (SQLException ex) {
+            System.out.println("Error en AdminDAO(changeState): " + ex);
+            respuesta="No se pudo dar de Baja";
+        } finally{
+            this.cerrarConex();
+        }
+        return respuesta;
     }
     
 }

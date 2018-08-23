@@ -24,7 +24,7 @@ public class EncargadoDAO extends Conexion {
         try {
             this.Conectar();
             System.out.println("dao encargado");
-            sql = "insert into encargado values(?,?,?,?,?,?,?,?,?,?)";
+            sql = "insert into encargado values(?,?,?,?,?,?,?,?,?,?,?)";
             run = this.getMiconexion().prepareStatement(sql);
             run.setString(1, encargado.getCodigo());
             run.setString(2, encargado.getNombre());
@@ -35,7 +35,8 @@ public class EncargadoDAO extends Conexion {
             run.setInt(7, encargado.getTelMovil());
             run.setString(8, encargado.getFechanac());
             run.setLong(9, encargado.getCui());
-            run.setString(10, secre.getCodigo());
+            run.setInt(10, 1);
+            run.setString(11, secre.getCodigo());
 
             System.out.println(encargado.toString());
             System.out.println(secre.toString());
@@ -54,7 +55,7 @@ public class EncargadoDAO extends Conexion {
         ArrayList<Encargado> lista = null;
         try {
             this.Conectar();
-            sql = "select * from encargado";
+            sql = "select * from encargado where estado=1";
             run = this.getMiconexion().prepareStatement(sql);
             resultado = run.executeQuery();
             lista = new ArrayList();
@@ -155,6 +156,26 @@ public class EncargadoDAO extends Conexion {
             this.cerrarConex();
         }
         return enc;
+    }
+    public String cambioEstado(Encargado enc){
+        try {
+            this.Conectar();
+            sql = "update estado =2 where cod_enc=?";
+            run = this.getMiconexion().prepareStatement(sql);
+             run.setString(1, enc.getCodigo());
+             
+             run.executeUpdate();
+             answer = "registro eliminado exitosamente";
+             
+             run.close();    
+        } catch (SQLException e) {
+            answer = "No se pudo actualizar ";
+            System.out.println("Error en actualizar " + e);
+        }finally{
+            this.cerrarConex();
+           
+        }
+        return answer;
     }
 
 }

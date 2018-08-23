@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Registro Secretaria</title>
+        <link href='icon.jpg' rel='icon' type='image/x-icon'/>
+    </h:head>
+    
+    <h:body>
+        <f:event type="preRenderView" listener="#{controllerSecre.cargarSecre()}"/>
+        
+        <h1>Ingrese los Datos que se piden a continuación:</h1>
+        
+        <h:form id="frmIngreso">
+            
+            <p:outputLabel for="txtCodigo" value="Código:"/>
+            <p:inputText id="txtCodigo" value="#{controllerSecre.secre.codigo}"/>
+            <br/>
+
+            <p:outputLabel for="txtNombre" value="Nombre:"/>
+            <p:inputText id="txtNombre" value="#{controllerSecre.secre.nombre}"/>
+            <br/>
+
+            <p:outputLabel for="txtApellido" value="Apellido:"/>
+            <p:inputText id="txtApellido" value="#{controllerSecre.secre.apellido}"/>
+            <br/>
+
+            <p:outputLabel for="txtDireccion" value="Dirección:"/>
+            <p:inputText id="txtDireccion" value="#{controllerSecre.secre.direccion}"/>
+            <br/>
+
+            <p:outputLabel for="txtCorreo" value="Correo:"/>
+            <p:inputText id="txtCorreo" value="#{controllerSecre.secre.email}"/>
+            <br/>
+
+            <p:outputLabel for="txtTelCasa" value="Telefono Casa:"/>
+            <p:inputText id="txtTelCasa" value="#{controllerSecre.secre.telCasa}"/>
+            <br/>
+
+            <p:outputLabel for="txtTelMovil" value="Telefono Movil:"/>
+            <p:inputText id="txtTelMovil" value="#{controllerSecre.secre.telMovil}"/>
+            <br/>
+
+            <p:outputLabel for="txtFechaNac" value="Fecha de Nacimiento:"/>
+            <p:inputText id="txtFechaNac" value="#{controllerSecre.secre.fechanac}"/>
+            <br/>
+
+            <p:outputLabel for="txtCui" value="CUI:"/>
+            <p:inputText id="txtCui" value="#{controllerSecre.secre.cui}"/>
+            <br/>
+            
+            <p:outputLabel for="txtCodigoAdm" value="Código Administrador:"/>
+            <p:inputText id="txtCodigoAdm" value="#{controllerSecre.secre.codAdm}"/>
+            <br/>
+
+            <p:outputLabel for="txtPass" value="Contrasena:"/>
+            <p:inputText id="txtPass" value="#{controllerSecre.secre.pass}" type="password"/>
+            <br/>
+
+            <p:commandButton actionListener="#{controllerSecre.guardarSecre()}" value="Guardar" update=":frmTabla:tblSecretaria" />
+            <br/>  
+            
+        </h:form>
+        
+        <h:form id="frmTabla">
+            <p:dataTable var="secre" value="#{controllerSecre.listaSecre}" id="tblSecretaria">
+                 
+                <p:column headerText="Código">
+                    <h:outputText value="#{secre.codigo}"/>
+                </p:column>
+
+                <p:column headerText="Nobre">
+                    <h:outputText value="#{secre.nombre}"/>
+                </p:column>
+
+                <p:column headerText="Apellido">
+                    <h:outputText value="#{secre.apellido}"/>
+                </p:column>
+
+                <p:column headerText="Dirección">
+                    <h:outputText value="#{secre.direccion}"/>
+                </p:column>
+
+                <p:column headerText="Correo">
+                    <h:outputText value="#{secre.email}"/>
+                </p:column>
+
+                <p:column headerText="Telefono de Casa">
+                    <h:outputText value="#{secre.telCasa}"/>
+                </p:column>
+
+                <p:column headerText="Telefono Móvil">
+                    <h:outputText value="#{secre.telMovil}"/>
+                </p:column>
+
+                <p:column headerText="Fecha de Nacimiento">
+                    <h:outputText value="#{secre.fechanac}"/>
+                </p:column>     
+
+                <p:column headerText="CUI">
+                    <h:outputText value="#{secre.cui}"/>
+                </p:column>
+                         
+                <p:column headerText="Código Administrador">
+                    <h:outputText value="#{secre.codAdm}"/>
+                </p:column>
+                         
+                <p:column headerText="Contraseña">
+                    <h:outputText value="#{secre.pass}"/>
+                </p:column>
+                <p:column headerText="Estado">
+                    <h:outputText value="#{secre.estado}"/>
+                </p:column>
+
+                <p:column headerText="Acciones">
+                    <p:commandButton title="Actualizar" actionListener="#{controllerSecre.buscarSecre(secre)}" oncomplete="PF('dglActualizar').Show();" update=":Actualizar"/>                     
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
+        <p:dialog header="Actualizar Datos" id="Actualizar" widgetVar="dlgActualizar" showEffect="explode" hideEffect="bounce" height="410" width="500">
+            <h:form>
+                <p:outputLabel for="txtCodigoSecre" value="Código"/>
+                <p:inputText id="txtCodigoSecre" value="#{controllerSecre.secre.codigo}" />
+                <br/>
+
+                <p:outputLabel for="txtNombreSecre" value="Nombre"/>
+                <p:inputText id="txtNombreSecre" value="#{controllerSecre.secre.nombre}" />
+                <br/>
+
+                <p:outputLabel for="txtApellidoSecre" value="Apellido"/>
+                <p:inputText id="txtApellidoSecre" value="#{controllerSecre.secre.apellido}" />
+                <br/>
+
+                <p:outputLabel for="txtDireccionSecre" value="Dirección"/>
+                <p:inputText id="txtDireccionSecre" value="#{controllerSecre.secre.direccion}" />
+                <br/>
+
+                <p:outputLabel for="txtCorreoSecre" value="Email"/>
+                <p:inputText id="txtCorreoSecre" value="#{controllerSecre.secre.email}" />
+                <br/>
+
+                <p:outputLabel for="txtTelCasaSecre" value="Telefono de Casa"/>
+                <p:inputText id="txtTelCasaSecre" value="#{controllerSecre.secre.telCasa}" />
+                <br/>
+
+                <p:outputLabel for="txtTelMovilSecre" value="Telefono Móvil"/>
+                <p:inputText id="txtTelMovilSecre" value="#{controllerSecre.secre.telMovil}" />
+                <br/>
+
+                <p:outputLabel for="txtFechaNacSecre" value="Fecha de Nacimiento"/>
+                <p:inputText id="txtFechaNacSecre" value="#{controllerSecre.secre.fechanac}" />
+                <br/>
+
+                <p:outputLabel for="txtCuiSecre" value="CUI"/>
+                <p:inputText id="txtCuiSecre" value="#{controllerSecre.secre.cui}" />
+                <br/>
+                
+                <p:outputLabel for="txtCodigoAdmS" value="Código Administrador:"/>
+                <p:inputText id="txtCodigoAdmS" value="#{controllerSecre.secre.codAdm}"/>
+                <br/>
+                
+                <p:outputLabel for="txtContrasenaSecre" value="Contraseña"/>
+                <p:inputText id="txtContrasenaSecre" value="#{controllerSecre.secre.pass}" type="password"/>
+                <br/>
+                 
+                <p:outputLabel for="txtEstadoSecre" value="Estado"/>
+                <p:inputText id="txtEstadoSecre" value="#{controllerSecre.secre.estado}"/>
+                <br/>
+                
+                <p:commandButton actionListener="#{controllerSecre.editarSecre(secre)}" value="Actualizar" update=":frmTabla:tblSecretaria" oncomplete="PF('dlgActualizar').hide();"/>
+                <p:commandButton value="Cancelar"   update=":frmTabla:tblSecretaria" oncomplete="PF('dlgActualizar')"/>   
+                
+            </h:form>   
+        </p:dialog>    
+
+        
+</h:body>
+</html>
+
