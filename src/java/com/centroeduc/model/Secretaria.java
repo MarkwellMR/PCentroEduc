@@ -2,15 +2,25 @@ package com.centroeduc.model;
 
 public class Secretaria extends Persona{
     
- String codigoAdm;
+  private String codAdm;
 
     public String getCodAdm() {
-        return codigoAdm;
+        return codAdm;
     }
 
-    public void setCodAdm(String codigoAdm) {
-        this.codigoAdm = codigoAdm;
+    public void setCodAdm(String codAdm) {
+        this.codAdm = codAdm;
     }
- 
+
+  
+  
+  
+
+   
+    
+   
+   
+   
+
     
 }
