@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        
+        <title>ALUMNO</title>
+        <script>
+            function borrarFormulario() {
+                document.getElementById("frmEliminaModifica").reset();
+            }
+        </script>
+    </h:head>
+    <h:body>
+
+        <f:event type="preRenderView" listener="#{controllerAlumno.cargarAlumnos()}"/>
+        <center>
+             <br/>
+        <h3 style="margin-top:0" >INFORME DE ALUMNOS</h3>
+        </center>
+
+        <p:accordionPanel id="acordion">
+            <p:tab title="Buscar Estudiante">
+                <h:panelGrid columns="1" cellpadding="10">
+
+                    <h:form id="frmBuscar">
+                        <p:outputLabel value="Código" for="txtCodigoBusqueda"/>
+                        <p:inputText value="#{controllerAlumno.alum.codigo}" id="txtCodigoBusqueda"/>
+                        <p:commandButton value="Buscaar" actionListener="#{controllerAlumno.busquedaCodigo()}" oncomplete="PF('dlgBusqueda').show();" update=":acordion:dglBusqueda1" />
+                    </h:form>
+
+                    <p:dialog header="Estudiantes" id="dglBusqueda1" widgetVar="dlgBusqueda" showEffect="explode" hideEffect="bounce" height="670" width="280" >
+
+                        <h:form id="frmEliminaModifica" >
+
+
+                            <p:outputLabel for="txtCodigoB" value="Codigo:"/>
+                            <br/>
+                            <p:inputText id="txtCodigoB" value="#{controllerAlumno.alum.codigo}"/>
+                            <br/>
+                            <p:outputLabel for="txtNombreB" value="Nombre:"/>
+                            <br/>
+                            <p:inputText id="txtNombreB" value="#{controllerAlumno.alum.nombre}"/>
+                            <br/>
+                            <p:outputLabel for="txtApellidoB" value="Apellido:"/>
+                            <br/>
+                            <p:inputText id="txtApellidoB" value="#{controllerAlumno.alum.apellido}"/>
+                            <br/>
+                            <p:outputLabel for="txtDireccionB" value="Direccion:"/>
+                            <br/>
+                            <p:inputText id="txtDireccionB" value="#{controllerAlumno.alum.direccion}"/>
+                            <br/>
+                            <p:outputLabel for="txtEmailB" value="Email:"/>
+                            <br/>
+                            <p:inputText id="txtEmailB" value="#{controllerAlumno.alum.email}"/>
+                            <br/>
+                            <p:outputLabel for="txtTelEmergenciaB" value="Telefono de Emergencia:"/>
+                            <br/>
+                            <p:inputText id="txtTelEmergenciaB" value="#{controllerAlumno.alum.telEmergencia}"/>
+                            <br/>
+                            <p:outputLabel for="txtCodEncargadoB" value="Codigo de Encargado:"/>
+                            <br/>
+                            <p:inputText id="txtCodEncargadoB" value="#{controllerAlumno.alum.codEncargado}"/>
+                            <br/>
+                            <p:outputLabel for="txtCodSecretariaB" value="Codigo de Secretaria:"/>
+                            <br/>
+                            <p:inputText id="txtCodSecretariaB" value="#{controllerAlumno.alum.codSecretaria}"/>
+                            <br/>
+                            <p:outputLabel for="txtFechanacB" value="Fecha de Nacimiento:"/>
+                            <br/>
+                            <p:inputText id="txtFechanacB" value="#{controllerAlumno.alum.fechanac}"/>
+                            <br/>
+                            <p:outputLabel for="txtPadecimientoB" value="Padecimientos:"/>
+                            <br/>
+                            <p:inputTextarea id="txtPadecimientoB" value="#{controllerAlumno.alum.padecimiento}"/>
+                            <br/>
+                            <br/>
+                            <center>
+                                <p:commandButton actionListener="#{controllerAlumno.actualizarDatosAlumno()}" value="Modificar" update=":frmTablaDatos:tblAlumnos"/>
+                                 <br/>
+                                  <br/>
+                                <p:commandButton actionListener="#{controllerAlumno.cambioEstado()}" value="Cambio de Estado" update=":frmTablaDatos:tblAlumnos"/>
+                                <br/>
+                        </center>
+                        </h:form>  
+
+                    </p:dialog>
+
+
+                </h:panelGrid>
+            </p:tab>
+
+
+            <p:tab title="Agregar un Nuevo Estudiantes">
+                <h:panelGrid columns="1" cellpadding="10" bgcolor="linen">
+                    <h:form id="frmIngresoDatos">
+                        
+                        <br/>
+                        <p:outputLabel for="txtNombre" value="Nombre:"/>
+                        <br/>
+                        <p:inputText id="txtNombre" value="#{controllerAlumno.alum.nombre}"/>
+                        <br/>
+                        <p:outputLabel for="txtApellido" value="Apellido:"/>
+                        <br/>
+                        <p:inputText id="txtApellido" value="#{controllerAlumno.alum.apellido}"/>
+                        <br/>
+                        <p:outputLabel for="txtDireccion" value="Direccion:"/>
+                        <br/>
+                        <p:inputText id="txtDireccion" value="#{controllerAlumno.alum.direccion}"/>
+                        <br/>
+                        <p:outputLabel for="txtEmail" value="Email:"/>
+                        <br/>
+                        <p:inputText id="txtEmail" value="#{controllerAlumno.alum.email}"/>
+                        <br/>
+                        <p:outputLabel for="txtTelEmergencia" value="Telefono de Emergencia:"/>
+                        <br/>
+                        <p:inputText id="txtTelEmergencia" value="#{controllerAlumno.alum.telEmergencia}"/>
+                        <br/>
+                        <p:outputLabel for="txtCodEncargado" value="Codigo de Encargado:"/>
+                        <br/>
+                        <p:inputText id="txtCodEncargado" value="#{controllerAlumno.alum.codEncargado}"/>
+                        <br/>
+                        <p:outputLabel for="txtCodSecretaria" value="Codigo de Secretaria:"/>
+                        <br/>
+                        <p:inputText id="txtCodSecretaria" value="#{controllerAlumno.alum.codSecretaria}"/>
+                        <br/>
+                        <p:outputLabel for="txtFechanac" value="Fecha de Nacimiento:"/>
+                        <br/>
+                        <p:inputText id="txtFechanac" value="#{controllerAlumno.alum.fechanac}"/>
+                        <br/>
+                        <p:outputLabel for="txtPadecimiento" value="Padecimientos:"/>
+                        <br/>
+                        <p:inputTextarea id="txtPadecimiento" value="#{controllerAlumno.alum.padecimiento}"/>
+                        <br/>
+                        <p:commandButton actionListener="#{controllerAlumno.guardarAlumno()}" value="Guardar Datos" update=":frmTablaDatos:tblAlumnos"/>
+                    </h:form>
+                </h:panelGrid>
+            </p:tab>
+
+
+        </p:accordionPanel>
+
+
+
+        <br/>
+        <br/>
+        <h:form id="frmTablaDatos">
+            <p:dataTable var="alumno1" value="#{controllerAlumno.listaAlumno}" id="tblAlumnos">
+                <p:column headerText="Codigo">
+                    <h:outputText value="#{alumno1.codigo}" />
+                </p:column>
+                <p:column headerText="Nombre">
+                    <h:outputText value="#{alumno1.nombre}" />
+                </p:column>
+                <p:column headerText="Apellido">
+                    <h:outputText value="#{alumno1.apellido}" />
+                </p:column>
+                <p:column headerText="Direccion">
+                    <h:outputText value="#{alumno1.direccion}" />
+                </p:column>
+                <p:column headerText="Email">
+                    <h:outputText value="#{alumno1.email}" />
+                </p:column>
+                <p:column headerText="Telefono Emergencia">
+                    <h:outputText value="#{alumno1.telEmergencia}" />
+                </p:column>
+                <p:column headerText="Codigo de Encargado">
+                    <h:outputText value="#{alumno1.codEncargado}" />
+                </p:column>
+                <p:column headerText="Codigo de Secretaria">
+                    <h:outputText value="#{alumno1.codSecretaria}" />
+                </p:column>
+                <p:column headerText="Fecha de Nacimiento">
+                    <h:outputText value="#{alumno1.fechanac}" />
+                </p:column>
+                <p:column headerText="Padecimientos">
+                    <h:outputText value="#{alumno1.padecimiento}" />
+                </p:column>
+                <p:column headerText="Estado">
+                    <h:outputText value="#{alumno1.estado}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
+
+
+
+    </h:body>
+</html>
+

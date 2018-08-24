@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        
+        <title>Grado</title>
+    </h:head>
+    <h:body>
+
+        <f:event type="preRenderView" listener="#{controllerGrado.cargarGrado()}"/>
+        <center>
+             <br/>
+        <h3 style="margin-top:0" >INFORME DE GRADO</h3>
+        </center>
+        <p:accordionPanel id="acordion">
+            <p:tab title="Buscar Estudiante">
+                <h:panelGrid columns="1" cellpadding="10">
+                    <h:form id="frmBuscarGrado">
+                        <p:outputLabel value="Código" for="txtCodigoBusqueda"/>
+                        <p:inputText value="#{controllerGrado.grado.cod_grado}" id="txtCodigoBusqueda"/>
+                        <p:commandButton value="Buscar" actionListener="#{controllerGrado.busquedaCodigo()}" oncomplete="PF('dlgBusqueda').show();" update=":acordion:dglBusqueda1" />
+                    </h:form>
+                    <p:dialog header="Grado" id="dglBusqueda1" widgetVar="dlgBusqueda" showEffect="explode" hideEffect="bounce" height="300" width="310" >
+
+                        <h:form id="frmEliminaModifica" >
+                            <p:outputLabel for="txtCodigoB" value="Codigo:"/>
+                            <br/>
+                            <p:inputText id="txtCodigoB" value="#{controllerGrado.grado.cod_grado}"/>
+                            <br/>
+                            <p:outputLabel for="txtDescripcionB" value="Descripcion:"/>
+                            <br/>
+                            <p:inputTextarea id="txtDescripcionB" value="#{controllerGrado.grado.descripcion}"  rows="5" cols="30"/>
+                            <br/>
+                            <center>
+                                <br/>
+                                <br/>
+                                <p:commandButton actionListener="#{controllerGrado.actualizarDatosGrado()}" value="Modificar" update=":frmTablaGrados:tblGrado"/>
+                                <br/>
+                                <br/>
+                                <p:commandButton actionListener="#{controllerGrado.elimGrado()}" value="Eliminar" update=":frmTablaGrados:tblGrado"/>
+                                <br/>
+                            </center>
+                        </h:form>
+                    </p:dialog> 
+                </h:panelGrid>
+            </p:tab>
+            <p:tab title="Agregar un Nuevo Grado">
+                <h:panelGrid columns="1" cellpadding="10" bgcolor="linen">
+                    <h:form id="frmIngresoDatos">
+                        <p:outputLabel for="txtCodigoB" value="Codigo:"/>
+                        <br/>
+                        <p:inputText id="txtCodigoB" value="#{controllerGrado.grado.cod_grado}"/>
+                        <br/>
+                        <p:outputLabel for="txtDescripcionB" value="Descripcion:"/>
+                        <br/>
+                        <p:inputTextarea id="txtDescripcionB" value="#{controllerGrado.grado.descripcion}" rows="5" cols="30"/>
+                        <br/>
+                        <p:commandButton actionListener="#{controllerGrado.guardarGrado()}" value="Guardar Datos" update=":frmTablaGrados:tblGrado"/>
+                    </h:form>
+                </h:panelGrid>
+            </p:tab>
+
+
+        </p:accordionPanel>
+        <br/>
+        <br/>
+        <h:form id="frmTablaGrados">
+            <p:dataTable var="grado1" value="#{controllerGrado.listaGrado}" id="tblGrado">
+                <p:column headerText="Codigo">
+                    <h:outputText value="#{grado1.cod_grado}" />
+                </p:column>
+                <p:column headerText="Descripcion">
+                    <h:outputText value="#{grado1.descripcion}" />
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+
+
+
+
+    </h:body>
+</html>
+
