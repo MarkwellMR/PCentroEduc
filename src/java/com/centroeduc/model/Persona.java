@@ -116,6 +116,12 @@ public class Persona {
         this.estado = estado;
     }
 
+    @Override
+    public String toString() {
+        return "Persona{" + "codigo=" + codigo + ", nombre=" + nombre + ", apellido=" + apellido + ", direccion=" + direccion + ", email=" + email + ", telCasa=" + telCasa + ", telMovil=" + telMovil + ", fechanac=" + fechanac + ", cui=" + cui + ", pass=" + pass + ", estado=" + estado + '}';
+    }
+
+    
     
   
 }

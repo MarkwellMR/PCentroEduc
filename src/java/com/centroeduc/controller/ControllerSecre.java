@@ -1,4 +1,3 @@
-
 package com.centroeduc.controller;
 
 import com.centroeduc.dao.SecreDao;
@@ -13,11 +12,14 @@ import org.primefaces.event.ToggleEvent;
 @ManagedBean
 @ViewScoped
 
+   
 public class ControllerSecre {
 
     ArrayList<Secretaria> listaSecre = new ArrayList();
 
-    
+    Secretaria secre = new Secretaria();
+    SecreDao secretariaDao = new SecreDao();
+
     public ArrayList<Secretaria> getListaSecre() {
         return listaSecre;
     }
@@ -27,11 +29,9 @@ public class ControllerSecre {
     }
 
     public void cargarSecre() {
-        SecreDao secretariaDao = new SecreDao();
+     
         listaSecre = secretariaDao.MostrarSecretaria();
     }
-
-    Secretaria secre = new Secretaria();
 
     public Secretaria getSecre() {
         return secre;
@@ -41,47 +41,47 @@ public class ControllerSecre {
         this.secre = secre;
     }
 
-         /*INGRESO CLIENTE*/
+    /*INGRESO CLIENTE*/
     public void guardarSecre() {
         SecreDao secretariaDao = new SecreDao();
         Administrador admin = new Administrador();
         admin.setCodigo("A0001");
         try {
+            System.out.println("CONTROLADOR: ");
+            System.out.println(secre.toString());
             secretariaDao.nuevaSecretaria(secre, admin);
             System.out.println("LLEGO AL CONTROLADOR CLIENTE");
 
         } catch (Exception e) {
-             System.out.println("Error EN CONTROLADORSECRE:" + e);
+            System.out.println("Error EN CONTROLADORSECRE:" + e);
         }
     }
-    
-    public void buscarSecre(Secretaria secre){
-        SecreDao secretariaDao = new SecreDao();
-        try{
-            this.secre= secretariaDao.buscarCodigo(Integer.parseInt(secre.getCodigo()));
-        }catch(Exception e){
+
+    public void buscarSecre(Secretaria secre) {
+
+        try {
+            this.secre = secretariaDao.buscarCodigo(secre.getCodigo());
+        } catch (Exception e) {
             System.out.println("Error en Busqueda, ControllerSecre" + e);
         }
     }
-         
-    public void editarSecre(){
-        SecreDao secretariaDao = new SecreDao();
-        
-        try{
-           secretariaDao.editarSecretaria(secre);
-        }catch(Exception e){
+
+    public void editarSecre() {
+
+        try {
+            secretariaDao.editarSecretaria(secre);
+        } catch (Exception e) {
             System.out.println("Error en Actualizar, ControladoCliente" + e);
-        }                
-    }
+        }
+    } 
     
-//    public void eliminarSecretaria(Secretaria secre){
-//            SecreDao secretariaDao = new SecreDao();
-//        try{
-//            secretariaDao.eliminarSecretaria(this.secre.getCodigo());        
-//        }catch(Exception e){
-//            System.out.println("Error en Controlador Eliminar Cliente" + e);
-//        
-//        }
-//    }
-  
+    public void estado(){
+        try{
+            secretariaDao.estado(secre);
+        }catch(Exception e){
+            System.out.println("Errr en Cambio de Estado,Controlador Estado");
+        }
+        
+        
+    }
 }
