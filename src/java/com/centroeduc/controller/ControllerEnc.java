@@ -72,7 +72,7 @@ public class ControllerEnc {
     
     public void deleteEnc(){
         try {
-            encdao.delEnc(enc.getCodigo());
+            encdao.cambioEstado(Integer.parseInt(enc.getCodigo()));
         } catch (Exception e) {
             
         }
