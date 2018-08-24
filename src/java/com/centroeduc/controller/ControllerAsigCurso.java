@@ -114,6 +114,7 @@ public class ControllerAsigCurso {
         System.out.println("Sección: " + this.seccion.getCodigo());
         System.out.println("Maestro: " + this.maestro.getCodigo());
         
+        
     }
     
     
