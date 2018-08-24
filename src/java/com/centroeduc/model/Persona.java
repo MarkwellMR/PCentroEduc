@@ -27,7 +27,7 @@ public class Persona {
         this.pass=null;
         this.estado=null;
     }
-
+    
     public String getCodigo() {
         return codigo;
     }
