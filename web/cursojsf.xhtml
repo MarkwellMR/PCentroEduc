@@ -15,10 +15,10 @@
             <p:inputText id="txtName" value="#{controllerCurso.course.nombre}"/>
             <br/>
             <p:outputLabel for="txtHStart" value="Hora Inicio:"/>
-            <p:inputText id="txtHStart" value="#{controllerCurso.course}" placeholder="00:00:00"/>
+            <p:inputText id="txtHStart" value="#{controllerCurso.course.hinicio}" placeholder="00:00:00"/>
             <br/>
             <p:outputLabel for="txtHEnd" value="Hora Fin:"/>
-            <p:inputText id="txtHEnd" value="#{controllerCurso.course}" placeholder="00:00:00"/>
+            <p:inputText id="txtHEnd" value="#{controllerCurso.course.hfin}" placeholder="00:00:00"/>
             <br/>
             <p:outputLabel for="txtJornada" value="Jornada:"/>
             <p:inputText id="txtJornada" value="#{controllerCurso.course.jornada}"/>
@@ -38,10 +38,10 @@
                     <h:outputText value="#{cur.nombre}"/>
                 </p:column>
                 <p:column headerText="Hora Inicio">
-                    <h:outputText value="#{cur}"/>
+                    <h:outputText value="#{cur.hinicio}"/>
                 </p:column>
                 <p:column headerText="Hora Fin">
-                    <h:outputText value="#{cur}"/>
+                    <h:outputText value="#{cur.hfin}"/>
                 </p:column>
                 <p:column headerText="Jornada">
                     <h:outputText value="#{cur.jornada}"/>
@@ -62,11 +62,11 @@
                 <p:outputLabel for="txtNameA" value="Nombre:"/>
                 <p:inputText id="txtNameA" value="#{controllerCurso.course.nombre}"/>
                 <br/>
-                <p:outputLabel for="txtHStart" value="Hora Inicio:"/>
-                <p:inputText id="txtHStartA" value="#{controllerCurso.course}" placeholder="00:00:00"/>
+                <p:outputLabel for="txtHStartA" value="Hora Inicio:"/>
+                <p:inputText id="txtHStartA" value="#{controllerCurso.course.hinicio}" placeholder="00:00:00"/>
                 <br/>
                 <p:outputLabel for="txtHEndA" value="Hora Fin:"/>
-                <p:inputText id="txtHEndA" value="#{controllerCurso.course}" placeholder="00:00:00"/>
+                <p:inputText id="txtHEndA" value="#{controllerCurso.course.hfin}" placeholder="00:00:00"/>
                 <br/>
                 <p:outputLabel for="txtJornadaA" value="Jornada:"/>
                 <p:inputText id="txtJornadaA" value="#{controllerCurso.course.jornada}"/>

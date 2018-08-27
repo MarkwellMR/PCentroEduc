@@ -24,8 +24,8 @@ public class CursoDAO extends Conexion {
             sql = "insert into curso(nombre, hinicio, hfin, jornada, cupo) values(?,?,?,?,?)";
             run = this.getMiconexion().prepareStatement(sql);
             run.setString(1, curso.getNombre());
-            run.setString(2, curso.gethInicio());
-            run.setString(3, curso.gethFin());
+            run.setString(2, curso.getHinicio());
+            run.setString(3, curso.getHfin());
             run.setString(4, curso.getJornada());
             run.setInt(5, curso.getCupo());
 
@@ -59,8 +59,8 @@ public class CursoDAO extends Conexion {
                 Curso course = new Curso();
                 course.setCod(this.values.getInt("cod_curso"));
                 course.setNombre(this.values.getString("nombre"));
-                course.sethInicio(this.values.getString("hinicio"));
-                course.sethFin(this.values.getString("hfin"));
+                course.setHinicio(this.values.getString("hinicio"));
+                course.setHfin(this.values.getString("hfin"));
                 course.setJornada(this.values.getString("jornada"));
                 course.setCupo(this.values.getInt("cupo"));
                 list.add(course);
@@ -83,8 +83,8 @@ public class CursoDAO extends Conexion {
             sql = "update curso set nombre=?, hinicio=?, hfin=?, jornada=?, cupo=? where cod_curso=?";
             run = this.getMiconexion().prepareStatement(sql);
             run.setString(1, courso.getNombre());
-            run.setString(2, courso.gethInicio());
-            run.setString(3, courso.gethFin());
+            run.setString(2, courso.getHinicio());
+            run.setString(3, courso.getHfin());
             run.setString(4, courso.getJornada());
             run.setInt(5, courso.getCupo());
             run.setInt(6, courso.getCod());
@@ -132,8 +132,8 @@ public class CursoDAO extends Conexion {
             if (this.values.next()) {
                 course.setCod(this.values.getInt("cod_curso"));
                 course.setNombre(this.values.getString("nombre"));
-                course.sethInicio(this.values.getString("hinicio"));
-                course.sethFin(this.values.getString("hfin"));
+                course.setHinicio(this.values.getString("hinicio"));
+                course.setHfin(this.values.getString("hfin"));
                 course.setJornada(this.values.getString("jornada"));
                 course.setCupo(this.values.getInt("cupo"));
             }else{
