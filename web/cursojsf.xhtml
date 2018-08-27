@@ -11,9 +11,6 @@
     <h:body>
         <f:event type="preRenderView" listener="#{controllerCurso.loadCurso()}"/>
         <h:form id="frmIngreso">
-            <p:outputLabel for="txtCod" value="Codigo:"/>
-            <p:inputText id="txtCod" value="#{controllerCurso.course.cod}"/>
-            <br/>
             <p:outputLabel for="txtName" value="Nombre:"/>
             <p:inputText id="txtName" value="#{controllerCurso.course.nombre}"/>
             <br/>
@@ -54,7 +51,7 @@
         <p:dialog header="Actualizar Curso" id="update" widgetVar="dlgUpdate" showEffect="explode" hideEffect="none" height="400" width="500">
             <h:form>
                 <p:outputLabel for="txtCodigoA" value="Codigo:"/>
-                <p:inputText id="txtCodigoA" value="#{controllerCurso.course.cod}"/>
+                <p:outputLabel id="txtCodigoA" value="#{controllerCurso.course.cod}"/>
                 <br/>
                 <p:outputLabel for="txtNameA" value="Nombre:"/>
                 <p:inputText id="txtNameA" value="#{controllerCurso.course.nombre}"/>

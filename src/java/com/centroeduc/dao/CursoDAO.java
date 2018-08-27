@@ -21,13 +21,12 @@ public class CursoDAO extends Conexion {
         answer = null;
         try {
             this.Conectar();
-            sql = "insert into curso values(?,?,?,?,?)";
+            sql = "insert into curso(nombre, horario, jornada, cupo) values(?,?,?,?)";
             run = this.getMiconexion().prepareStatement(sql);
-            run.setInt(1, course.getCod());
-            run.setString(2, course.getNombre());
-            run.setString(3, course.getHorario());
-            run.setString(4, course.getJornada());
-            run.setInt(5, course.getCupo());
+            run.setString(1, course.getNombre());
+            run.setString(2, course.getHorario());
+            run.setString(3, course.getJornada());
+            run.setInt(4, course.getCupo());
 
             run.executeUpdate();
 
