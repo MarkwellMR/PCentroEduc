@@ -1,5 +1,6 @@
 package com.centroeduc.controller;
 
+import com.centroeduc.dao.AsignGSCPDAO;
 import com.centroeduc.dao.CursoDAO;
 import com.centroeduc.dao.GradoDAO;
 import com.centroeduc.dao.MaestroDAO;
@@ -21,6 +22,7 @@ public class ControllerAsigCurso {
     GradoDAO gradodao = new GradoDAO();
     SeccionDAO secdao = new SeccionDAO();
     MaestroDAO maesdao = new MaestroDAO();
+    AsignGSCPDAO dao = new AsignGSCPDAO();
     //Instancia Clases 
     Curso curso = new Curso();
     Grado grado = new Grado();
@@ -109,10 +111,16 @@ public class ControllerAsigCurso {
     }
     
     public void asignarCurso(){
-        System.out.println("Curso: " + this.curso.getCod());
         System.out.println("Grado: " + this.grado.getCod_grado());
         System.out.println("Sección: " + this.seccion.getCodigo());
+        System.out.println("Curso: " + this.curso.getCod());
         System.out.println("Maestro: " + this.maestro.getCodigo());
+         try {
+            dao.newAsing(this.grado.getCod_grado(), this.seccion.getCodigo(), this.curso.getCod(), this.maestro.getCodigo());
+        } catch (Exception e) {
+             System.out.println("Error en ControllerAsignCurso: " + e);
+        }
+        
         
         
     }

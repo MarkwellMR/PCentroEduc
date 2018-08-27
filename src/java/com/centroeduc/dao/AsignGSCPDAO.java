@@ -15,20 +15,20 @@ public class AsignGSCPDAO extends Conexion{
     
     AsignacionGSCP asign = new AsignacionGSCP();
     
-    public String newAsing(){
+    public String newAsing(int cdGrado, int cdSeccion, int cdCurso, String cdMeastro){
         answer = null;
         try {
             this.Conectar();
             sql = "insert into cursgradsecprof(cod_grad, cod_sec, cod_curso, cod_prof) values(?,?,?,?)";
             run = this.getMiconexion().prepareStatement(sql);
-            run.setInt(1, this.asign.getCdGrado());
-            run.setInt(2, this.asign.getCdSecc());
-            run.setInt(3, this.asign.getCdCurso());
-            run.setString(4, this.asign.getCdMaestro());
+            run.setInt(1, cdGrado);
+            run.setInt(2, cdSeccion);
+            run.setInt(3, cdCurso);
+            run.setString(4, cdMeastro);
             run.executeUpdate();
             
             answer = "Asignacion Realizada con Exito";
-             run.close();
+            this.run.close();
             
         } catch (SQLException e) {
             System.out.println("Error al asignar: " + e);
