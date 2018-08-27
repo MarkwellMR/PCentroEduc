@@ -5,6 +5,7 @@ import com.centroeduc.dao.CursoDAO;
 import com.centroeduc.dao.GradoDAO;
 import com.centroeduc.dao.MaestroDAO;
 import com.centroeduc.dao.SeccionDAO;
+import com.centroeduc.model.AsignacionGSCP;
 import com.centroeduc.model.Curso;
 import com.centroeduc.model.Grado;
 import com.centroeduc.model.Maestro;
@@ -28,12 +29,23 @@ public class ControllerAsigCurso {
     Grado grado = new Grado();
     Seccion seccion = new Seccion();
     Maestro maestro = new Maestro();
+    AsignacionGSCP asign = new AsignacionGSCP();
     //Array List the objetos
     ArrayList<Grado> ListaGrado = new ArrayList();
     ArrayList<Curso> ListaCurso = new ArrayList();
     ArrayList<Seccion> ListaSeccion = new ArrayList();
     ArrayList<Maestro> ListaMaestros = new ArrayList();
+    ArrayList<AsignacionGSCP> ListaAsignacion = new ArrayList();
 
+    public ArrayList<AsignacionGSCP> getListaAsignacion() {
+        return ListaAsignacion;
+    }
+
+    public void setListaAsignacion(ArrayList<AsignacionGSCP> ListaAsignacion) {
+        this.ListaAsignacion = ListaAsignacion;
+    }
+    
+    
     List<String> nombreCurso;
     public Curso getCurso() {
         return curso;
@@ -106,11 +118,13 @@ public class ControllerAsigCurso {
         this.ListaCurso = this.cursodao.listCourse();
         this.ListaGrado = this.gradodao.mostrarGrado();
         this.ListaSeccion = this.secdao.MostrarSeccion();
+        this.ListaAsignacion = this.dao.listAsign();
         
     
     }
     
     public void asignarCurso(){
+        System.out.println("Codigo: " + this.asign.getCodigo());
         System.out.println("Grado: " + this.grado.getCod_grado());
         System.out.println("Sección: " + this.seccion.getCodigo());
         System.out.println("Curso: " + this.curso.getCod());

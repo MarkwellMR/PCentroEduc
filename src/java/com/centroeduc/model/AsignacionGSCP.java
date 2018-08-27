@@ -3,12 +3,14 @@ package com.centroeduc.model;
 
 
 public class AsignacionGSCP {
+    public Integer codigo;
     public Integer cdGrado;
     public Integer cdSecc;
     public Integer cdCurso;
     public String cdMaestro;
 
     public AsignacionGSCP() {
+        this.codigo = null;
         this.cdGrado = null;
         this.cdSecc = null;
         this.cdCurso = null;
@@ -16,6 +18,14 @@ public class AsignacionGSCP {
         
     }
 
+    public Integer getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
+    }
+    
     public Integer getCdGrado() {
         return cdGrado;
     }
@@ -50,9 +60,7 @@ public class AsignacionGSCP {
 
     @Override
     public String toString() {
-        return "AsignacionGSCP{" + "cdGrado=" + cdGrado + ", cdSecc=" + cdSecc + ", cdCurso=" + cdCurso + ", cdMaestro=" + cdMaestro + '}';
+        return "AsignacionGSCP{" + "codigo=" + codigo + ", cdGrado=" + cdGrado + ", cdSecc=" + cdSecc + ", cdCurso=" + cdCurso + ", cdMaestro=" + cdMaestro + '}';
     }
-    
-    
     
 }

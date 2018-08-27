@@ -18,6 +18,15 @@ public class Curso {
         this.cupo = null;
     }
 
+    public Curso(Integer cod, String nombre, String hInicio, String hFin, String jornada, Integer cupo) {
+        this.cod = cod;
+        this.nombre = nombre;
+        this.hInicio = hInicio;
+        this.hFin = hFin;
+        this.jornada = jornada;
+        this.cupo = cupo;
+    }
+
     public Integer getCod() {
         return cod;
     }
@@ -49,6 +58,7 @@ public class Curso {
     public void sethFin(String hFin) {
         this.hFin = hFin;
     }
+
     public String getJornada() {
         return jornada;
     }
@@ -64,7 +74,6 @@ public class Curso {
     public void setCupo(Integer cupo) {
         this.cupo = cupo;
     }
-    
     
     
     

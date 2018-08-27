@@ -38,10 +38,10 @@
                     <h:outputText value="#{cur.nombre}"/>
                 </p:column>
                 <p:column headerText="Hora Inicio">
-                    <h:outputText value="#{cur.gethInicio}"/>
+                    <h:outputText value="#{cur}"/>
                 </p:column>
                 <p:column headerText="Hora Fin">
-                    <h:outputText value="#{cur.gethFin}"/>
+                    <h:outputText value="#{cur}"/>
                 </p:column>
                 <p:column headerText="Jornada">
                     <h:outputText value="#{cur.jornada}"/>
@@ -63,10 +63,10 @@
                 <p:inputText id="txtNameA" value="#{controllerCurso.course.nombre}"/>
                 <br/>
                 <p:outputLabel for="txtHStart" value="Hora Inicio:"/>
-                <p:inputText id="txtHStartA" value="#{controllerCurso.course.gethInicio}" placeholder="00:00:00"/>
+                <p:inputText id="txtHStartA" value="#{controllerCurso.course}" placeholder="00:00:00"/>
                 <br/>
                 <p:outputLabel for="txtHEndA" value="Hora Fin:"/>
-                <p:inputText id="txtHEndA" value="#{controllerCurso.course.gethFin}" placeholder="00:00:00"/>
+                <p:inputText id="txtHEndA" value="#{controllerCurso.course}" placeholder="00:00:00"/>
                 <br/>
                 <p:outputLabel for="txtJornadaA" value="Jornada:"/>
                 <p:inputText id="txtJornadaA" value="#{controllerCurso.course.jornada}"/>
