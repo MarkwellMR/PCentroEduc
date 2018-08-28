@@ -174,8 +174,9 @@ public class MaestroDAO extends Conexion {
             System.out.println("Error en ClienteDao" + ex);
 
         } finally {
+            this.cerrarConex();
         }
-        this.cerrarConex();
+        
 
         return maes;
     }

@@ -35,6 +35,7 @@ public class ControllerAsigCurso {
     ArrayList<Maestro> ListaMaestros = new ArrayList();
 
     List<String> nombreCurso;
+    
     public Curso getCurso() {
         return curso;
     }

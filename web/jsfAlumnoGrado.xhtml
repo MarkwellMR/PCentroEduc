@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        
+        <title>Asinacion de Alumnos a Grados</title>
+    </h:head>
+    <h:body>
+
+        <f:event type="preRenderView" listener="#{controllerAlumnoGrado.cargarListasAlumnosGrado()}"/>
+        <center>
+             <br/>
+        <h3 style="margin-top:0" >INFORME DE Alumnos Asignado a Grados</h3>
+        </center>
+        <p:accordionPanel id="acordion">
+            <p:tab title="Buscar Datos">
+                <h:panelGrid columns="1" cellpadding="10">
+                    
+                    <h:form id="frmBuscarGrado">
+                        <p:outputLabel value="Código" for="txtCodigoBusqueda"/>
+                        <p:inputText value="#{controllerAlumnoGrado.datos.codAlumnoGrado}" id="txtCodigoBusqueda"/>
+                        <p:commandButton value="Buscar" actionListener="#{controllerAlumnoGrado.busquedaCodigoAlumnoGrado()}" oncomplete="PF('dlgBusqueda').show();" update=":acordion:dglBusqueda1" />
+                    </h:form>
+                    <p:dialog header="AlumnoGrado" id="dglBusqueda1" widgetVar="dlgBusqueda" showEffect="explode" hideEffect="bounce" height="300" width="310" >
+
+                        <h:form id="MostrarDatos" >
+                            <p:outputLabel for="txtCodAlGrad" value="Codigo de Alumno Grado:"/>
+                            <br/>
+                            <p:outputLabel id="txtCodAlGrad" value="#{controllerAlumnoGrado.datos.codAlumnoGrado}"/>
+                            <br/>
+                            <p:outputLabel for="txtCodAlumn" value="Codigo de Alumno:"/>
+                            <br/>
+                            <p:outputLabel id="txtCodAlumn" value="#{controllerAlumnoGrado.datos.codAlumnos}"/>
+                            <br/>
+                            <p:outputLabel for="txtCodCGSP" value="Codigo de CGSP:"/>
+                            <br/>
+                            <p:outputLabel id="txtCodCGSP" value="#{controllerAlumnoGrado.datos.ccursgradsecprof}"/>
+                            <br/>
+                            <p:outputLabel for="txtCiclo" value="Cliclo Escolar:"/>
+                            <br/>
+                            <p:outputLabel id="txtCiclo" value="#{controllerAlumnoGrado.datos.year}"/>
+                            <br/>
+                        </h:form>
+                    </p:dialog> 
+                </h:panelGrid>
+            </p:tab>
+            <p:tab title="Agregar Nuevos Datos">
+                <h:panelGrid columns="1" cellpadding="10" bgcolor="linen">
+                    <h:form id="frmIngresoDatos">
+                         <p:outputLabel for="txtCodAlGrad" value="Codigo de Alumno Grado:"/>
+                            <br/>
+                            <p:outputLabel id="txtCodAlGrad" value="#{controllerAlumnoGrado.datos.codAlumnoGrado}"/>
+                            <br/>
+                            <p:outputLabel for="txtCodAlumn" value="Codigo de Alumno:"/>
+                            <br/>
+                            <p:outputLabel id="txtCodAlumn" value="#{controllerAlumnoGrado.datos.codAlumnos}"/>
+                            <br/>
+                            <p:outputLabel for="txtCodCGSP" value="Codigo de CGSP:"/>
+                            <br/>
+                            <p:outputLabel id="txtCodCGSP" value="#{controllerAlumnoGrado.datos.ccursgradsecprof}"/>
+                            <br/>
+                            <p:outputLabel for="txtCiclo" value="Cliclo Escolar:"/>
+                            <br/>
+                            <p:inputText id="txtCiclo" value="#{controllerAlumnoGrado.datos.year}"/>
+                            <br/>
+                            <p:commandButton actionListener="#{controllerAlumnoGrado.guardarAlumnoGrado()}" value="Guardar Datos" update=":frmTablaAlumGrado:tblAlumGrado"/>
+                    </h:form>
+                </h:panelGrid>
+            </p:tab>
+
+
+        </p:accordionPanel>
+        <br/>
+        <br/>
+        <h:form id="frmTablaAlumGrado">
+            <p:dataTable var="AlumnoGrado" value="#{controllerAlumnoGrado.listaAlumnoGrado}" id="tblAlumGrado">
+                <p:column headerText="Codigo de Alumno Grado">
+                    <h:outputText value="#{AlumnoGrado.codAlumnoGrado}" />
+                </p:column>
+                <p:column headerText="Codigo de Alumnos">
+                    <h:outputText value="#{AlumnoGrado.codAlumnos}" />
+                </p:column>
+                <p:column headerText="Codigo de CGSP">
+                    <h:outputText value="#{AlumnoGrado.ccursgradsecprof}" />
+                </p:column>
+                <p:column headerText="Ciclo">
+                    <h:outputText value="#{AlumnoGrado.year}" />
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+
+
+
+
+    </h:body>
+</html>
+
