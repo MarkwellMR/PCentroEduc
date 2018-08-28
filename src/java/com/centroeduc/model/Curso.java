@@ -4,16 +4,27 @@ package com.centroeduc.model;
 public class Curso {
     private Integer cod;
     private String nombre;
-    private String horario;
+    private String hinicio;
+    private String hfin;
     private String jornada;
     private Integer cupo;
 
     public Curso() {
         this.cod = null;
         this.nombre = null;
-        this.horario = null;
+        this.hinicio = null;
+        this.hfin = null;
         this.jornada = null;
         this.cupo = null;
+    }
+
+    public Curso(Integer cod, String nombre, String hinicio, String hfin, String jornada, Integer cupo) {
+        this.cod = cod;
+        this.nombre = nombre;
+        this.hinicio = hinicio;
+        this.hfin = hfin;
+        this.jornada = jornada;
+        this.cupo = cupo;
     }
 
     public Integer getCod() {
@@ -32,13 +43,23 @@ public class Curso {
         this.nombre = nombre;
     }
 
-    public String getHorario() {
-        return horario;
+    public String getHinicio() {
+        return hinicio;
     }
 
-    public void setHorario(String horario) {
-        this.horario = horario;
+    public void setHinicio(String hinicio) {
+        this.hinicio = hinicio;
     }
+
+    public String getHfin() {
+        return hfin;
+    }
+
+    public void setHfin(String hfin) {
+        this.hfin = hfin;
+    }
+
+    
 
     public String getJornada() {
         return jornada;
@@ -55,6 +76,12 @@ public class Curso {
     public void setCupo(Integer cupo) {
         this.cupo = cupo;
     }
+
+    @Override
+    public String toString() {
+        return "Curso{" + "cod=" + cod + ", nombre=" + nombre + ", hinicio=" + hinicio + ", hfin=" + hfin + ", jornada=" + jornada + ", cupo=" + cupo + '}';
+    }
+
     
     
     

@@ -13,16 +13,16 @@
 
         <h:form>
             <div class="ui-g">
-                <div class="ui-g-12 ui-md-12 ui-lg-12"></div>
-                
-                <div class="ui-g-12 ui-md-6 ui-lg-2"></div>
-                
+                <div class="ui-g-12 ui-md-12 ui-lg-12">&nbsp;</div>
+
+                <div class="ui-g-12 ui-md-6 ui-lg-2">&nbsp;</div>
+
                 <div class="ui-g-12 ui-md-6 ui-lg-2">
                     <p:outputLabel for="lstCurso" value="Curso: " />
                     <br/>
                     <p:outputLabel for="lstGrado" value="Grado: " />
                 </div>
-                
+
                 <div class="ui-g-12 ui-md-6 ui-lg-2">
                     <p:selectOneMenu id="lstCurso" value="#{controllerAsigCurso.curso.cod}">
                         <f:selectItems value="#{controllerAsigCurso.listaCurso}" var="micurso"  itemLabel="#{micurso.nombre}" itemValue="#{micurso.cod}" />
@@ -32,13 +32,13 @@
                         <f:selectItems value="#{controllerAsigCurso.listaGrado}" var="migrado"  itemLabel="#{migrado.descripcion}" itemValue="#{migrado.cod_grado}" />
                     </p:selectOneMenu>
                 </div>
-                
+
                 <div class="ui-g-12 ui-md-6 ui-lg-2">
                     <p:outputLabel for="lstSeccion" value="Seccion: " />
                     <br/>
                     <p:outputLabel for="lstMaestro" value="Maestro: " />
                 </div>
-                
+
                 <div class="ui-g-12 ui-md-6 ui-lg-2">
                     <p:selectOneMenu id="lstSeccion" value="#{controllerAsigCurso.seccion.codigo}">
                         <f:selectItems value="#{controllerAsigCurso.listaSeccion}" var="miseccion"  itemLabel="#{miseccion.descripcion}" itemValue="#{miseccion.codigo}" />
@@ -51,7 +51,28 @@
                     <h:commandButton actionListener="#{controllerAsigCurso.asignarCurso()}" value="asignar"/>
                 </div>
 
-                <div class="ui-g-12 ui-md-6 ui-lg-2"></div>
+                <div class="ui-g-12 ui-md-6 ui-lg-2">&nbsp;</div>
+                <div class="ui-g-12 ui-md-6 ui-lg-12">
+                    <h:form id="frmTabla">
+                        <p:dataTable var="asg" value="#{controllerAsigCurso.listaAsignacion}" id="tblA">
+                            <p:column headerText="Codigo asignacion">
+                                <h:outputText value="#{asg.codigo}"/>
+                            </p:column>
+                            <p:column headerText="CS Grado">
+                                <h:outputText value="#{asg.cdGrado}"/>
+                            </p:column>
+                            <p:column headerText="CD Seccion">
+                                <h:outputText value="#{asg.cdSecc}"/>
+                            </p:column>
+                            <p:column headerText="CD Curso">
+                                <h:outputText value="#{asg.cdCurso}"/>
+                            </p:column>
+                            <p:column headerText="CD Maestro">
+                                <h:outputText value="#{asg.cdMaestro}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </div>
             </div>
 
 

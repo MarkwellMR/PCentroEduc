@@ -17,17 +17,17 @@ public class CursoDAO extends Conexion {
     Curso curso = new Curso();
 
     //almacenar
-    public String newCurso(Curso course) {
+    public String newCurso(Curso curso) {
         answer = null;
         try {
             this.Conectar();
-            sql = "insert into curso values(?,?,?,?,?)";
+            sql = "insert into curso(nombre, hinicio, hfin, jornada, cupo) values(?,?,?,?,?)";
             run = this.getMiconexion().prepareStatement(sql);
-            run.setInt(1, course.getCod());
-            run.setString(2, course.getNombre());
-            run.setString(3, course.getHorario());
-            run.setString(4, course.getJornada());
-            run.setInt(5, course.getCupo());
+            run.setString(1, curso.getNombre());
+            run.setString(2, curso.getHinicio());
+            run.setString(3, curso.getHfin());
+            run.setString(4, curso.getJornada());
+            run.setInt(5, curso.getCupo());
 
             run.executeUpdate();
 
@@ -59,7 +59,8 @@ public class CursoDAO extends Conexion {
                 Curso course = new Curso();
                 course.setCod(this.values.getInt("cod_curso"));
                 course.setNombre(this.values.getString("nombre"));
-                course.setHorario(this.values.getString("horario"));
+                course.setHinicio(this.values.getString("hinicio"));
+                course.setHfin(this.values.getString("hfin"));
                 course.setJornada(this.values.getString("jornada"));
                 course.setCupo(this.values.getInt("cupo"));
                 list.add(course);
@@ -75,17 +76,18 @@ public class CursoDAO extends Conexion {
         return list;
     }
 
-    public String updateCourse(Curso course) {
+    public String updateCourse(Curso courso) {
         answer = null;
         try {
             this.Conectar();
-            sql = "update curso set nombre=?, horario=?, jornada=?, cupo=? where cod_curso=?";
+            sql = "update curso set nombre=?, hinicio=?, hfin=?, jornada=?, cupo=? where cod_curso=?";
             run = this.getMiconexion().prepareStatement(sql);
-            run.setString(1, course.getNombre());
-            run.setString(2, course.getHorario());
-            run.setString(3, course.getJornada());
-            run.setInt(4, course.getCupo());
-            run.setInt(5, course.getCod());
+            run.setString(1, courso.getNombre());
+            run.setString(2, courso.getHinicio());
+            run.setString(3, courso.getHfin());
+            run.setString(4, courso.getJornada());
+            run.setInt(5, courso.getCupo());
+            run.setInt(6, courso.getCod());
 
             run.executeUpdate();
             answer = "Curso actualizado";
@@ -130,7 +132,8 @@ public class CursoDAO extends Conexion {
             if (this.values.next()) {
                 course.setCod(this.values.getInt("cod_curso"));
                 course.setNombre(this.values.getString("nombre"));
-                course.setHorario(this.values.getString("horario"));
+                course.setHinicio(this.values.getString("hinicio"));
+                course.setHfin(this.values.getString("hfin"));
                 course.setJornada(this.values.getString("jornada"));
                 course.setCupo(this.values.getInt("cupo"));
             }else{

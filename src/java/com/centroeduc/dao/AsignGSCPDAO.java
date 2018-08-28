@@ -6,6 +6,7 @@ import com.centroeduc.model.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class AsignGSCPDAO extends Conexion{
     private String sql;
@@ -37,6 +38,34 @@ public class AsignGSCPDAO extends Conexion{
             this.cerrarConex();
         }
         return answer;
+    }
+    
+    public ArrayList<AsignacionGSCP> listAsign(){
+        ArrayList<AsignacionGSCP> list = null;
+        values = null;
+        try {
+            this.Conectar();
+            sql = "select * from cursgradsecprof";
+            run = this.getMiconexion().prepareStatement(sql);
+            values = run.executeQuery();
+            list = new ArrayList();
+            while(values.next()){
+                AsignacionGSCP asigna = new AsignacionGSCP();
+                asigna.setCodigo(this.values.getInt(1));
+                asigna.setCdGrado(this.values.getInt("cod_grad"));
+                asigna.setCdSecc(this.values.getInt("cod_sec"));
+                asigna.setCdCurso(this.values.getInt("cod_curso"));
+                asigna.setCdMaestro(this.values.getString("cod_prof"));
+                list.add(asigna);
+            }
+            values.close();
+            run.close();
+        } catch (SQLException e) {
+            System.out.println("Error en AsignGSCPDAO(lista): " + e);
+        }finally{
+            this.cerrarConex();
+        }
+        return list;
     }
     
 }
