@@ -148,4 +148,36 @@ public class CursoDAO extends Conexion {
         }
         return course;
     }
+    
+    public ArrayList<Curso> listCurso(String dato) {
+        ArrayList<Curso> list = null;
+        values = null;
+        try {
+            this.Conectar();
+            sql = "select * from curso where nombre like ?";
+            run = this.getMiconexion().prepareStatement(sql);
+            run.setString(1, dato + "%");
+            this.values = this.run.executeQuery();
+            list = new ArrayList();
+
+            while (values.next()) {
+                Curso course = new Curso();
+                course.setCod(this.values.getInt("cod_curso"));
+                course.setNombre(this.values.getString("nombre"));
+                course.setHinicio(this.values.getString("hinicio"));
+                course.setHfin(this.values.getString("hfin"));
+                course.setJornada(this.values.getString("jornada"));
+                course.setCupo(this.values.getInt("cupo"));
+                list.add(course);
+            }
+
+            values.close();
+            run.close();
+        } catch (SQLException e) {
+            System.out.println("Error en CursoDAO(Lista Nombre): " + e);
+        } finally {
+            this.cerrarConex();
+        }
+        return list;
+    }
 }

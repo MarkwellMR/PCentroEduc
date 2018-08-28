@@ -23,7 +23,7 @@ public class ControllerCurso {
     }
     
     public void loadCurso(){
-        listCurso = dao.listCourse();
+        listCurso = dao.listCurso(course.getNombre());
     }
 
     public Curso getCourse() {
@@ -63,6 +63,14 @@ public class ControllerCurso {
             course = dao.serachId(curso.getCod());
         } catch (Exception e) {
             System.out.println("Error en ControllerCurso(search): " + e);
+        }
+    }
+    
+    public void searchName(){
+        try {
+            listCurso = dao.listCurso(course.getNombre());
+        } catch (Exception e) {
+            System.out.println("Error en: " + e);
         }
     }
 }
