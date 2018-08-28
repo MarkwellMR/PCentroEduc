@@ -21,10 +21,9 @@ public class SeccionDAO extends Conexion {
         ingreso = null;
         try {
             this.Conectar();
-            sql = "insert into seccion values(?,?)";
+            sql = "insert into seccion(descripcion) values(?)";
             ejecutar = this.getMiconexion().prepareStatement(sql);
-            ejecutar.setInt(1, sec.getCodigo());
-            ejecutar.setString(2, sec.getDescripcion());
+            ejecutar.setString(1, sec.getDescripcion());
 
             ejecutar.executeUpdate();
             ingreso = "datos almacenados";

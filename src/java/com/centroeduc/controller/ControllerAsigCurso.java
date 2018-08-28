@@ -47,6 +47,7 @@ public class ControllerAsigCurso {
     
     
     List<String> nombreCurso;
+    
     public Curso getCurso() {
         return curso;
     }

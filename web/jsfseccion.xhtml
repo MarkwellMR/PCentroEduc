@@ -24,7 +24,7 @@
                         <h:form id="frmModifica">
                             <p:outputLabel for="txtCodigoL" value="Codigo:"/>
                             <br/>
-                            <p:inputText id="txtCodigoL" value="#{controladorSeccion.sec.codigo}"/>
+                            <p:outputLabel id="txtCodigoL" value="#{controladorSeccion.sec.codigo}"/>
                             <br/>
                             <p:outputLabel for="txtDescripcionL" value="Descripcion:"/>
                             <br/>
@@ -44,10 +44,6 @@
                     <f:event type="preRenderView" listener="#{controladorSeccion.cargarSeccion()}"/>
                     <h:form id="frmIngresar">
 
-                        <p:outputLabel for="txtCodigo" value="Codigo"/>
-                        <p:inputText id="txtCodigo" value="#{controladorSeccion.sec.codigo}"/>
-                        <br/>
-                        <br/>
                         <p:outputLabel for="txtDescripcion" value="Descripcion"/>
                         <p:inputText id="txtDescripcion" value="#{controladorSeccion.sec.descripcion}"/>
                         <br/>
