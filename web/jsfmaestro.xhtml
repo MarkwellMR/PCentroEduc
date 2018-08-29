@@ -1,0 +1,209 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Maestro</title>
+    </h:head>
+    <h:body>
+        <f:event type="preRenderView" listener="#{controladorMaestro.cargarMaestro()}"/>
+        <p:accordionPanel id="acordion">
+            <p:tab title="Buscar Maestro">
+                <h:panelGrid columns="1" cellpadding="10" >
+
+                    <h:form id="frmBuscar">
+                        <p:outputLabel value="Código" for="txtCodigoBusqueda"/>
+                        <p:inputText value="#{controladorMaestro.maes.codigo}" id="txtCodigoBusqueda"/>
+                        <p:commandButton value="Buscar" actionListener="#{controladorMaestro.busquedaCodigo()}" oncomplete="PF('dlgBusqueda').show();" update=":acordion:dglBusqueda1" />
+                    </h:form>
+
+                    <p:dialog header="Maestros" id="dglBusqueda1" widgetVar="dlgBusqueda" showEffect="explode" hideEffect="bounce" height="700" width="250">
+
+                        <h:form id="frmEliminaModifica">
+
+
+                            <p:outputLabel for="txtCodigoB" value="Codigo:"/>
+                            <br/>
+                            <p:inputText id="txtCodigoB" value="#{controladorMaestro.maes.codigo}"/>
+                            <br/>
+                            <p:outputLabel for="txtNombreB" value="Nombre:"/>
+                            <br/>
+                            <p:inputText id="txtNombreB" value="#{controladorMaestro.maes.nombre}"/>
+                            <br/>
+                            <p:outputLabel for="txtApellidoB" value="Apellido:"/>
+                            <br/>
+                            <p:inputText id="txtApellidoB" value="#{controladorMaestro.maes.apellido}"/>
+                            <br/>
+                            <p:outputLabel for="txtDireccionB" value="Direccion:"/>
+                            <br/>
+                            <p:inputText id="txtDireccionB" value="#{controladorMaestro.maes.direccion}"/>
+                            <br/>
+                            <p:outputLabel for="txtEmailB" value="Email:"/>
+                            <br/>
+                            <p:inputText id="txtEmailB" value="#{controladorMaestro.maes.email}"/>
+                            <br/>
+                            <p:outputLabel for="txtTelCasaB" value="Telefono de Casa:"/>
+                            <br/>
+                            <p:inputText id="txtTelCasaB" value="#{controladorMaestro.maes.telCasa}"/>
+                            <br/>
+                            <p:outputLabel for="txtTelMovilB" value="Telefono Movil:"/>
+                            <br/>
+                            <p:inputText id="txtTelMovilB" value="#{controladorMaestro.maes.telMovil}"/>
+                            <br/>
+                            <p:outputLabel for="txtFechanacB" value="Fecha de Nacimiento:"/>
+                            <br/>
+                            <p:inputText id="txtFechanacB" value="#{controladorMaestro.maes.fechanac}"/>
+                            <br/>
+                            <p:outputLabel for="txtCuiB" value="Cui:"/>
+                            <br/>
+                            <p:inputText id="txtCuiB" value="#{controladorMaestro.maes.cui}"/>
+                            <br/>
+                            <p:outputLabel for="txtPasswordB" value="Password:"/>
+                            <br/>
+                            <p:inputText id="txtPasswordB" value="#{controladorMaestro.maes.pass}"/>
+                            <br/>
+                            <p:outputLabel for="txtCodigoAB" value="Codigo Administrador:"/>
+                            <br/>
+                            <p:inputText id="txtCodigoAB" value="#{controladorMaestro.maes.codigoA}"/>
+                            <br/>
+                            <p:outputLabel for="txtEstadoB" value="Estado:"/>
+                            <br/>
+                            <p:inputText id="txtEstadoB" value="#{controladorMaestro.maes.estado}"/>
+                            <br/>
+                            <p:commandButton actionListener="#{controladorMaestro.actualizarMaestro()}" value="Modificar" update=":frmTabla:tblMaestros"/>
+                        </h:form>  
+
+                    </p:dialog>
+                </h:panelGrid>
+            </p:tab>
+        </p:accordionPanel>
+
+
+
+
+        <p:accordionPanel id="acordion1">
+            <p:tab title="Agregar un Nuevo Maestro">
+                <h:panelGrid columns="1" cellpadding="10">
+                    <f:event type="preRenderView" listener="#{controladorMaestro.cargarMaestro()}"/>
+                    <h:form  id="frmIngreso">
+
+                        <p:outputLabel for="txtCodigo" value="Codigo: "/>
+                        <p:inputText id="txtCodigo" value="#{controladorMaestro.maes.codigo}"/>
+                        <br/>
+                        <br/>
+                        <p:outputLabel for="txtNombre" value="Nombre: "/>
+                        <p:inputText id="txtNombre" value="#{controladorMaestro.maes.nombre}"/>
+                        <br/> 
+                        <br/>
+                        <p:outputLabel for="txtApellido" value="Apellido: "/>
+                        <p:inputText id="txtApellido" value="#{controladorMaestro.maes.apellido}"/>
+                        <br/>    
+                        <br/>
+                        <p:outputLabel for="txtDireccion" value="Direccion: "/>
+                        <p:inputText id="txtDireccion" value="#{controladorMaestro.maes.direccion}"/>
+                        <br/>
+                        <br/>
+                        <p:outputLabel for="txtEmail" value="Email: "/>
+                        <p:inputText id="txtEmail" value="#{controladorMaestro.maes.email}"/>
+                        <br/>
+                        <br/>
+                        <p:outputLabel for="txtTelcasa" value="Tel Casa: "/>
+                        <p:inputText id="txtTelcasa" value="#{controladorMaestro.maes.telCasa}"/>
+                        <br/>
+                        <br/>
+                        <p:outputLabel for="txtTelmovil" value="Tel Movil: "/>
+                        <p:inputText id="txtTelmovil" value="#{controladorMaestro.maes.telMovil}"/>
+                        <br/>
+                        <br/>
+                        <p:outputLabel for="txtFechanac" value="Fecha de Nacimiento: "/>
+                        <p:inputText id="txtFechanac" value="#{controladorMaestro.maes.fechanac}"/>
+                        <br/>
+                        <br/>
+                        <p:outputLabel for="txtCui" value="Cui: "/>
+                        <p:inputText id="txtCui" value="#{controladorMaestro.maes.cui}"/>
+                        <br/>
+                        <br/>
+                        <p:outputLabel for="txtPass" value="Pasword: "/>
+                        <p:inputText id="txtPass" value="#{controladorMaestro.maes.pass}"/>
+                        <br/>
+                        <br/>
+                        <p:outputLabel for="txtCodigoA" value="Codigo Administrador: "/>
+                        <p:inputText id="txtCodigoA" value="#{controladorMaestro.maes.codigoA}"/>
+                        <br/>
+                        <br/>
+                        <p:outputLabel for="txtEstado" value="Estado: "/>
+                        <p:inputText id="txtEstado" value="#{controladorMaestro.maes.estado}"/>
+                        <br/>
+                        <br/>
+                        <p:commandButton actionListener="#{controladorMaestro.guardarMaestro()}" value="Guardar Datos" update=":frmTabla:tblMaestros" />
+                        <br/>
+                        <br/>
+                    </h:form>
+                </h:panelGrid>
+            </p:tab>
+        </p:accordionPanel>
+        <br/>
+
+
+
+
+        <h:form id="frmTabla">
+            <p:dataTable var="Maestro" value="#{controladorMaestro.mostrarMaestro}" id="tblMaestros">
+
+                <p:column headerText="Codigo">
+                    <h:outputText value="#{Maestro.codigo}" />
+                </p:column>
+
+                <p:column headerText="Nombre">
+                    <h:outputText value="#{Maestro.nombre}" />
+                </p:column>
+
+                <p:column headerText="Apellido">
+                    <h:outputText value="#{Maestro.apellido}" />
+                </p:column>
+
+                <p:column headerText="Direccion">
+                    <h:outputText value="#{Maestro.direccion}" />
+                </p:column>
+
+                <p:column headerText="Email">
+                    <h:outputText value="#{Maestro.email}" />
+                </p:column>
+
+                <p:column headerText="Tel casa">
+                    <h:outputText value="#{Maestro.telCasa}" />
+                </p:column>
+
+                <p:column headerText="Tel movil">
+                    <h:outputText value="#{Maestro.telMovil}" />
+                </p:column>
+
+                <p:column headerText="Fecha de Nacimiento">
+                    <h:outputText value="#{Maestro.fechanac}" />
+                </p:column>
+
+                <p:column headerText="Cui">
+                    <h:outputText value="#{Maestro.cui}" />
+                </p:column>
+
+                <p:column headerText="Password">
+                    <h:outputText value="#{Maestro.pass}" /> 
+                </p:column>
+
+                <p:column headerText="Codigo Administrador">
+                    <h:outputText value="#{Maestro.codigoA}" />
+                </p:column>
+                <p:column headerText="Estado">
+                    <h:outputText value="#{Maestro.estado}" />
+                </p:column> 
+
+
+            </p:dataTable>
+        </h:form>
+
+    </h:body>
+</html>
+

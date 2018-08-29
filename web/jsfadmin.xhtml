@@ -35,7 +35,7 @@
             <p:inputText id="txtTelM" value="#{controllerAdmin.admin.telMovil}"/>
             <br/>
             <p:outputLabel for="txtBirthdate" value="Fecha de Nacimiento"/>
-            <p:inputText id="txtBirthdate" value="#{controllerAdmin.admin.fechanac}"/>
+            <p:inputText id="txtBirthdate" value="#{controllerAdmin.admin.fechanac}" placeholder="0000/00/00"/>
             <br/>
             <p:outputLabel for="txtCui" value="CUI:"/>
             <p:inputText id="txtCui" value="#{controllerAdmin.admin.cui}"/>
@@ -86,7 +86,7 @@
         <p:dialog header="Actualizar Datos" id="update" widgetVar="dlgUpdate" showEffect="explode" hideEffect="none" height="400" width="500">
             <h:form>
                 <p:outputLabel for="txtCodeA" value="Codigo:"/>
-                <p:inputText id="txtCodeA" value="#{controllerAdmin.admin.codigo}"/>
+                <p:outputLabel id="txtCodeA" value="#{controllerAdmin.admin.codigo}"/>
                 <br/>
                 <p:outputLabel for="txtNameA" value="Nombre:"/>
                 <p:inputText id="txtNameA" value="#{controllerAdmin.admin.nombre}"/>

@@ -13,6 +13,7 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class ControllerAlumno {
     ArrayList<Alumno> listaAlumno= new ArrayList();
+    
     Alumno alum=new Alumno();
     
      public Alumno getAlum() {

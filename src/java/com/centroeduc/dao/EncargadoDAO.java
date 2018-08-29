@@ -23,28 +23,26 @@ public class EncargadoDAO extends Conexion {
         answer = null;
         try {
             this.Conectar();
-            System.out.println("dao encargado");
-            sql = "insert into encargado values(?,?,?,?,?,?,?,?,?,?,?)";
+            sql = "insert into encargado(nombre,sapellido,direccion,email, tel_casa,tel_movil,fechanac,cui,estado,cod_secre) values(?,?,?,?,?,?,?,?,?,?)";
+            System.out.println("Nombre Encargado "+ encargado.getNombre());
+            System.out.println("");
             run = this.getMiconexion().prepareStatement(sql);
-            run.setString(1, encargado.getCodigo());
-            run.setString(2, encargado.getNombre());
-            run.setString(3, encargado.getApellido());
-            run.setString(4, encargado.getDireccion());
-            run.setString(5, encargado.getEmail());
-            run.setInt(6, encargado.getTelCasa());
-            run.setInt(7, encargado.getTelMovil());
-            run.setString(8, encargado.getFechanac());
-            run.setLong(9, encargado.getCui());
-            run.setInt(10, 1);
-            run.setString(11, secre.getCodigo());
-
-            System.out.println(encargado.toString());
-            System.out.println(secre.toString());
-
+            run.setString(1, encargado.getNombre());
+            run.setString(2, encargado.getApellido());
+            run.setString(3, encargado.getDireccion());
+            run.setString(4, encargado.getEmail());
+            run.setInt(5, encargado.getTelCasa());
+            run.setInt(6, encargado.getTelMovil());
+            run.setString(7, encargado.getFechanac());
+            run.setLong(8, encargado.getCui());
+            run.setInt(9, 1);
+            run.setString(10,secre.getCodigo() );
+            
             run.executeUpdate();
             answer = "Dato almacenado";
         } catch (SQLException e) {
             answer = "dato no guardado" + e;
+            System.out.println("error "+e);
         } finally {
             this.cerrarConex();
         }
@@ -157,13 +155,12 @@ public class EncargadoDAO extends Conexion {
         }
         return enc;
     }
-    public String cambioEstado(Encargado enc){
+    public String cambioEstado(int codigo){
         try {
             this.Conectar();
-            sql = "update estado =2 where cod_enc=?";
+            sql = "update encargado set estado=2 where cod_enc=?";
             run = this.getMiconexion().prepareStatement(sql);
-             run.setString(1, enc.getCodigo());
-             
+             run.setInt(1, codigo);
              run.executeUpdate();
              answer = "registro eliminado exitosamente";
              

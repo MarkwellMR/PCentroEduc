@@ -22,11 +22,14 @@ public class SecreDao extends Conexion {
     Administrador admin = new Administrador();
 
     public String nuevaSecretaria(Secretaria secretaria, Administrador adm) {
+        System.out.println(secretaria.toString());
         try {
             this.Conectar();
-            System.out.println("DAO Encargado");
-            sql = "INSERT INTO secretaria values(?,?,?,?,?,?,?,?,?,?,?,?)";
+            System.out.println("DAO SECRETARIA");
+            sql = "INSERT INTO secretaria values(?,?,?,?,?,?,?,?,?,?,?,?)"; 
+            System.out.println(sql);
             run = this.getMiconexion().prepareStatement(sql);
+            
             run.setString(1, secretaria.getCodigo());
             run.setString(2, secretaria.getNombre());
             run.setString(3, secretaria.getApellido());
@@ -39,13 +42,13 @@ public class SecreDao extends Conexion {
             run.setString(10, adm.getCodigo());
             run.setString(11, secretaria.getPass());
             run.setInt(12, 1);
-            
 
             run.executeUpdate();
             ingreso = "Datos Almacenados Exitosamente!";
 
         } catch (SQLException e) {
             ingreso = "Error al almacenar datos" + e;
+            System.out.println("Error en Almacenar los Datos de Secretaria");
         } finally {
             this.cerrarConex();
         }
@@ -55,9 +58,10 @@ public class SecreDao extends Conexion {
     public ArrayList<Secretaria> MostrarSecretaria() {
         ArrayList<Secretaria> array = null;
         ResultSet resultado;
+        
         try {
             this.Conectar();
-            sql = "select * from secretaria";
+            sql = "select * from secretaria ";
             run = this.getMiconexion().prepareStatement(sql);
             resultado = run.executeQuery();
             array = new ArrayList();
@@ -79,7 +83,7 @@ public class SecreDao extends Conexion {
                 array.add(secre);
             }
         } catch (Exception e) {
-            System.out.println("Error" + e);
+            System.out.println("Error en Mostrar Datos" + e);
         } finally {
             this.cerrarConex();
         }
@@ -92,6 +96,7 @@ public class SecreDao extends Conexion {
 //            this.Conectar();
 //            sql = "Delete from secretaria where cod_secre= ?";
 //            run = this.getMiconexion().prepareStatement(sql);
+    
 //            run.setString(1, codigo);
 //            run.executeUpdate();
 //            ingreso = "Registro Eliminado Exitosamente";
@@ -110,8 +115,10 @@ public class SecreDao extends Conexion {
 
         try {
             this.Conectar();
-            sql = "Update secretaria set nombre=?, apellido=?, direccion=?, email=?, tel_casa=?, tel_movil=?, fechanac=?, cui=?, cod_admin=?, contraseña=?, estado=? where cod_secre=?";
+            sql = "Update secretaria set nombre=?, apellido=?, direccion=?, email=?, tel_casa=?, tel_movil=?, fechanac=?, cui=?, password=?, estado=? where cod_secre=?";
             run = this.getMiconexion().prepareStatement(sql);
+            
+            
             run.setString(1, secre.getNombre());
             run.setString(2, secre.getApellido());
             run.setString(3, secre.getDireccion());
@@ -120,12 +127,13 @@ public class SecreDao extends Conexion {
             run.setInt(6, secre.getTelMovil());
             run.setString(7, secre.getFechanac());
             run.setLong(8, secre.getCui());
-            run.setString(9, admin.getCodigo());
-            run.setString(10, secre.getPass());
-            run.setInt(11, secre.getEstado());
-            run.setString(12, secre.getCodigo());
+            run.setString(9, secre.getPass());
+            run.setInt(10, secre.getEstado());
+            run.setString(11, secre.getCodigo());
             run.executeUpdate();
+            
             ingreso = "Datos Actualizados con exito!";
+            
         } catch (SQLException e) {
             System.out.println("Error al actualizar los datos" + e);
         } finally {
@@ -133,23 +141,18 @@ public class SecreDao extends Conexion {
         }
         return ingreso;
     }
-
     
         
-    public Secretaria buscarCodigo(int id) {
+    public Secretaria buscarCodigo(String id) {
         Secretaria secre = new Secretaria();
 
         try{
             this.Conectar();
-            sql = "SELECT * FROM cliente WHERE cod_secre=? ";
-                     
-                     
+            sql = "SELECT * FROM secretaria WHERE cod_secre=? ";        
             run = this.getMiconexion().prepareStatement(sql);
-            run.setInt(id, id);
+            run.setString(1, id);
             resultadoSelect = run.executeQuery();
-            
-            
-            
+                                   
             if(this.resultadoSelect.next()){
                 secre.setCodigo(this.resultadoSelect.getString(1));
                 secre.setNombre(this.resultadoSelect.getString("nombre"));
@@ -160,14 +163,15 @@ public class SecreDao extends Conexion {
                 secre.setTelMovil(this.resultadoSelect.getInt("tel_movil"));
                 secre.setFechanac(this.resultadoSelect.getString("fechanac"));
                 secre.setCui(this.resultadoSelect.getLong("cui"));
+                admin.setCodigo(this.resultadoSelect.getString("cod_admin"));
                 secre.setPass(this.resultadoSelect.getString("password"));
                 secre.setEstado(this.resultadoSelect.getInt("estado"));
             }else{
                 System.out.println("No se encontraron registros");
-            }  
-           
+            }             
             run.close();
             resultadoSelect.close();
+            
         } catch (Exception e) {
             System.out.println("Error en SecreDao Busqueda" + e);
         } finally {
@@ -175,11 +179,25 @@ public class SecreDao extends Conexion {
         }
         return secre;
     }
-    
-    
-    public String estado(){
-        ingreso = null;
+
+    public String estado(Secretaria secre){
+        ingreso=null;
+        try{
+            this.Conectar();
+            sql="UPDATE secretaria SET estado=? WHERE cod_secre=?";
+            run= this.getMiconexion().prepareStatement(sql);
+            
+            run.setInt(1, 2);
+            run.setString(2, secre.getCodigo());
+            run.executeUpdate();
+            run.close();
+            
+        }catch(Exception e){
+            System.out.println("Error en el Estado, DAO" + e);
         
+        }finally{
+            this.cerrarConex();           
+        }
         return ingreso;
     }
 

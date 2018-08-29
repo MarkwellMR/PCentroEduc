@@ -10,8 +10,6 @@
     <h:body>
         <f:event type="preRenderView" listener="#{controllerEnc.cargarDatos()}"/>
         <h:form id="frmGuardar">
-            <p:outputLabel for="txtCode" value="Codigo:" />
-            <p:inputText id="txtCode" value="#{controllerEnc.enc.codigo}"/>
             <br/>
             <p:outputLabel for="txtNombre" value="Nombre:"/>
             <p:inputText id="txtNombre" value="#{controllerEnc.enc.nombre}"/>
@@ -81,7 +79,7 @@
         <p:dialog header="Actualizar Datos" id="updEnc" widgetVar="dlgUpdEnc" showEffect="explode" hideEffect="none" height="500" width="600">
             <h:form>
                 <p:outputLabel for="txtCodea" value="Codigo:" />
-                <p:inputText id="txtCodea" value="#{controllerEnc.enc.codigo}"/>
+                <p:outputLabel id="txtCodea" value="#{controllerEnc.enc.codigo}"/>
                 <br/>
                 <p:outputLabel for="txtNombrea" value="Nombre:"/>
                 <p:inputText id="txtNombrea" value="#{controllerEnc.enc.nombre}"/>
@@ -103,10 +101,12 @@
                 <br/>
                 <p:outputLabel for="txtFechNaca" value="Fecha de Nacimiento:"/>
                 <p:inputText id="txtFechNaca" value="#{controllerEnc.enc.fechanac}"/>
-                <br/>
+                <br/> 
                 <p:outputLabel for="txtCUIa" value="CUI"/>
                 <p:inputText id="txtCUIa" value="#{controllerEnc.enc.cui}"/>
-                
+                <br></br>
+                <br></br>
+                <br></br>
                 <p:commandButton title="Eliminar" actionListener="#{controllerEnc.deleteEnc()}" update="frmTabla:tblEnc" oncomplete="PF('dlgUpdEnc').hide();"/>          
                <p:commandButton title="Actualizar" actionListener="#{controllerEnc.updEnc()}" update="frmTabla:tblEnc" oncomplete="PF('dlgUpdEnc').hide();"/>
                <p:commandButton title="Cancelar" update="frmTabla:tblEnc" oncomplete="PF('dlgUpdate').hide();"/>
