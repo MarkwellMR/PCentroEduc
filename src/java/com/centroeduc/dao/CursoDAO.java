@@ -156,7 +156,7 @@ public class CursoDAO extends Conexion {
             this.Conectar();
             sql = "select * from curso where nombre like ?";
             run = this.getMiconexion().prepareStatement(sql);
-            run.setString(1, dato + "%");
+            run.setString(1, "%" + dato + "%");
             this.values = this.run.executeQuery();
             list = new ArrayList();
 
