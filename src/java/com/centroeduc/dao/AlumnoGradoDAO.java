@@ -16,17 +16,24 @@ public class AlumnoGradoDAO extends Conexion {
 
     AlumnoGrado asignacion = new AlumnoGrado();
 
-    public String asignarAG(int year) {
+    public String asignarAG(int cAlumn, int cAsign, int miyear) {
         respuesta = null;
+        System.out.println("Toy en el DAO: " + cAlumn +", " + cAsign + ", " + miyear);
+        
         try {
             this.Conectar();
-            sql = "insert into alumnogrado (ciclo) value(?)";
+            sql = "insert into alumnogrado(cod_alumn, cod_curs_grad_sec_prof, ciclo) values(?,?,?)";
+            System.out.println("sql: " + sql);
             ejecutar = this.getMiconexion().prepareStatement(sql);
-            ejecutar.setInt(1, year);
+            
+            ejecutar.setInt(1, cAlumn);
+            ejecutar.setInt(2, cAsign);
+            ejecutar.setInt(3, miyear);
+            
             ejecutar.executeUpdate();
 
             respuesta = "asignacion realizada";
-           
+           ejecutar.close();
         } catch (SQLException e) {
             System.out.println("error al asignar datos" + e);
         } finally {

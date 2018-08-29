@@ -112,7 +112,7 @@ public class AlumnoDAO extends Conexion {
             ejecutar.setString(1, codigo);
             clonarTabla = ejecutar.executeQuery();
             if (clonarTabla.next()) {
-                alum.setCodigo(clonarTabla.getString("cod_alumno"));
+                alum.setCodAlumno(clonarTabla.getInt("cod_alumno"));
                 alum.setNombre(clonarTabla.getString("nombre"));
                 alum.setApellido(clonarTabla.getString("apellido"));
                 alum.setEmail(clonarTabla.getString("email"));
@@ -148,7 +148,7 @@ public class AlumnoDAO extends Conexion {
             clonarTabla = this.ejecutar.executeQuery();
             while (clonarTabla.next()) {// se posiciona en el primero
                 Alumno alum = new Alumno();
-                alum.setCodigo(clonarTabla.getString("cod_alumno"));
+                alum.setCodAlumno(clonarTabla.getInt("cod_alumno"));
                 alum.setNombre(clonarTabla.getString("nombre"));
                 alum.setApellido(clonarTabla.getString("apellido"));
                 alum.setEmail(clonarTabla.getString("email"));

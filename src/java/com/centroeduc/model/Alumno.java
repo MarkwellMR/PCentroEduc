@@ -9,24 +9,33 @@ package com.centroeduc.model;
  *
  * @author Usuario
  */
-public class Alumno extends Persona{
+public class Alumno extends Persona {
+
+    private Integer codAlumno;
     private Integer telEmergencia;
-    private String  padecimiento;
+    private String padecimiento;
     private String codEncargado;
     private String codSecretaria;
     private Integer estado;
 
     public Alumno() {
-         this.telEmergencia=null;
-          this.padecimiento=null;
-          this.codEncargado = null;
+        this.codAlumno = null;
+        this.telEmergencia = null;
+        this.padecimiento = null;
+        this.codEncargado = null;
         this.codSecretaria = null;
         this.estado = null;
-          
-         
-          
+
     }
 
+    public Integer getCodAlumno() {
+        return codAlumno;
+    }
+
+    public void setCodAlumno(Integer codAlumno) {
+        this.codAlumno = codAlumno;
+    }
+    
     public String getCodEncargado() {
         return codEncargado;
     }
@@ -66,15 +75,11 @@ public class Alumno extends Persona{
     public void setEstado(Integer estado) {
         this.estado = estado;
     }
-    
-    
 
+    
     @Override
     public String toString() {
-        return "Alumno{" + "telEmergencia=" + telEmergencia + ", padecimiento=" + padecimiento + ", codEncargado=" + codEncargado + ", codSecretaria=" + codSecretaria + '}';
+        return "Alumno{" + "codAlumno=" + codAlumno + ", telEmergencia=" + telEmergencia + ", padecimiento=" + padecimiento + ", codEncargado=" + codEncargado + ", codSecretaria=" + codSecretaria + ", estado=" + estado + '}';
     }
-    
-    
-    
-    
 }
+

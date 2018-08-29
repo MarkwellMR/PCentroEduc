@@ -5,20 +5,20 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        
+
         <title>Asinacion de Alumnos a Grados</title>
     </h:head>
     <h:body>
 
         <f:event type="preRenderView" listener="#{controllerAlumnoGrado.cargarListasAlumnosGrado()}"/>
         <center>
-             <br/>
-        <h3 style="margin-top:0" >INFORME DE Alumnos Asignado a Grados</h3>
+            <br/>
+            <h3 style="margin-top:0" >INFORME DE Alumnos Asignado a Grados</h3>
         </center>
         <p:accordionPanel id="acordion">
             <p:tab title="Buscar Datos">
                 <h:panelGrid columns="1" cellpadding="10">
-                    
+
                     <h:form id="frmBuscarGrado">
                         <p:outputLabel value="Código" for="txtCodigoBusqueda"/>
                         <p:inputText value="#{controllerAlumnoGrado.datos.codAlumnoGrado}" id="txtCodigoBusqueda"/>
@@ -47,26 +47,28 @@
                     </p:dialog> 
                 </h:panelGrid>
             </p:tab>
+            
             <p:tab title="Agregar Nuevos Datos">
                 <h:panelGrid columns="1" cellpadding="10" bgcolor="linen">
-                    <h:form id="frmIngresoDatos">
-                         <p:outputLabel for="txtCodAlGrad" value="Codigo de Alumno Grado:"/>
-                            <br/>
-                            <p:outputLabel id="txtCodAlGrad" value="#{controllerAlumnoGrado.datos.codAlumnoGrado}"/>
-                            <br/>
-                            <p:outputLabel for="txtCodAlumn" value="Codigo de Alumno:"/>
-                            <br/>
-                            <p:outputLabel id="txtCodAlumn" value="#{controllerAlumnoGrado.datos.codAlumnos}"/>
-                            <br/>
-                            <p:outputLabel for="txtCodCGSP" value="Codigo de CGSP:"/>
-                            <br/>
-                            <p:outputLabel id="txtCodCGSP" value="#{controllerAlumnoGrado.datos.ccursgradsecprof}"/>
-                            <br/>
-                            <p:outputLabel for="txtCiclo" value="Cliclo Escolar:"/>
-                            <br/>
-                            <p:inputText id="txtCiclo" value="#{controllerAlumnoGrado.datos.year}"/>
-                            <br/>
-                            <p:commandButton actionListener="#{controllerAlumnoGrado.guardarAlumnoGrado()}" value="Guardar Datos" update=":frmTablaAlumGrado:tblAlumGrado"/>
+                    <h:form id="frmIngresoDatos5">
+                        <p:outputLabel for="txtCodAlumn5" value="Alumno:"/>
+                        <br/>
+                        <p:selectOneMenu id="txtCodAlumn5" value="#{controllerAlumnoGrado.alumno.codAlumno}">
+                            <f:selectItems value="#{controllerAlumnoGrado.listaAlumno}" var="alumn"  itemLabel="#{alumn.nombre}" itemValue="#{alumn.codAlumno}" />
+                        </p:selectOneMenu>
+                        
+                        <br/>
+                        <p:outputLabel for="txtCodCGSP5" value="Codigo de CGSP:"/>
+                        <br/>
+                        <p:selectOneMenu id="txtCodCGSP5" value="#{controllerAlumnoGrado.asing.codigo}">
+                            <f:selectItems value="#{controllerAlumnoGrado.listaAsignacion}" var="asign"  itemLabel="#{asign.codigo}" itemValue="#{asign.codigo}" />
+                        </p:selectOneMenu>
+                        <br/>
+                        <p:outputLabel for="txtCiclo" value="Cliclo Escolar:"/>
+                        <br/>
+                        <p:inputText id="txtCiclo" value="#{controllerAlumnoGrado.datos.year}"/>
+                        <br/>
+                        <p:commandButton actionListener="#{controllerAlumnoGrado.guardarAlumnoGrado()}" value="Guardar Datos" update=":frmTablaAlumGrado:tblAlumGrado"/>
                     </h:form>
                 </h:panelGrid>
             </p:tab>
@@ -98,4 +100,3 @@
 
     </h:body>
 </html>
-
