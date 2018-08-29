@@ -12,27 +12,27 @@ import java.util.ArrayList;
 import com.centroeduc.model.Conexion;
 import com.centroeduc.model.Alumno;
 
-
 /**
  *
  * @author Usuario
  */
-public class AlumnoDAO extends Conexion{
-     private String sql;
+public class AlumnoDAO extends Conexion {
+
+    private String sql;
     private PreparedStatement ejecutar;
     private String respuesta;
-      ResultSet clonarTabla;
-    
+    ResultSet clonarTabla;
+
     Alumno alum = new Alumno();
 
-    public String ingresarAlum(Alumno alum){
+    public String ingresarAlum(Alumno alum) {
         respuesta = null;
         try {
             this.Conectar();
             sql = "insert into alumno(nombre, apellido, direccion, email, tel_emergencia, cod_enc, cod_secre, fechanac, padecimiento, estado) values(?,?,?,?,?,?,?,?,?,?)";
             ejecutar = this.getMiconexion().prepareStatement(sql);
             ejecutar.setString(1, alum.getNombre());
-            ejecutar.setString(2,alum.getApellido());
+            ejecutar.setString(2, alum.getApellido());
             ejecutar.setString(3, alum.getDireccion());
             ejecutar.setString(4, alum.getEmail());
             ejecutar.setInt(5, alum.getTelEmergencia());
@@ -41,48 +41,46 @@ public class AlumnoDAO extends Conexion{
             ejecutar.setString(8, alum.getFechanac());
             ejecutar.setString(9, alum.getPadecimiento());
             ejecutar.setInt(10, 1);
-            
-            
+
             ejecutar.executeUpdate();
-            respuesta="Registro almacenado con Exito";
-            
+            respuesta = "Registro almacenado con Exito";
+
         } catch (SQLException ex) {
-            respuesta="Error al almacenar los datos" + ex;
-           
-            
-        }finally{
+            respuesta = "Error al almacenar los datos" + ex;
+
+        } finally {
             this.cerrarConex();
         }
         return respuesta;
     }
-     
-      public String estadoAlumno(Alumno estado){
+
+    public String estadoAlumno(Alumno estado) {
         respuesta = null;
         try {
             this.Conectar();
-            sql="update alumno set estado=? where cod_alumno=?";
+            sql = "update alumno set estado=? where cod_alumno=?";
             ejecutar = this.getMiconexion().prepareStatement(sql);
             ejecutar.setInt(1, 2);
             ejecutar.setString(2, estado.getCodigo());
-            
-             
+
             ejecutar.executeUpdate();
-            respuesta="Se han actualizado los datos correctamente";
-            
-        } catch (SQLException ex) {  
+            respuesta = "Se han actualizado los datos correctamente";
+
+        } catch (SQLException ex) {
             //Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Error en Conexion: " + ex);
-            respuesta="Error, no se puede cambiar el estado del registro";
+            respuesta = "Error, no se puede cambiar el estado del registro";
         }
-         return respuesta;
+        return respuesta;
     }
-      public String modificarAlumno(Alumno dato){
-         respuesta=null;
-          
+
+    public String modificarAlumno(Alumno dato) {
+        respuesta = null;
+
         try {
-            this.Conectar();  
-            sql ="update alumno set nombre=?, apellido=?, email=?, direccion=?, tel_emergencia=?, fechanac=?, padecimiento=?, estado=? where cod_alumno=?";
-            ejecutar= this.getMiconexion().prepareStatement(sql);
+            this.Conectar();
+            sql = "update alumno set nombre=?, apellido=?, email=?, direccion=?, tel_emergencia=?, fechanac=?, padecimiento=?, estado=? where cod_alumno=?";
+            ejecutar = this.getMiconexion().prepareStatement(sql);
             ejecutar.setString(1, dato.getNombre());
             ejecutar.setString(2, dato.getApellido());
             ejecutar.setString(3, dato.getEmail());
@@ -92,39 +90,40 @@ public class AlumnoDAO extends Conexion{
             ejecutar.setString(7, dato.getPadecimiento());
             ejecutar.setInt(8, dato.getEstado());
             ejecutar.setString(9, dato.getCodigo());
-            
+
             ejecutar.executeUpdate();
-            respuesta="Datos actualizados correctamente";
+            respuesta = "Datos actualizados correctamente";
         } catch (SQLException ex) {
             System.out.println("error en conexion" + ex);
-            respuesta = "error en conexion, datos no se actualizaron"+ ex;
-        }finally{
-          this.cerrarConex();
+            respuesta = "error en conexion, datos no se actualizaron" + ex;
+        } finally {
+            this.cerrarConex();
         }
-           return respuesta;
+        return respuesta;
     }
-       public Alumno busquedaDatos(String codigo) {
+
+    public Alumno busquedaDatos(String codigo) {
         // busqueda por codigo, devuelve 1 o ninguno
         Alumno alum = new Alumno();
         try {
             this.Conectar();
             sql = "select * from alumno where cod_alumno=?";
             ejecutar = this.getMiconexion().prepareStatement(sql);
-            ejecutar.setString(1,codigo);
-            clonarTabla=ejecutar.executeQuery();
+            ejecutar.setString(1, codigo);
+            clonarTabla = ejecutar.executeQuery();
             if (clonarTabla.next()) {
-            alum.setCodigo(clonarTabla.getString("cod_alumno"));
-            alum.setNombre(clonarTabla.getString("nombre"));
-            alum.setApellido(clonarTabla.getString("apellido"));
-            alum.setEmail(clonarTabla.getString("email"));
-            alum.setTelEmergencia(clonarTabla.getInt("tel_emergencia"));
-            alum.setCodEncargado(clonarTabla.getString("cod_enc"));
-            alum.setCodSecretaria(clonarTabla.getString("cod_secre"));
-            alum.setDireccion(clonarTabla.getString("direccion"));
-            alum.setFechanac(clonarTabla.getString("fechanac"));
-            alum.setPadecimiento(clonarTabla.getString("padecimiento"));
-            alum.setEstado(clonarTabla.getInt("estado"));
-            
+                alum.setCodigo(clonarTabla.getString("cod_alumno"));
+                alum.setNombre(clonarTabla.getString("nombre"));
+                alum.setApellido(clonarTabla.getString("apellido"));
+                alum.setEmail(clonarTabla.getString("email"));
+                alum.setTelEmergencia(clonarTabla.getInt("tel_emergencia"));
+                alum.setCodEncargado(clonarTabla.getString("cod_enc"));
+                alum.setCodSecretaria(clonarTabla.getString("cod_secre"));
+                alum.setDireccion(clonarTabla.getString("direccion"));
+                alum.setFechanac(clonarTabla.getString("fechanac"));
+                alum.setPadecimiento(clonarTabla.getString("padecimiento"));
+                alum.setEstado(clonarTabla.getInt("estado"));
+
             }
             // cerrar el preparedStatement
             //cerrar el Resultset
@@ -132,46 +131,44 @@ public class AlumnoDAO extends Conexion{
             clonarTabla.close();
 
         } catch (SQLException e) {
-            System.out.println("error en el alumnodao buscar datos"+ e);
+            System.out.println("error en el alumnodao buscar datos" + e);
         } finally {
             this.cerrarConex();
         }
         return alum;
-      }
-       public ArrayList<Alumno> mostrarAlumno() {
-       ArrayList<Alumno> alumno = new ArrayList();
+    }
+
+    public ArrayList<Alumno> mostrarAlumno() {
+        ArrayList<Alumno> alumno = new ArrayList();
 
         try {
             this.Conectar();
             sql = "select* from alumno where estado=1";
             ejecutar = this.getMiconexion().prepareStatement(sql);
             clonarTabla = this.ejecutar.executeQuery();
-            while(clonarTabla.next()){// se posiciona en el primero
-               Alumno alum = new Alumno();
-               alum.setCodigo(clonarTabla.getString("cod_alumno"));
-               alum.setNombre(clonarTabla.getString("nombre"));
-               alum.setApellido(clonarTabla.getString("apellido"));
-               alum.setEmail(clonarTabla.getString("email"));
-               alum.setTelEmergencia(clonarTabla.getInt("tel_emergencia"));
-               alum.setCodEncargado(clonarTabla.getString("cod_enc"));
-               alum.setCodSecretaria(clonarTabla.getString("cod_secre"));
-               alum.setDireccion(clonarTabla.getString("direccion"));
-               alum.setFechanac(clonarTabla.getString("fechanac"));
-               alum.setPadecimiento(clonarTabla.getString("padecimiento"));
-               alum.setEstado(clonarTabla.getInt("estado"));
-               alumno.add(alum);
-               
+            while (clonarTabla.next()) {// se posiciona en el primero
+                Alumno alum = new Alumno();
+                alum.setCodigo(clonarTabla.getString("cod_alumno"));
+                alum.setNombre(clonarTabla.getString("nombre"));
+                alum.setApellido(clonarTabla.getString("apellido"));
+                alum.setEmail(clonarTabla.getString("email"));
+                alum.setTelEmergencia(clonarTabla.getInt("tel_emergencia"));
+                alum.setCodEncargado(clonarTabla.getString("cod_enc"));
+                alum.setCodSecretaria(clonarTabla.getString("cod_secre"));
+                alum.setDireccion(clonarTabla.getString("direccion"));
+                alum.setFechanac(clonarTabla.getString("fechanac"));
+                alum.setPadecimiento(clonarTabla.getString("padecimiento"));
+                alum.setEstado(clonarTabla.getInt("estado"));
+                alumno.add(alum);
+
             }
-            
-            
+
         } catch (SQLException ex) {
-                System.out.println("error en MostrarAlumno en dao: "+ex);
+            System.out.println("error en MostrarAlumno en dao: " + ex);
         } finally {
             this.cerrarConex();
         }
         return alumno;
     }
-       
-    
-}
 
+}

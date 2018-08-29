@@ -14,6 +14,7 @@ import javax.faces.bean.ViewScoped;
 public class ControllerAlumno {
     ArrayList<Alumno> listaAlumno= new ArrayList();
     Alumno alum=new Alumno();
+    
      public Alumno getAlum() {
         return alum;
     }
