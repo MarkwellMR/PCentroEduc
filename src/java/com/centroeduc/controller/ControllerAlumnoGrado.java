@@ -35,6 +35,7 @@ public class ControllerAlumnoGrado {
     ArrayList<Alumno> ListaAlumno = new ArrayList();
     ArrayList<AlumnoGrado> ListaAlumnoGrado = new ArrayList();
     ArrayList<AsignacionGSCP> ListaAsignacion = new ArrayList();
+    
 
     public Alumno getAlumno() {
         return alumno;
