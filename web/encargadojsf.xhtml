@@ -9,6 +9,7 @@
     </h:head>
     <h:body>
         <f:event type="preRenderView" listener="#{controllerEnc.cargarDatos()}"/>
+        
         <h:form id="frmGuardar">
             <br/>
             <p:outputLabel for="txtNombre" value="Nombre:"/>
@@ -39,6 +40,28 @@
             <p:inputText id="txtCsecre" value="#{controllerEnc.sec.codigo}"/>
             <br/>
             <p:commandButton actionListener="#{controllerEnc.guardarEnc()}" value="Crear" update="frmTabla:tblEnc"/>
+            <br/><br/><br/>
+        </h:form>
+        <h:form id="BuscarxNombre">
+            
+            <p:outputLabel for="btnSearch" value="Buscar por Nombre"/>
+            <p:inputText id="btnSearch" value="#{controllerEnc.enc.nombre}"/>
+            
+            <p:commandButton value="Buscar por Nombre" actionListener="#{controllerEnc.buscarPorNombre()}" oncomplete="PF('resBuscar').show();" update="frmBuscarEncargado:busqEnc"/>
+            
+            <p:dialog header="Resultados" id="resSearch" widgetVar="resBuscar"  showEffect="explode" hideEffect="none" height="500" width="600">
+                <h:form id="frmBuscarEncargado">
+                    <p:dataTable var="busqueda" value="#{controllerEnc.listaBusEnc}" id="busqEnc">
+                        <p:column headerText="Codigo">
+                            <h:outputText value="#{busqueda.codigo}"/>
+                        </p:column>
+                        <p:column headerText="Nombre">
+                            <h:outputText value="#{busqueda.nombre}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </p:dialog>
+            
         </h:form>
         <br/><br/><br/><br/><br/><br/><br/>
         <h:form id="frmTabla">
