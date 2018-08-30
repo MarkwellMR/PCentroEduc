@@ -75,9 +75,6 @@
                 <p:column headerText="CUI">
                     <h:outputText value="#{admin.cui}"/>
                 </p:column>
-                <p:column headerText="Estado">
-                    <h:outputText value="#{admin.estado}"/>
-                </p:column>
                 <p:column headerText="Acciones">
                     <p:commandButton title="Actualizar" actionListener="#{controllerAdmin.searchAdmin(admin)}" oncomplete="PF('dlgUpdate').show();" update=":update" icon="ui-icon-print"/>
                 </p:column>
