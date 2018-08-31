@@ -24,7 +24,6 @@ public class EncargadoDAO extends Conexion {
         try {
             this.Conectar();
             sql = "insert into encargado(nombre,apellido,direccion,email, tel_casa,tel_movil,fechanac,cui,estado,cod_secre) values(?,?,?,?,?,?,?,?,?,?)";
-            System.out.println("");
             run = this.getMiconexion().prepareStatement(sql);
             run.setString(1, encargado.getNombre());
             run.setString(2, encargado.getApellido());
