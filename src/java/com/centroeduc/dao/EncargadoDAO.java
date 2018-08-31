@@ -23,8 +23,7 @@ public class EncargadoDAO extends Conexion {
         answer = null;
         try {
             this.Conectar();
-            sql = "insert into encargado(nombre,sapellido,direccion,email, tel_casa,tel_movil,fechanac,cui,estado,cod_secre) values(?,?,?,?,?,?,?,?,?,?)";
-            System.out.println("Nombre Encargado "+ encargado.getNombre());
+            sql = "insert into encargado(nombre,apellido,direccion,email, tel_casa,tel_movil,fechanac,cui,estado,cod_secre) values(?,?,?,?,?,?,?,?,?,?)";
             System.out.println("");
             run = this.getMiconexion().prepareStatement(sql);
             run.setString(1, encargado.getNombre());
@@ -174,5 +173,37 @@ public class EncargadoDAO extends Conexion {
         }
         return answer;
     }
+    
+    public ArrayList<Encargado> BusquedaXnombre(String Nombre) {
+        ArrayList<Encargado> lista = null;
+        try {
+            this.Conectar();
+            sql = "select * from encargado where nombre LIKE ? and estado=1";
+            run = this.getMiconexion().prepareStatement(sql);
+            run.setString(1, "%"+ Nombre+"%");
+            resultado = run.executeQuery();
+            lista = new ArrayList();
+            while (resultado.next()) {
+                Encargado enc = new Encargado();
+                enc.setCodigo(resultado.getString("cod_enc"));
+                enc.setNombre(resultado.getString("nombre"));
+                enc.setApellido(resultado.getString("apellido"));
+                enc.setDireccion(resultado.getString("direccion"));
+                enc.setEmail(resultado.getString("email"));
+                enc.setTelCasa(resultado.getInt("tel_casa"));
+                enc.setTelMovil(resultado.getInt("tel_movil"));
+                enc.setFechanac(resultado.getString("fechanac"));
+                enc.setCui(resultado.getLong("cui"));
+                lista.add(enc);
+
+            }
+        } catch (SQLException e) {
+            System.out.println("Error" + e);
+        } finally {
+            this.cerrarConex();
+        }
+        return lista;
+    }
+
 
 }

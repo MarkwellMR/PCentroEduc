@@ -51,8 +51,4 @@ public class AlumnoGrado  {
     public String toString() {
         return "AlumnoGrado{" + "CodAlumnoGrado=" + CodAlumnoGrado + ", CodAlumnos=" + CodAlumnos + ", Ccursgradsecprof=" + Ccursgradsecprof + ", year=" + year + '}';
     }
-    
-  
-     
-
 }

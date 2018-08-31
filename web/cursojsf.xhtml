@@ -15,7 +15,7 @@
             <p:inputText id="txtBusc" value="#{controllerCurso.course.nombre}"/>
             <p:commandButton actionListener="#{controllerCurso.searchName()}" value="Buscar" oncomplete="PF('dlgSearch').show();" update=":busqueda"/>
         </h:form>
-        
+
         <h:form id="frmIngreso">
             <p:outputLabel for="txtName" value="Nombre:"/>
             <p:inputText id="txtName" value="#{controllerCurso.course.nombre}"/>
@@ -35,7 +35,6 @@
             <p:commandButton actionListener="#{controllerCurso.saveCurso()}" value="Guardar"/>
         </h:form>
         <br/><br/>
-        
         <p:dialog header="Actualizar Curso" id="update" widgetVar="dlgUpdate" showEffect="explode" hideEffect="none" height="400" width="500">
             <h:form>
                 <p:outputLabel for="txtCodigoA" value="Codigo:"/>
@@ -56,35 +55,37 @@
                 <p:outputLabel for="txtCupoA" value="Cupo:"/>
                 <p:inputText id="txtCupoA" value="#{controllerCurso.course.cupo}"/>
                 <br/>
-                <p:commandButton actionListener="#{controllerCurso.updateCurso()}" value="Guardar" oncomplete="PF('dlgUpdate').hide();"/>
                 <p:commandButton actionListener="#{controllerCurso.deleteCurso()}" value="Eliminar" oncomplete="PF('dlgUpdate').hide();"/>
                 <p:commandButton value="Cancelar" update=":frmTabla:tblC" oncomplete="PF('dlgUpdate').hide();"/>
 
             </h:form>
         </p:dialog>
-        <p:dialog header="Resultados" id="busqueda" widgetVar="dlgSearch" showEffect="explode" hideEffect="none" height="250" width="500">
+        <p:dialog header="Resultados" id="busqueda" widgetVar="dlgSearch" showEffect="explode" hideEffect="none" height="250" width="600">
             <h:form id="frmTabla">
                 <p:dataTable var="cur" value="#{controllerCurso.listCurso}" id="tblC">
-                <p:column headerText="Codigo">
-                    <h:outputText value="#{cur.cod}"/>
-                </p:column>
-                <p:column headerText="Nombre">
-                    <h:outputText value="#{cur.nombre}"/>
-                </p:column>
-                <p:column headerText="Hora Inicio">
-                    <h:outputText value="#{cur.hinicio}"/>
-                </p:column>
-                <p:column headerText="Hora Fin">
-                    <h:outputText value="#{cur.hfin}"/>
-                </p:column>
-                <p:column headerText="Jornada">
-                    <h:outputText value="#{cur.jornada}"/>
-                </p:column>
-                <p:column headerText="Cupo">
-                    <h:outputText value="#{cur.cupo}"/>
-                </p:column>
-            </p:dataTable>
-        </h:form>
+                    <p:column headerText="Codigo">
+                        <h:outputText value="#{cur.cod}"/>
+                    </p:column>
+                    <p:column headerText="Nombre">
+                        <h:outputText value="#{cur.nombre}"/>
+                    </p:column>
+                    <p:column headerText="Hora Inicio">
+                        <h:outputText value="#{cur.hinicio}"/>
+                    </p:column>
+                    <p:column headerText="Hora Fin">
+                        <h:outputText value="#{cur.hfin}"/>
+                    </p:column>
+                    <p:column headerText="Jornada">
+                        <h:outputText value="#{cur.jornada}"/>
+                    </p:column>
+                    <p:column headerText="Cupo">
+                        <h:outputText value="#{cur.cupo}"/>
+                    </p:column>
+                    <p:column headerText="Estado">
+                        <h:outputText value="#{cur.estado}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
         </p:dialog>
     </h:body>
 </html>
