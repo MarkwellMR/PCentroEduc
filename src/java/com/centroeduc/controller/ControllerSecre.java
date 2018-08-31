@@ -1,5 +1,6 @@
 package com.centroeduc.controller;
 
+import com.centroeduc.dao.AdminDAO;
 import com.centroeduc.dao.SecreDao;
 import com.centroeduc.model.Administrador;
 import com.centroeduc.model.Secretaria;
@@ -17,12 +18,24 @@ public class ControllerSecre {
 
     ArrayList<Secretaria> listaSecre = new ArrayList();
 
+
     Secretaria secre = new Secretaria();
     SecreDao secretariaDao = new SecreDao();
+    AdminDAO adminDao = new AdminDAO();
 
     public ArrayList<Secretaria> getListaSecre() {
         return listaSecre;
     }
+
+
+    public AdminDAO getAdminDao() {
+        return adminDao;
+    }
+
+    public void setAdminDao(AdminDAO adminDao) {
+        this.adminDao = adminDao;
+    }
+    
 
     public void setListaSecre(ArrayList<Secretaria> listaSecre) {
         this.listaSecre = listaSecre;
@@ -31,6 +44,7 @@ public class ControllerSecre {
     public void cargarSecre() {
      
         listaSecre = secretariaDao.MostrarSecretaria();
+       
     }
 
     public Secretaria getSecre() {

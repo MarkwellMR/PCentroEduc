@@ -8,66 +8,85 @@
         <title>Registro Secretaria</title>
         <link href='icon.jpg' rel='icon' type='image/x-icon'/>
     </h:head>
-    
+
     <h:body>
         <f:event type="preRenderView" listener="#{controllerSecre.cargarSecre()}"/>
         
-        <h1>Ingrese los Datos que se piden a continuación:</h1>
-        
-        <h:form id="frmIngreso">
-            
-            <p:outputLabel for="txtCodigo" value="Código:"/>
-            <p:inputText id="txtCodigo" value="#{controllerSecre.secre.codigo}"/>
-            <br/>
+        <p:accordionPanel id="acordion">
+            <p:tab title="Ingrese los Datos que se piden a continuación:">
+                <h:panelGrid columns="1" cellpadding="10" >
 
-            <p:outputLabel for="txtNombre" value="Nombre:"/>
-            <p:inputText id="txtNombre" value="#{controllerSecre.secre.nombre}"/>
-            <br/>
+                    <h:form id="frmIngreso">
 
-            <p:outputLabel for="txtApellido" value="Apellido:"/>
-            <p:inputText id="txtApellido" value="#{controllerSecre.secre.apellido}"/>
-            <br/>
+                        <p:outputLabel for="txtCodigo" value="Código: "/>
+                        <br/>
+                        <p:inputText id="txtCodigo" value="#{controllerSecre.secre.codigo}"/>
+                        <br/>
 
-            <p:outputLabel for="txtDireccion" value="Dirección:"/>
-            <p:inputText id="txtDireccion" value="#{controllerSecre.secre.direccion}"/>
-            <br/>
+                        <p:outputLabel for="txtNombre" value="Nombre: "/>
+                        <br/>
+                        <p:inputText id="txtNombre" value="#{controllerSecre.secre.nombre}"/>
+                        <br/>
 
-            <p:outputLabel for="txtCorreo" value="Correo:"/>
-            <p:inputText id="txtCorreo" value="#{controllerSecre.secre.email}"/>
-            <br/>
+                        <p:outputLabel for="txtApellido" value="Apellido: "/>
+                        <br/>
+                        <p:inputText id="txtApellido" value="#{controllerSecre.secre.apellido}"/>
+                        <br/>
 
-            <p:outputLabel for="txtTelCasa" value="Telefono Casa:"/>
-            <p:inputText id="txtTelCasa" value="#{controllerSecre.secre.telCasa}"/>
-            <br/>
+                        <p:outputLabel for="txtDireccion" value="Dirección: "/>
+                        <br/>
+                        <p:inputText id="txtDireccion" value="#{controllerSecre.secre.direccion}"/>
+                        <br/>
 
-            <p:outputLabel for="txtTelMovil" value="Telefono Movil:"/>
-            <p:inputText id="txtTelMovil" value="#{controllerSecre.secre.telMovil}"/>
-            <br/>
+                        <p:outputLabel for="txtCorreo" value="Correo: "/>
+                        <br/>
+                        <p:inputText id="txtCorreo" value="#{controllerSecre.secre.email}"/>
+                        <br/>
 
-            <p:outputLabel for="txtFechaNac" value="Fecha de Nacimiento:"/>
-            <p:inputText id="txtFechaNac" value="#{controllerSecre.secre.fechanac}"/>
-            <br/>
+                        <p:outputLabel for="txtTelCasa" value="Telefono Casa: "/>
+                        <br/>
+                        <p:inputText id="txtTelCasa" value="#{controllerSecre.secre.telCasa}"/>
+                        <br/>
 
-            <p:outputLabel for="txtCui" value="CUI:"/>
-            <p:inputText id="txtCui" value="#{controllerSecre.secre.cui}"/>
-            <br/>
-            
-            <p:outputLabel for="txtCodigoAdm" value="Código Administrador:"/>
-            <p:inputText id="txtCodigoAdm" value="#{controllerSecre.secre.codAdm}"/>
-            <br/>
+                        <p:outputLabel for="txtTelMovil" value="Telefono Movil: "/>
+                        <br/>
+                        <p:inputText id="txtTelMovil" value="#{controllerSecre.secre.telMovil}"/>
+                        <br/>
 
-            <p:outputLabel for="txtPass" value="Contrasena:"/>
-            <p:inputText id="txtPass" value="#{controllerSecre.secre.pass}" type="password"/>
-            <br/>
+                        <p:outputLabel for="txtFechaNac" value="Fecha de Nacimiento: "/>
+                        <br/>
+                        <p:inputText id="txtFechaNac" value="#{controllerSecre.secre.fechanac}"/>
+                        <br/>
 
-            <p:commandButton actionListener="#{controllerSecre.guardarSecre()}" value="Guardar" update=":frmTabla:tblSecretaria" />
-            <br/>  
-            
-        </h:form>
-        
+                        <p:outputLabel for="txtCui" value="CUI: "/>
+                        <br/>
+                        <p:inputText id="txtCui" value="#{controllerSecre.secre.cui}"/>
+                        <br/>
+
+                        <p:outputLabel for="txtCodigoAdm" value="Código Administrador: "/>
+                        <br/>
+                        <!--<p:inputText id="txtCodigoAdm" value="#{controllerSecre.secre.codAdm}"/>-->
+                        <p:inputText id="txtCodigoAdm" value="#{controllerSecre.secre.codAdm}"/>
+                        <br/>
+
+                        <p:outputLabel for="txtPass" value="Contrasena: "/>
+                        <br/>
+                        <p:inputText id="txtPass" value="#{controllerSecre.secre.pass}" type="password"/>
+                        <br/>
+                        <br/>
+
+                        <p:commandButton actionListener="#{controllerSecre.guardarSecre()}" value="Guardar" update=":frmTabla:tblSecretaria" />
+                        <br/>  
+
+                    </h:form>
+                </h:panelGrid>
+            </p:tab>
+        </p:accordionPanel>
+
+
         <h:form id="frmTabla">
             <p:dataTable var="secre" value="#{controllerSecre.listaSecre}" id="tblSecretaria">
-                 
+
                 <p:column headerText="Código">
                     <h:outputText value="#{secre.codigo}"/>
                 </p:column>
@@ -103,21 +122,23 @@
                 <p:column headerText="CUI">
                     <h:outputText value="#{secre.cui}"/>
                 </p:column>
-                         
-                <p:column headerText="Código Administrador">
-                    <h:outputText value="#{secre.codAdm}"/>
-                </p:column>
-                         
-                <p:column headerText="Contraseña">
-                    <h:outputText value="#{secre.pass}"/>
-                </p:column>
-                <p:column headerText="Estado">
-                    <h:outputText value="#{secre.estado}"/>
-                </p:column>
+                <!--                      
+                                <p:column headerText="Código Administrador">
+                                    <h:outputText value="#{secre.codAdm}"/>
+                                </p:column>
+                                         
+                                <p:column headerText="Contraseña">
+                                    <h:outputText value="#{secre.pass}"/>
+                                </p:column>
+                                
+                                <p:column headerText="Estado">
+                                    <h:outputText value="#{secre.estado}"/>
+                                </p:column>
+                -->
 
                 <p:column headerText="Acciones">
                     <p:commandButton title="Actualizar " actionListener="#{controllerSecre.buscarSecre(secre)}" oncomplete="PF('dlgActualizar').show();" update=":actualizar"/>  
-                    
+
                 </p:column>
             </p:dataTable>
         </h:form>
@@ -159,21 +180,21 @@
                 <p:outputLabel for="txtCuiSecreA" value="CUI"/>
                 <p:inputText id="txtCuiSecreA" value="#{controllerSecre.secre.cui}" />
                 <br/>
-                
+
                 <p:outputLabel for="txtContrasenaSecreA" value="Contraseña"/>
                 <p:inputText id="txtContrasenaSecreA" value="#{controllerSecre.secre.pass}" type="password"/>
                 <br/>
-                 
+
                 <p:outputLabel for="txtEstadoSecreA" value="Estado"/>
                 <p:inputText id="txtEstadoSecreA" value="#{controllerSecre.secre.estado}"/>
                 <br/>
-                
+
                 <p:commandButton actionListener="#{controllerSecre.editarSecre()}" value="Actualizar" update=":frmTabla:tblSecretaria" oncomplete="PF('dlgActualizar').hide();"/>                
                 <p:commandButton actionListener="#{controllerSecre.estado()}" value="Eliminar" update=":frmTabla:tblSecretaria" oncomplete="PF('dlgActualizar').hide();"/>
                 <p:commandButton value="Cancelar"   update=":frmTabla:tblSecretaria" oncomplete="PF('dlgActualizar').hide()"/>   
-                
+
             </h:form>   
         </p:dialog>      
-</h:body>
+    </h:body>
 </html>
 
