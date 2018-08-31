@@ -74,4 +74,13 @@ public class ControladorMaestro {
         }
     }
 
+    public void elEstado() {
+        MaestroDAO maest = new MaestroDAO();
+        try {
+            maest.estadoMaestro(maes);
+        } catch (Exception e) {
+            System.out.println("error en controlador estado" + e);
+        }
+    }
+
 }
