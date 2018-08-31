@@ -72,7 +72,7 @@ public class ControllerGrado {
     public void elimGrado(){
         GradoDAO grados= new GradoDAO();
         try{
-            grados.eliminarGrado(grado.getCod_grado());
+            grados.eliminarGrado(grado);
         }catch (Exception e){
             System.out.println("error en el controlador de cambio de estado"+e);
         }

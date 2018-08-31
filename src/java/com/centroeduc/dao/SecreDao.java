@@ -26,7 +26,7 @@ public class SecreDao extends Conexion {
         try {
             this.Conectar();
             System.out.println("DAO SECRETARIA");
-            sql = "INSERT INTO secretaria values(?,?,?,?,?,?,?,?,?,?,?,?)"; 
+            sql = "INSERT INTO secretaria values(?,?,?,?,?,?,?,?,?,?,MD5(?),?)"; 
             System.out.println(sql);
             run = this.getMiconexion().prepareStatement(sql);
             
@@ -38,9 +38,9 @@ public class SecreDao extends Conexion {
             run.setInt(6, secretaria.getTelCasa());
             run.setInt(7, secretaria.getTelMovil());
             run.setString(8, secretaria.getFechanac());
-            run.setLong(9, secretaria.getCui());
+            run.setLong(9, secretaria.getCui());            
             run.setString(10, adm.getCodigo());
-            run.setString(11, secretaria.getPass());
+            run.setString(11, secretaria.getPass());            
             run.setInt(12, 1);
 
             run.executeUpdate();
@@ -61,13 +61,14 @@ public class SecreDao extends Conexion {
         
         try {
             this.Conectar();
-            sql = "select * from secretaria ";
+            sql = "select * from secretaria WHERE estado=1";
             run = this.getMiconexion().prepareStatement(sql);
             resultado = run.executeQuery();
             array = new ArrayList();
             
             while (resultado.next()) {
                 Secretaria secre = new Secretaria();
+                Administrador admin = new Administrador();
                 secre.setCodigo(resultado.getString("cod_secre"));
                 secre.setNombre(resultado.getString("nombre"));
                 secre.setApellido(resultado.getString("apellido"));
@@ -77,7 +78,8 @@ public class SecreDao extends Conexion {
                 secre.setTelMovil(resultado.getInt("tel_movil"));
                 secre.setFechanac(resultado.getString("fechanac"));
                 secre.setCui(resultado.getLong("cui"));
-                admin.setCodigo(resultado.getString("cod_admin"));
+                secre.setCodAdm(resultado.getString("cod_admin"));
+                System.out.println(resultado.getString("cod_admin"));
                 secre.setPass(resultado.getString("password"));
                 secre.setEstado(resultado.getInt("estado"));
                 array.add(secre);

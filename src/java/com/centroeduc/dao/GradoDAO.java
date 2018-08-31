@@ -41,19 +41,21 @@ public class GradoDAO extends Conexion{
         }
         return respuesta;
     }
-    public String eliminarGrado(Integer cod_grado){
+    public String eliminarGrado(Grado estado){
         respuesta = null;
         try{
             this.Conectar();
-            sql= "delete from grado where cod_grado=?";
+            sql= "update grado set estado=? where cod_grado=?";
             ejecutar=this.getMiconexion().prepareStatement(sql);
-            ejecutar.setInt(1, cod_grado);
+            ejecutar.setInt(1, 2);
+            ejecutar.setInt(2, estado.getCod_grado());
+            
             ejecutar.executeUpdate();
-            respuesta ="registro eliminado";
+            respuesta ="se han acutalizado los datos correctamente";
             
         }catch(SQLException ex){
-            System.out.println("Error en conexion"+ ex);
-            respuesta = "error, no se puede eliminar el registro";
+            System.out.println("Error en conexion, no se pude ejecutar el estado "+ ex);
+            respuesta = "error, no se puede cambiar el estado";
         }finally{
             this.cerrarConex();
         }
@@ -105,13 +107,14 @@ public class GradoDAO extends Conexion{
         ArrayList<Grado> grado = new ArrayList();
         try{
             this.Conectar();
-            sql="select* from grado";
+            sql="select* from grado where estado =1";
             ejecutar= this.getMiconexion().prepareStatement(sql);
             clonarTabla=this.ejecutar.executeQuery();
             while(clonarTabla.next()){
                 Grado grad = new Grado();
                 grad.setCod_grado(clonarTabla.getInt("cod_grado"));
                 grad.setDescripcion(clonarTabla.getString("descripcion"));
+                grad.setEstado(clonarTabla.getInt("estado"));
                 grado.add(grad);
             }
         }catch(SQLException ex){

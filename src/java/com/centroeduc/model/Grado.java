@@ -12,10 +12,21 @@ package com.centroeduc.model;
 public class Grado {
     private Integer cod_grado;
     private String descripcion;
+    private Integer estado;
 
     public Grado() {
         this.cod_grado =null;
         this.descripcion =null;
+        this.estado = null;
+        
+    }
+
+    public Integer getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Integer estado) {
+        this.estado = estado;
     }
 
     public Integer getCod_grado() {

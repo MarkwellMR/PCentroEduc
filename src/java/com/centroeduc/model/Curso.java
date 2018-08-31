@@ -8,6 +8,7 @@ public class Curso {
     private String hfin;
     private String jornada;
     private Integer cupo;
+    private Integer estado;
 
     public Curso() {
         this.cod = null;
@@ -16,15 +17,17 @@ public class Curso {
         this.hfin = null;
         this.jornada = null;
         this.cupo = null;
+        this.estado = null;
     }
 
-    public Curso(Integer cod, String nombre, String hinicio, String hfin, String jornada, Integer cupo) {
+    public Curso(Integer cod, String nombre, String hinicio, String hfin, String jornada, Integer cupo, Integer estado) {
         this.cod = cod;
         this.nombre = nombre;
         this.hinicio = hinicio;
         this.hfin = hfin;
         this.jornada = jornada;
         this.cupo = cupo;
+        this.estado = estado;
     }
 
     public Integer getCod() {
@@ -59,8 +62,6 @@ public class Curso {
         this.hfin = hfin;
     }
 
-    
-
     public String getJornada() {
         return jornada;
     }
@@ -77,13 +78,16 @@ public class Curso {
         this.cupo = cupo;
     }
 
-    @Override
-    public String toString() {
-        return "Curso{" + "cod=" + cod + ", nombre=" + nombre + ", hinicio=" + hinicio + ", hfin=" + hfin + ", jornada=" + jornada + ", cupo=" + cupo + '}';
+    public Integer getEstado() {
+        return estado;
     }
 
-    
-    
-    
-    
+    public void setEstado(Integer estado) {
+        this.estado = estado;
+    }
+
+    @Override
+    public String toString() {
+        return "Curso{" + "cod=" + cod + ", nombre=" + nombre + ", hinicio=" + hinicio + ", hfin=" + hfin + ", jornada=" + jornada + ", cupo=" + cupo + ", estado=" + estado + '}';
+    }
 }

@@ -41,7 +41,7 @@
                                 <p:commandButton actionListener="#{controllerGrado.actualizarDatosGrado()}" value="Modificar" update=":frmTablaGrados:tblGrado"/>
                                 <br/>
                                 <br/>
-                                <p:commandButton actionListener="#{controllerGrado.elimGrado()}" value="Eliminar" update=":frmTablaGrados:tblGrado"/>
+                                <p:commandButton actionListener="#{controllerGrado.elimGrado()}" value="Cambiar Estado" update=":frmTablaGrados:tblGrado"/>
                                 <br/>
                             </center>
                         </h:form>
@@ -72,13 +72,11 @@
                 <p:column headerText="Descripcion">
                     <h:outputText value="#{grado1.descripcion}" />
                 </p:column>
-
+                <p:column headerText="Estado">
+                    <h:outputText value="#{grado1.estado}" />
+                </p:column>
             </p:dataTable>
         </h:form>
-
-
-
-
     </h:body>
 </html>
 

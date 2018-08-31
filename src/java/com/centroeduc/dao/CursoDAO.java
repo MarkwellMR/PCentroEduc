@@ -21,13 +21,14 @@ public class CursoDAO extends Conexion {
         answer = null;
         try {
             this.Conectar();
-            sql = "insert into curso(nombre, hinicio, hfin, jornada, cupo) values(?,?,?,?,?)";
+            sql = "insert into curso(nombre, hinicio, hfin, jornada, cupo, estado) values(?,?,?,?,?,?)";
             run = this.getMiconexion().prepareStatement(sql);
             run.setString(1, curso.getNombre());
             run.setString(2, curso.getHinicio());
             run.setString(3, curso.getHfin());
             run.setString(4, curso.getJornada());
             run.setInt(5, curso.getCupo());
+            run.setInt(6, 1);
 
             run.executeUpdate();
 
@@ -50,7 +51,7 @@ public class CursoDAO extends Conexion {
         values = null;
         try {
             this.Conectar();
-            sql = "select * from curso";
+            sql = "select * from curso where estado=1";
             run = this.getMiconexion().prepareStatement(sql);
             values = run.executeQuery();
             list = new ArrayList();
@@ -136,6 +137,7 @@ public class CursoDAO extends Conexion {
                 course.setHfin(this.values.getString("hfin"));
                 course.setJornada(this.values.getString("jornada"));
                 course.setCupo(this.values.getInt("cupo"));
+                course.setEstado(this.values.getInt("estado"));
             }else{
                 System.out.println("No se encotraron coincidencias");
             }
@@ -168,6 +170,7 @@ public class CursoDAO extends Conexion {
                 course.setHfin(this.values.getString("hfin"));
                 course.setJornada(this.values.getString("jornada"));
                 course.setCupo(this.values.getInt("cupo"));
+                course.setEstado(this.values.getInt("estado"));
                 list.add(course);
             }
 
