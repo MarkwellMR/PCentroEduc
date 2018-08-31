@@ -11,10 +11,20 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class ControllerEnc {
     
+    public String valorABuscar;
     Encargado enc = new Encargado();
     Secretaria sec = new Secretaria();
     EncargadoDAO encdao = new EncargadoDAO();
     ArrayList<Encargado> listaEnc = new ArrayList();
+    ArrayList<Encargado> listaBusEnc = new ArrayList();
+
+    public ArrayList<Encargado> getListaBusEnc() {
+        return listaBusEnc;
+    }
+
+    public void setListaBusEnc(ArrayList<Encargado> listaBusEnc) {
+        this.listaBusEnc = listaBusEnc;
+    }
 
     public ArrayList<Encargado> getListaEnc() {
         return listaEnc;
@@ -26,6 +36,18 @@ public class ControllerEnc {
     
     public void cargarDatos(){
         listaEnc = encdao.MostarEncargado();
+        
+    }
+    public void loadDatos(){
+        listaBusEnc = encdao.BusquedaXnombre(enc.getNombre());
+    }
+    
+    public void buscarPorNombre(){
+        listaBusEnc= encdao.BusquedaXnombre(enc.getNombre());
+        System.out.println("CONTROLADOR ENCARGADO");
+        for (Encargado encargado : listaEnc) {
+            System.out.println("nombre: " + encargado.getNombre());
+        }
     }
     
 

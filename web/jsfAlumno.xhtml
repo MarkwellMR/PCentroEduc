@@ -27,7 +27,7 @@
 
                     <h:form id="frmBuscar">
                         <p:outputLabel value="Código" for="txtCodigoBusqueda"/>
-                        <p:inputText value="#{controllerAlumno.alum.codigo}" id="txtCodigoBusqueda"/>
+                        <p:inputText value="#{controllerAlumno.alum.codAlumno}" id="txtCodigoBusqueda"/>
                         <p:commandButton value="Buscaar" actionListener="#{controllerAlumno.busquedaCodigo()}" oncomplete="PF('dlgBusqueda').show();" update=":acordion:dglBusqueda1" />
                     </h:form>
 
@@ -38,7 +38,7 @@
 
                             <p:outputLabel for="txtCodigoB" value="Codigo:"/>
                             <br/>
-                            <p:inputText id="txtCodigoB" value="#{controllerAlumno.alum.codigo}"/>
+                            <p:outputLabel id="txtCodigoB" value="#{controllerAlumno.alum.codAlumno}"/>
                             <br/>
                             <p:outputLabel for="txtNombreB" value="Nombre:"/>
                             <br/>
@@ -81,7 +81,7 @@
                                 <p:commandButton actionListener="#{controllerAlumno.actualizarDatosAlumno()}" value="Modificar" update=":frmTablaDatos:tblAlumnos"/>
                                  <br/>
                                   <br/>
-                                <p:commandButton actionListener="#{controllerAlumno.cambioEstado()}" value="Cambio de Estado" update=":frmTablaDatos:tblAlumnos"/>
+                                <p:commandButton actionListener="#{controllerAlumno.cambioEstado()}" value="Eliminar" update=":frmTablaDatos:tblAlumnos"/>
                                 <br/>
                         </center>
                         </h:form>  
@@ -149,7 +149,7 @@
         <h:form id="frmTablaDatos">
             <p:dataTable var="alumno1" value="#{controllerAlumno.listaAlumno}" id="tblAlumnos">
                 <p:column headerText="Codigo">
-                    <h:outputText value="#{alumno1.codigo}" />
+                    <h:outputText value="#{alumno1.codAlumno}" />
                 </p:column>
                 <p:column headerText="Nombre">
                     <h:outputText value="#{alumno1.nombre}" />

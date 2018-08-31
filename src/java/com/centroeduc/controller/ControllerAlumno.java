@@ -46,7 +46,7 @@ public class ControllerAlumno {
     public void busquedaDatosAlumno(Alumno dato){
         AlumnoDAO alumnodao=new AlumnoDAO();
         try{
-            alum =alumnodao.busquedaDatos(dato.getCodigo());
+            alum =alumnodao.busquedaDatos(dato.getCodAlumno());
         }catch(Exception e){
             System.out.println("Error en el controlador de busqueda de datos "+e);
         }
@@ -55,7 +55,7 @@ public class ControllerAlumno {
         AlumnoDAO alum1=new AlumnoDAO();
         try{
             Alumno provisional = new Alumno();
-            provisional = alum1.busquedaDatos(alum.getCodigo());
+            provisional = alum1.busquedaDatos(alum.getCodAlumno());
             alum = provisional;
             System.out.println("alumno: " + alum.getNombre());
         }catch(Exception ex ){

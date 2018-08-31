@@ -61,7 +61,7 @@ public class AlumnoDAO extends Conexion {
             sql = "update alumno set estado=? where cod_alumno=?";
             ejecutar = this.getMiconexion().prepareStatement(sql);
             ejecutar.setInt(1, 2);
-            ejecutar.setString(2, estado.getCodigo());
+            ejecutar.setInt(2, estado.getCodAlumno());
 
             ejecutar.executeUpdate();
             respuesta = "Se han actualizado los datos correctamente";
@@ -102,14 +102,14 @@ public class AlumnoDAO extends Conexion {
         return respuesta;
     }
 
-    public Alumno busquedaDatos(String codigo) {
+    public Alumno busquedaDatos(int codigo) {
         // busqueda por codigo, devuelve 1 o ninguno
         Alumno alum = new Alumno();
         try {
             this.Conectar();
             sql = "select * from alumno where cod_alumno=?";
             ejecutar = this.getMiconexion().prepareStatement(sql);
-            ejecutar.setString(1, codigo);
+            ejecutar.setInt(1, codigo);
             clonarTabla = ejecutar.executeQuery();
             if (clonarTabla.next()) {
                 alum.setCodAlumno(clonarTabla.getInt("cod_alumno"));
