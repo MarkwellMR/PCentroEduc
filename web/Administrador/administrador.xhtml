@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../Templates/formato.xhtml">
+
+            <ui:define name="left">
+                <a href="../jsfadmin.xhtml"><img src="../resources/img/icon2.png" class="img"></img></a>
+                <img src="../resources/img/icon2.png" class="img"></img>
+                <img src="../resources/img/icon2.png" class="img"></img>
+                <img src="../resources/img/icon2.png" class="img"></img>
+            </ui:define>
+
+            <ui:define name="content">
+                <p id="titulo">Usuario</p>
+                <p id="titulo">Administradores</p>
+                <h:form id="frmIngreso" class="form">
+                    <div class="ui-g">
+                        <div class="ui-g-12 ui-md-6 ui-lg-3" id="etiquetas">
+                            <p:outputLabel for="txtCode" value="Codigo:"/>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <p:inputText id="txtCode" value="#{controllerAdmin.admin.codigo}"/>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3" id="etiquetas">
+                            <p:outputLabel for="txtName" value="Nombre:"/>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <p:inputText id="txtName" value="#{controllerAdmin.admin.nombre}"/>
+                        </div>
+                    </div>
+                    
+                    <p:commandButton actionListener="#{controllerAdmin.saveAdmin()}" value="Guardar" />
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
