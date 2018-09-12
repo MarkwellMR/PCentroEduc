@@ -89,6 +89,20 @@
     
 }
 
+#titulo-1{
+    font-size: 25px;
+    color: black;
+    
+}
+
+.w-1{
+    width: 100%;
+}
+
+.ml-1{
+    margin-left: 30px;
+}
+
 #etiquetas{
     text-align: right;
     font-size: 17px;
@@ -98,5 +112,16 @@
     margin-top: 20px;
 }
 
+.mt-1{
+    margin-top: 20px;
+}
+ 
+.mt-2{
+    margin-top: 40px;
+}
 
+.m{
+   padding-left: 20px;
+   padding-right: 20px;
+}
 

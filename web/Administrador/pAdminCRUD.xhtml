@@ -7,63 +7,107 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
-
         <ui:composition template="./fAdmin.xhtml">
-
             <ui:define name="content">
                 <f:event type="preRenderView" listener="#{controllerAdmin.loadAdmin()}"/>
                 <p id="titulo">Usuario</p>
-                <p id="titulo">Administradores</p>
-
-                <div class="ui-g">
-                    <div class="ui-lg-6">
-                        <div class="ui-g">
-                            <h:form id="frmIngreso" class="form">
-                                <div class="ui-lg-2">
+                <p id="titulo">Administrador</p>
+                <div class="ui-g mt-1">
+                    <div class="ui-g-12 ui-md-6 ui-lg-6">
+                        <div class="ui-lg-12">
+                            <p id="titulo-1">Ingresar Nuevo Administrador</p>
+                        </div>
+                        <h:form id="frmIngreso" class="form">
+                            <div class="ui-g">
+                                <div class="ui-g-12 ui-md-6 ui-lg-3" id="etiquetas">
                                     <p:outputLabel for="txtCode" value="Codigo:"/>
                                 </div>
-                                <div class="ui-lg-3">
-                                    <p:inputText id="txtCode" value="#{controllerAdmin.admin.codigo}"/>
+                                <div class="ui-g-12 ui-md-6 ui-lg-3">
+                                    <p:inputText id="txtCode" value="#{controllerAdmin.admin.codigo}" class="w-1"/>
                                 </div>
-                                <div class="ui-lg-2">
+                                <div class="ui-g-12 ui-md-6 ui-lg-6">&nbsp;</div>
+                                <div class="ui-g-12 ui-md-6 ui-lg-3" id="etiquetas">
                                     <p:outputLabel for="txtName" value="Nombre:"/>
                                 </div>
-                                <div class="ui-lg-3">
-                                    <p:inputText id="txtName" value="#{controllerAdmin.admin.nombre}"/>
+                                <div class="ui-g-12 ui-md-6 ui-lg-3">
+                                    <p:inputText id="txtName" value="#{controllerAdmin.admin.nombre}" class="w-1"/>
                                 </div>
-                                <div class="ui-lg-2">
+                                <div class="ui-g-12 ui-md-6 ui-lg-3" id="etiquetas">
                                     <p:outputLabel for="txtApellido" value="Apellido:"/>
                                 </div>
-                                <div class="ui-lg-3">
-                                    <p:inputText id="txtApellido" value="#{controllerAdmin.admin.apellido}"/>
-                                </div>  
+                                <div class="ui-g-12 ui-md-6 ui-lg-3">
+                                    <p:inputText id="txtApellido" value="#{controllerAdmin.admin.apellido}" class="w-1"/>
+                                </div>
+                                <div class="ui-g-12 ui-md-6 ui-lg-3" id="etiquetas">
+                                    <p:outputLabel for="txtDir" value="Dirección:" />
+                                </div>
+                                <div class="ui-g-12 ui-md-6 ui-lg-9">
+                                    <p:inputText id="txtDir" value="#{controllerAdmin.admin.direccion}" class="w-1"/>
+                                </div>
+                                <div class="ui-g-12 ui-md-6 ui-lg-3" id="etiquetas">
+                                    <p:outputLabel for="txtEmail" value="Email:" />
+                                </div>
+                                <div class="ui-g-12 ui-md-8 ui-lg-9">
+                                    <p:inputText id="txtEmail" value="#{controllerAdmin.admin.email}" class="w-1"/>
+                                </div>
+                                <div class="ui-g-12 ui-md-6 ui-lg-3" id="etiquetas">
+                                    <p:outputLabel for="txtTH" value="Telefono de Casa:"/>
+                                </div>
+                                <div class="ui-g-12 ui-md-6 ui-lg-3">
+                                    <p:inputText id="txtTH" value="#{controllerAdmin.admin.telCasa}" class="w-1"/>
+                                </div>
+                                <div class="ui-g-12 ui-md-6 ui-lg-3" id="etiquetas">
+                                    <p:outputLabel for="txtTM" value="Telefono Movil:"/>
+                                </div>
+                                <div class="ui-g-12 ui-md-6 ui-lg-3">
+                                    <p:inputText id="txtTM" value="#{controllerAdmin.admin.telMovil}" class="w-1"/>
+                                </div>
+                                <div class="ui-g-12 ui-md-6 ui-lg-3" id="etiquetas">
+                                    <p:outputLabel for="txtFechanac" value="Fecha de Nacimiento:"/>
+                                </div>
+                                <div class="ui-g-12 ui-md-6 ui-lg-3">
+                                    <p:inputText id="txtFechanac" value="#{controllerAdmin.admin.fechanac}" class="w-1"/>
+                                </div>
+                                <div class="ui-g-12 ui-md-6 ui-lg-3" id="etiquetas">
+                                    <p:outputLabel for="txtCUI" value="CUI:"/>
+                                </div>
+                                <div class="ui-g-12 ui-md-6 ui-lg-3">
+                                    <p:inputText id="txtCUI" value="#{controllerAdmin.admin.cui}" class="w-1"/>
+                                </div>
+                                <div class="ui-g-12 ui-md-6 ui-lg-3" id="etiquetas">
+                                    <p:outputLabel for="txtPass" value="Contraseña:"/>
+                                </div>
+                                <div class="ui-g-12 ui-md-6 ui-lg-3">
+                                    <p:inputText id="txtPass" value="#{controllerAdmin.admin.pass}" type="password" class="w-1"/>
+                                </div>
+                                <div class="ui-g-12 ui-md-6 ui-lg-12">
+                                    <p:commandButton actionListener="#{controllerAdmin.saveAdmin()}" value="Guardar" update=":frmTabla:tblCl" class="ml-1" id="etiquetas"/>
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-lg-6 mt-2">
+                        <div class="ui-g-12 ui-md-6 ui-lg-12 m">
+                            <h:form id="frmTabla">
+                                <p:dataTable var="admin" value="#{controllerAdmin.listAdmin}" id="tblCl">
+                                    <p:column headerText="Codigo">
+                                        <h:outputText value="#{admin.codigo}"/>
+                                    </p:column>
+                                    <p:column headerText="Nombre">
+                                        <h:outputText value="#{admin.nombre}"/>
+                                    </p:column>
+                                    <p:column headerText="Apellido">
+                                        <h:outputText value="#{admin.apellido}"/>
+                                    </p:column>
+                                    <p:column headerText="Email">
+                                        <h:outputText value="#{admin.email}"/>
+                                    </p:column>
+                                    <p:column headerText="Telefono Movil">
+                                        <h:outputText value="#{admin.telMovil}"/>
+                                    </p:column>
+                                </p:dataTable>
                             </h:form>
                         </div>
-                    </div>
-
-                    <div class="ui-lg-5">
-                        <h:form id="frmTabla">
-                            <p:dataTable var="admin" value="#{controllerAdmin.listAdmin}" id="tblCl">
-                                <p:column headerText="Codigo">
-                                    <h:outputText value="#{admin.codigo}"/>
-                                </p:column>
-                                <p:column headerText="Nombre">
-                                    <h:outputText value="#{admin.nombre}"/>
-                                </p:column>
-                                <p:column headerText="Apellido">
-                                    <h:outputText value="#{admin.apellido}"/>
-                                </p:column>
-                                <p:column headerText="Email">
-                                    <h:outputText value="#{admin.email}"/>
-                                </p:column>
-                                <p:column headerText="telefono de Casa">
-                                    <h:outputText value="#{admin.telCasa}"/>
-                                </p:column>
-                                <p:column headerText="Telefono Movil">
-                                    <h:outputText value="#{admin.telMovil}"/>
-                                </p:column>
-                            </p:dataTable>
-                        </h:form>
                     </div>
                 </div>
             </ui:define>

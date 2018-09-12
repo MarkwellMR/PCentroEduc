@@ -5,23 +5,20 @@
         <Node id="jsfGrado.xhtml" x="150" y="600" zoom="true"/>
         <Node id="jsfseccion.xhtml" x="1040" y="33" zoom="true"/>
         <Node id="jsfAsignarCurso.xhtml" x="1150" y="150" zoom="true"/>
-        <Node id="Administrador/sol2.xhtml" x="424" y="167" zoom="true"/>
-        <Node id="jsfmaestro.xhtml" x="150" y="750" zoom="true"/>
         <Node id="jsfSecre.xhtml" x="856" y="806" zoom="true"/>
+        <Node id="jsfmaestro.xhtml" x="150" y="750" zoom="true"/>
         <Node id="cursojsf.xhtml" x="982" y="643" zoom="true"/>
         <Node id="jsfAlumno.xhtml" x="900" y="300" zoom="true"/>
-        <Node id="Administrador/iAdmin.xhtml" x="426" y="35" zoom="true"/>
-        <Node id="Templates/formato.xhtml" x="763" y="427" zoom="true"/>
-        <Node id="Administrador/sol1.xhtml" x="429" y="106" zoom="true"/>
         <Node id="jsfadmin.xhtml" x="400" y="600" zoom="true"/>
         <Node id="jsfAlumnoGrado.xhtml" x="150" y="450" zoom="true"/>
-        <Node id="Administrador/administrador.xhtml" x="35" y="37" zoom="true"/>
+        <Node id="Administrador/*" x="150" y="300" zoom="true"/>
         <Node id="encargadojsf.xhtml" x="757" y="33" zoom="true"/>
+        <Node id="Administrador/adminP2.xhtml" x="400" y="300" zoom="true"/>
         <Node id="index.html" x="904" y="478" zoom="true"/>
-        <Node id="Templates/newTemplate.xhtml" x="35" y="264" zoom="true"/>
-        <Node id="Templates/fAdmin.xhtml" x="61" y="175" zoom="true"/>
-        <Node id="contenido2.xhtml" x="751" y="206" zoom="true"/>
+        <Node id="Administrador/fAdmin.xhtml" x="650" y="150" zoom="true"/>
+        <Node id="Administrador/adminP3.xhtml" x="150" y="150" zoom="true"/>
         <Node id="jsfUnidad.xhtml" x="900" y="150" zoom="true"/>
+        <Node id="Administrador/pAdminCRUD.xhtml" x="400" y="150" zoom="true"/>
     </Scope>
     <Scope Scope="All Faces Configurations"/>
 </Scene>
