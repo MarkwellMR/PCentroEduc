@@ -80,8 +80,12 @@
                                                 <p:outputLabel for="txtState" value="Estado:"/>
                                                 <p:inputText id="txtState" value="#{controllerAdmin.admin.estado}"/>
                                                 <br/>
-                                                <p:commandButton actionListener="#{controllerAdmin.updateAdmin()}" value="Actualizar" update=":acordion:frmTabla:tblCl" oncomplete="PF('dlgUpdate').hide();"/>
-                                                <p:commandButton actionListener="#{controllerAdmin.changeState()}" value="Eliminar" update=":acordion:frmTabla:tblCl" oncomplete="PF('dlgUpdate').hide();"/>
+                                                <p:commandLink actionListener="#{controllerAdmin.updateAdmin()}" update=":acordion:frmTabla:tblCl" oncomplete="PF('dlgUpdate').hide();">
+                                                    <img src="../resources/img/EU.svg" id="img-2" title="Actualizar Usuario"/>
+                                                </p:commandLink>
+                                                <p:commandLink actionListener="#{controllerAdmin.changeState()}" title="Eliminar" update=":acordion:frmTabla:tblCl" oncomplete="PF('dlgUpdate').hide();">
+                                                    <img src="../resources/img/DU.svg" id="img-2" title="Eliminar Usuario"/>
+                                                </p:commandLink>
                                                 <p:commandButton value="Cancelar" update=":acordion:frmTabla:tblCl" oncomplete="PF('dlgUpdate').hide();"/>
                                             </h:form>
                                         </p:dialog>
