@@ -1,15 +1,146 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
 
     <body>
-
+        <f:event type="preRenderView" listener="#{controladorMaestro.cargarMaestro()}"/>
         <ui:composition template="./fAdmin.xhtml">
 
             <ui:define name="content">
-                Pagina 2
-                
+                <p id="titulo">Usuario:</p>
+                <p id="titulo">Profesores</p>
+
+                <div class="ui-g">
+                    <div class="ui-lg-6">
+                        <h:form id="frmIngreso">
+                            <div class="ui-g">
+                                <div class="ui-g-2">
+                                    <p:outputLabel for="txtCodigo" value="Codigo: "/>
+                                </div>
+                                <div class="ui-g-10">
+                                    <p:inputText id="txtCodigo" value="#{controladorMaestro.maes.codigo}"/> 
+                                </div>
+                                <div class="ui-g-2">
+                                    <p:outputLabel for="txtNombre" value="Nombre: "/>
+                                </div>
+                                <div class="ui-g-4">
+                                    <p:inputText id="txtNombre" value="#{controladorMaestro.maes.nombre}"/>
+                                </div>
+                                <div class="ui-g-2">
+                                    <p:outputLabel for="txtApellido" value="Apellido:"/>
+                                </div>
+                                <div class="ui-g-4">
+                                    <p:inputText id="txtApellido" value="#{controladorMaestro.maes.apellido}"/>
+                                </div>
+                                <div class="ui-g-2">
+                                    <p:outputLabel for="txtDireccion" value="Direccion: "/>
+                                </div>
+                                <div class="ui-g-10">
+                                    <p:inputText id="txtDireccion" value="#{controladorMaestro.maes.direccion}"/> 
+                                </div>
+                                <div class="ui-g-2">
+                                    <p:outputLabel for="txtEmail" value="Email: "/>
+                                </div>
+                                <div class="ui-g-10">
+                                    <p:inputText id="txtEmail" value="#{controladorMaestro.maes.email}"/>
+                                </div>
+                                <div class="ui-g-2">
+                                    <p:outputLabel for="txtTelcasa" value="Tel Casa: "/>
+                                </div>
+                                <div class="ui-g-4">
+                                    <p:inputText id="txtTelcasa" value="#{controladorMaestro.maes.telCasa}"/>
+                                </div>
+                                <div class="ui-g-2">
+                                    <p:outputLabel for="txtTelmovil" value="Tel Movil: "/>
+                                </div>
+                                <div class="ui-g-4">
+                                    <p:inputText id="txtTelmovil" value="#{controladorMaestro.maes.telMovil}"/>
+                                </div>
+                                <div class="ui-g-2">
+                                    <p:outputLabel for="txtFechanac" value="Fecha de Nacimiento: "/>
+                                </div>
+                                <div class="ui-g-4">
+                                    <p:inputText id="txtFechanac" value="#{controladorMaestro.maes.fechanac}"/>
+                                </div>
+                                <div class="ui-g-2">
+                                    <p:outputLabel for="txtCui" value="Cui: "/>
+                                </div>
+                                <div class="ui-g-4">
+                                    <p:inputText id="txtCui" value="#{controladorMaestro.maes.cui}"/>
+                                </div>
+                                <div class="ui-g-12" />
+                                <div class="ui-g-2">
+                                    <p:outputLabel for="txtPass" value="Pasword: "/>
+                                </div>
+                                <div class="ui-g-4">
+                                    <p:inputText type="password" id="txtPass" value="#{controladorMaestro.maes.pass}"/>
+                                </div>
+                                <div class="ui-g-2">
+                                    <p:outputLabel for="txtCodigoA" value="Codigo Administrador: "/>
+                                </div>
+                                <div class="ui-g-4">
+                                    <p:inputText id="txtCodigoA" value="#{controladorMaestro.maes.codigoA}"/>
+                                </div>
+                                <div class="ui-g-12">
+                                    <p:commandButton actionListener="#{controladorMaestro.guardarMaestro()}" value="Guardar Datos"  />
+                                </div> 
+                            </div>
+                        </h:form>
+                    </div>
+                    <div class="ui-g-6">
+                        <h:form id="frmTabla">
+                            <p:dataTable var="Maestro" value="#{controladorMaestro.mostrarMaestro}" id="tblMaestros">
+
+                                <p:column headerText="Codigo">
+                                    <h:outputText value="#{Maestro.codigo}" />
+                                </p:column>
+
+                                <p:column headerText="Nombre">
+                                    <h:outputText value="#{Maestro.nombre}" />
+                                </p:column>
+
+                                <p:column headerText="Apellido">
+                                    <h:outputText value="#{Maestro.apellido}" />
+                                </p:column>
+
+                                <p:column headerText="Direccion">
+                                    <h:outputText value="#{Maestro.direccion}" />
+                                </p:column>
+
+                                <p:column headerText="Email">
+                                    <h:outputText value="#{Maestro.email}" />
+                                </p:column>
+
+                                <p:column headerText="Tel casa">
+                                    <h:outputText value="#{Maestro.telCasa}" />
+                                </p:column>
+
+                                <p:column headerText="Tel movil">
+                                    <h:outputText value="#{Maestro.telMovil}" />
+                                </p:column>
+
+                                <p:column headerText="Fecha de Nacimiento">
+                                    <h:outputText value="#{Maestro.fechanac}" />
+                                </p:column>
+
+                                <p:column headerText="Cui">
+                                    <h:outputText value="#{Maestro.cui}" />
+                                </p:column>
+
+                                <p:column headerText="Codigo Administrador">
+                                    <h:outputText value="#{Maestro.codigoA}" />
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+
+                    </div>
+                </div>
+
             </ui:define>
 
         </ui:composition>
