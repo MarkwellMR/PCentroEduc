@@ -9,173 +9,237 @@
     <body>
         <ui:composition template="./fAdmin.xhtml">
             <ui:define name="content">
-
                 <f:event type="preRenderView" listener="#{controllerAdmin.loadAdmin()}"/>
                 <p id="titulo">Usuario</p>
                 <p id="titulo">Administrador</p>
-                <div class="ui-g mt-1">
-                    <div class="ui-g-12 ui-md-12 ui-lg-12">
-                        <p:accordionPanel id="acordion">
-                            <p:tab title="Administradores">
-                                <h:panelGrid columns="1" cellpadding="10">
-                                    <div class="ui-g-12 ui-md-12 ui-lg-12">
-                                        <h:form id="frmTabla">
-                                            <div class="ui-g m-1">
-                                                <p:dataTable var="admin" value="#{controllerAdmin.listAdmin}" id="tblCl">
-                                                    <p:column headerText="Codigo">
-                                                        <h:outputText value="#{admin.codigo}"/>
-                                                    </p:column>
-                                                    <p:column headerText="Nombre">
-                                                        <h:outputText value="#{admin.nombre}"/>
-                                                    </p:column>
-                                                    <p:column headerText="Apellido">
-                                                        <h:outputText value="#{admin.apellido}"/>
-                                                    </p:column>
-                                                    <p:column headerText="Email">
-                                                        <h:outputText value="#{admin.email}"/>
-                                                    </p:column>
-                                                    <p:column headerText="Telefono Movil">
-                                                        <h:outputText value="#{admin.telMovil}"/>
-                                                    </p:column>
-                                                    <p:column headerText="Acciones">
-                                                        <p:commandLink title="Actualizar" actionListener="#{controllerAdmin.searchAdmin(admin)}" oncomplete="PF('dlgUpdate').show();" update=":acordion:update">
-                                                            <img src="../resources/img/Cr.svg" id="img-2"/>
-                                                        </p:commandLink> 
-                                                    </p:column>
-                                                </p:dataTable>
-                                            </div>
-                                        </h:form>
-                                        <p:dialog header="Actualizar Datos" id="update" widgetVar="dlgUpdate" showEffect="explode" hideEffect="none" height="400" width="500">
-                                            <h:form>
+                <p:accordionPanel id="acordion" class="mt-1">
+                    <p:tab title="Administradores">
+                        <h:panelGrid columns="1" cellpadding="10">
+                            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                <h:form id="frmTabla">
+                                    <div class="ui-g m-1">
+                                        <p:dataTable var="admin" value="#{controllerAdmin.listAdmin}" id="tblCl">
+                                            <p:column headerText="Codigo">
+                                                <h:outputText value="#{admin.codigo}"/>
+                                            </p:column>
+                                            <p:column headerText="Nombre">
+                                                <h:outputText value="#{admin.nombre}"/>
+                                            </p:column>
+                                            <p:column headerText="Apellido">
+                                                <h:outputText value="#{admin.apellido}"/>
+                                            </p:column>
+                                            <p:column headerText="Direccion">
+                                                <h:outputText value="#{admin.direccion}"/>
+                                            </p:column>
+                                            <p:column headerText="Email">
+                                                <h:outputText value="#{admin.email}"/>
+                                            </p:column>
+                                            <p:column headerText="telefono de Casa">
+                                                <h:outputText value="#{admin.telCasa}"/>
+                                            </p:column>
+                                            <p:column headerText="Telefono Movil">
+                                                <h:outputText value="#{admin.telMovil}"/>
+                                            </p:column>
+                                            <p:column headerText="Fecha de Nacimiento">
+                                                <h:outputText value="#{admin.fechanac}"/>
+                                            </p:column>
+                                            <p:column headerText="Acciones">
+                                                <p:commandLink title="Actualizar" actionListener="#{controllerAdmin.searchAdmin(admin)}" oncomplete="PF('dlgUpdate').show();" update=":acordion:update">
+                                                    <img src="../resources/img/Cr.svg" id="img-2"/>
+                                                </p:commandLink> 
+                                                <p:commandLink title="Eliminar" actionListener="#{controllerAdmin.searchAdmin(admin)}" oncomplete="PF('dlgDelete').show();" update=":acordion:delete">
+                                                    <img src="../resources/img/DU.svg" id="img-2"/>
+                                                </p:commandLink>
+                                            </p:column>
+                                        </p:dataTable>
+                                    </div>
+                                </h:form>
+                                <!--Cuadros de Dialogo-->
+                                <p:dialog header="Actualizar Datos" id="update" widgetVar="dlgUpdate" showEffect="explode" hideEffect="none" height="400" width="800">
+                                    <h:form>
+                                        <div class="ui-g">
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
                                                 <p:outputLabel for="txtCodeA" value="Codigo:"/>
-                                                <p:outputLabel id="txtCodeA" value="#{controllerAdmin.admin.codigo}"/>
-                                                <br/>
-                                                <p:outputLabel for="txtNameA" value="Nombre:"/>
-                                                <p:inputText id="txtNameA" value="#{controllerAdmin.admin.nombre}"/>
-                                                <br/>
-                                                <p:outputLabel for="txtApellidoA" value="Apellido:"/>
-                                                <p:inputText id="txtApellidoA" value="#{controllerAdmin.admin.apellido}"/>
-                                                <br/>
-                                                <p:outputLabel for="txtAddreessA" value="Direccion:"/>
-                                                <p:inputText id="txtAddreessA" value="#{controllerAdmin.admin.direccion}"/>
-                                                <br/>
-                                                <p:outputLabel for="txtEmailA" value="Email:"/>
-                                                <p:inputText id="txtEmailA" value="#{controllerAdmin.admin.email}"/>
-                                                <br/>
-                                                <p:outputLabel for="txtTelHA" value="Telefono de Casa:"/>
-                                                <p:inputText id="txtTelHA" value="#{controllerAdmin.admin.telCasa}"/>
-                                                <br/>
-                                                <p:outputLabel for="txtTelMA" value="Telefono Movil:"/>
-                                                <p:inputText id="txtTelMA" value="#{controllerAdmin.admin.telMovil}"/>
-                                                <br/>
-                                                <p:outputLabel for="txtBirthdateA" value="Fecha de Nacimiento"/>
-                                                <p:inputText id="txtBirthdateA" value="#{controllerAdmin.admin.fechanac}"/>
-                                                <br/>
-                                                <p:outputLabel for="txtCuiA" value="CUI:"/>
-                                                <p:inputText id="txtCuiA" value="#{controllerAdmin.admin.cui}"/>
-                                                <br/>
-                                                <p:outputLabel for="txtPassA" value="Contraseña:"/>
-                                                <p:inputText id="txtPassA" value="#{controllerAdmin.admin.pass}" type="password"/>
-                                                <br/>
-                                                <p:outputLabel for="txtState" value="Estado:"/>
-                                                <p:inputText id="txtState" value="#{controllerAdmin.admin.estado}"/>
-                                                <br/>
-                                                <p:commandLink actionListener="#{controllerAdmin.updateAdmin()}" update=":acordion:frmTabla:tblCl" oncomplete="PF('dlgUpdate').hide();">
-                                                    <img src="../resources/img/EU.svg" id="img-2" title="Actualizar Usuario"/>
-                                                </p:commandLink>
-                                                <p:commandLink actionListener="#{controllerAdmin.changeState()}" title="Eliminar" update=":acordion:frmTabla:tblCl" oncomplete="PF('dlgUpdate').hide();">
-                                                    <img src="../resources/img/DU.svg" id="img-2" title="Eliminar Usuario"/>
-                                                </p:commandLink>
-                                                <p:commandButton value="Cancelar" update=":acordion:frmTabla:tblCl" oncomplete="PF('dlgUpdate').hide();"/>
-                                            </h:form>
-                                        </p:dialog>
-                                    </div>
-                                    <!--Cuadros de Dialogo-->
-
-                                </h:panelGrid>
-                            </p:tab>
-                            <p:tab title="Ingresar Nuevo Administrador">
-                                <h:panelGrid>
-                                    <div class="ui-g-12 ui-md-12 ui-lg-12">
-                                        <div class="ui-g-12 ui-md-12 ui-lg-12">
-                                            <p id="titulo-1">Ingrese los Datos</p>
-                                        </div>
-                                        <h:form id="frmIngreso">
-                                            <div class="ui-g m">
-                                                <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
-                                                    <p:outputLabel for="txtCode" value="Codigo:"/>
-                                                </div>
-                                                <div class="ui-g-12 ui-md-4 ui-lg-4">
-                                                    <p:inputText id="txtCode" value="#{controllerAdmin.admin.codigo}" class="w-1"/>
-                                                </div>
-                                                <div class="ui-g-12 ui-md-6 ui-lg-6">
-                                                    &nbsp;
-                                                </div>
-                                                <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
-                                                    <p:outputLabel for="txtName" value="Nombre:"/>
-                                                </div>
-                                                <div class="ui-g-12 ui-md-4 ui-lg-4">
-                                                    <p:inputText id="txtName" value="#{controllerAdmin.admin.nombre}" class="w-1"/>
-                                                </div>
-                                                <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
-                                                    <p:outputLabel for="txtApellido" value="Apellido:" class="etiquetas-1"/>
-                                                </div>
-                                                <div class="ui-g-12 ui-md-4 ui-lg-4">
-                                                    <p:inputText id="txtApellido" value="#{controllerAdmin.admin.apellido}" class="w-1"/>
-                                                </div>
-                                                <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
-                                                    <p:outputLabel for="txtTH" value="Telefono de Casa:"/>
-                                                </div>
-                                                <div class="ui-g-12 ui-md-4 ui-lg-4">
-                                                    <p:inputText id="txtTH" value="#{controllerAdmin.admin.telCasa}" class="w-1"/>
-                                                </div>
-                                                <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
-                                                    <p:outputLabel for="txtTM" value="Telefono Movil:" class="etiquetas-1"/>
-                                                </div>
-                                                <div class="ui-g-12 ui-md-4 ui-lg-4">
-                                                    <p:inputText id="txtTM" value="#{controllerAdmin.admin.telMovil}" class="w-1"/>
-                                                </div>
-                                                <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
-                                                    <p:outputLabel for="txtFechanac" value="Fecha de Nacimiento:"/>
-                                                </div>
-                                                <div class="ui-g-12 ui-md-4 ui-lg-4">
-                                                    <p:inputText id="txtFechanac" value="#{controllerAdmin.admin.fechanac}" class="w-1"/>
-                                                </div>
-                                                <div class="ui-g-12 ui-md-2 ui-lg-2" >
-                                                    <p:outputLabel for="txtCUI" value="CUI:" class="etiquetas-1"/>
-                                                </div>
-                                                <div class="ui-g-12 ui-md-4 ui-lg-4">
-                                                    <p:inputText id="txtCUI" value="#{controllerAdmin.admin.cui}" class="w-1 "/>
-                                                </div>
-                                                <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
-                                                    <p:outputLabel for="txtDir" value="Dirección:" />
-                                                </div>
-                                                <div class="ui-g-12 ui-md-10 ui-lg-10">
-                                                    <p:inputText id="txtDir" value="#{controllerAdmin.admin.direccion}" class="w-1"/>
-                                                </div>
-                                                <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
-                                                    <p:outputLabel for="txtEmail" value="Email:" />
-                                                </div>
-                                                <div class="ui-g-12 ui-md-10 ui-lg-10">
-                                                    <p:inputText id="txtEmail" value="#{controllerAdmin.admin.email}" class="w-1"/>
-                                                </div>
-                                                <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
-                                                    <p:outputLabel for="txtPass" value="Contraseña:"/>
-                                                </div>
-                                                <div class="ui-g-12 ui-md-4 ui-lg-4">
-                                                    <p:inputText id="txtPass" value="#{controllerAdmin.admin.pass}" type="password" class="w-1"/>
-                                                </div>
-                                                <div class="ui-g-12 ui-md-6 ui-lg-6">
-                                                    <p:commandButton actionListener="#{controllerAdmin.saveAdmin()}" value="Guardar" update=":acordion:frmTabla:tblCl" class="ml-1"/>
-                                                </div>
                                             </div>
-                                        </h:form>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:outputLabel id="txtCodeA" value="#{controllerAdmin.admin.codigo}"/>
+                                            </div>
+                                            <div class="ui-g-6 ui-md-6 ui-lg-6">
+                                                &nbsp;
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:outputLabel for="txtNameA" value="Nombre:"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:inputText id="txtNameA" value="#{controllerAdmin.admin.nombre}"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:outputLabel for="txtApellidoA" value="Apellido:"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:inputText id="txtApellidoA" value="#{controllerAdmin.admin.apellido}"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:outputLabel for="txtAddreessA" value="Direccion:"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:inputText id="txtAddreessA" value="#{controllerAdmin.admin.direccion}"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:outputLabel for="txtEmailA" value="Email:"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:inputText id="txtEmailA" value="#{controllerAdmin.admin.email}"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:outputLabel for="txtTelHA" value="Telefono de Casa:"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:inputText id="txtTelHA" value="#{controllerAdmin.admin.telCasa}"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:outputLabel for="txtTelMA" value="Telefono Movil:"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:inputText id="txtTelMA" value="#{controllerAdmin.admin.telMovil}"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:outputLabel for="txtBirthdateA" value="Fecha de Nacimiento"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:inputText id="txtBirthdateA" value="#{controllerAdmin.admin.fechanac}"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:outputLabel for="txtCuiA" value="CUI:"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:inputText id="txtCuiA" value="#{controllerAdmin.admin.cui}"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:outputLabel for="txtPassA" value="Contraseña:"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:inputText id="txtPassA" value="#{controllerAdmin.admin.pass}" type="password"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:outputLabel for="txtState" value="Estado:"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:outputLabel id="txtState" value="#{controllerAdmin.admin.estado}"/>
+                                            </div>
+                                            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                                <p:commandButton actionListener="#{controllerAdmin.updateAdmin()}" value="Actualizar" update=":acordion:frmTabla:tblCl" oncomplete="PF('dlgUpdate').hide();" class="ml-2"/>
+                                                <p:commandButton value="Cancelar" update=":acordion:frmTabla:tblCl" oncomplete="PF('dlgUpdate').hide();" class="ml-1"/>
+                                            </div>
+                                        </div>
+                                    </h:form>
+                                </p:dialog>
+                                <p:dialog header="Eliminar Administrador" id="delete" widgetVar="dlgDelete" showEffect="explode" hideEffect="none" height="400" width="500">
+                                    <h:form>
+                                        <h:outputText value="¿Esta seguro que desea Eliminarlo?"/>
+                                        <br/><br/>
+                                        <p:outputLabel for="txtCodeE" value="Codigo:"/>
+                                        <p:outputLabel id="txtCodeE" value="#{controllerAdmin.admin.codigo}"/>
+                                        <br/>
+                                        <p:outputLabel for="txtNameE" value="Nombre:"/>
+                                        <p:outputLabel id="txtNameE" value="#{controllerAdmin.admin.nombre}"/>
+                                        <br/>
+                                        <p:outputLabel for="txtApellidoE" value="Apellido:"/>
+                                        <p:outputLabel id="txtApellidoE" value="#{controllerAdmin.admin.apellido}"/>
+                                        <br/>
+                                        <p:commandButton actionListener="#{controllerAdmin.changeState()}" value="Eliminar" update=":acordion:frmTabla:tblCl" oncomplete="PF('dlgDelete').hide();"/>
+                                        <p:commandButton value="Cancelar" update=":acordion:frmTabla:tblCl" oncomplete="PF('dlgDelete').hide();"/>
+                                    </h:form>
+                                </p:dialog>
+                            </div>
+                        </h:panelGrid>
+                    </p:tab>
+                    <p:tab title="Ingresar Nuevo Administrador">
+                        <h:panelGrid>
+                            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                    <p id="titulo-1">Ingrese los Datos</p>
+                                </div>
+                                <h:form id="frmIngreso">
+                                    <div class="ui-g m">
+                                        <script type="text/javascript">
+                                            function limpiarForm()
+                                            {
+                                                document.getElementById("frmIngreso").reset();
+                                            }
+                                        </script>
+                                        <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
+                                            <p:outputLabel for="txtCode" value="Codigo:"/>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-4 ui-lg-4">
+                                            <p:inputText id="txtCode" value="#{controllerAdmin.admin.codigo}" class="w-1"/>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-6 ui-lg-6">
+                                            &nbsp;
+                                        </div>
+                                        <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
+                                            <p:outputLabel for="txtName" value="Nombre:"/>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-4 ui-lg-4">
+                                            <p:inputText id="txtName" value="#{controllerAdmin.admin.nombre}" class="w-1"/>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
+                                            <p:outputLabel for="txtApellido" value="Apellido:" class="etiquetas"/>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-4 ui-lg-4">
+                                            <p:inputText id="txtApellido" value="#{controllerAdmin.admin.apellido}" class="w-1"/>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
+                                            <p:outputLabel for="txtTH" value="Telefono de Casa:"/>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-4 ui-lg-4">
+                                            <p:inputText id="txtTH" value="#{controllerAdmin.admin.telCasa}" class="w-1"/>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
+                                            <p:outputLabel for="txtTM" value="Telefono Movil:" class="etiquetas"/>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-4 ui-lg-4">
+                                            <p:inputText id="txtTM" value="#{controllerAdmin.admin.telMovil}" class="w-1"/>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
+                                            <p:outputLabel for="txtFechanac" value="Fecha de Nacimiento:"/>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-4 ui-lg-4">
+                                            <p:inputText id="txtFechanac" value="#{controllerAdmin.admin.fechanac}" class="w-1"/>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-2 ui-lg-2" >
+                                            <p:outputLabel for="txtCUI" value="CUI:" class="etiquetas"/>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-4 ui-lg-4">
+                                            <p:inputText id="txtCUI" value="#{controllerAdmin.admin.cui}" class="w-1 "/>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
+                                            <p:outputLabel for="txtDir" value="Dirección:" />
+                                        </div>
+                                        <div class="ui-g-12 ui-md-10 ui-lg-10">
+                                            <p:inputText id="txtDir" value="#{controllerAdmin.admin.direccion}" class="w-1"/>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
+                                            <p:outputLabel for="txtEmail" value="Email:" />
+                                        </div>
+                                        <div class="ui-g-12 ui-md-10 ui-lg-10">
+                                            <p:inputText id="txtEmail" value="#{controllerAdmin.admin.email}" class="w-1"/>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
+                                            <p:outputLabel for="txtPass" value="Contraseña:"/>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-4 ui-lg-4">
+                                            <p:inputText id="txtPass" value="#{controllerAdmin.admin.pass}" type="password" class="w-1"/>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-6 ui-lg-6">
+                                            <p:commandButton actionListener="#{controllerAdmin.saveAdmin()}" value="Guardar" update=":acordion:frmTabla:tblCl" class="ml-1"/>
+                                        </div>
                                     </div>
-                                </h:panelGrid>
-                            </p:tab>
-                        </p:accordionPanel>
-                    </div>
-                </div>
+                                </h:form>
+                            </div>
+                        </h:panelGrid>
+                    </p:tab>
+                </p:accordionPanel>
             </ui:define>
         </ui:composition>
     </body>
