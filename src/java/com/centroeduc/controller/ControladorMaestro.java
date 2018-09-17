@@ -44,7 +44,7 @@ public class ControladorMaestro {
         }
     }
 
-    public void busquedaDatosAlumno(Maestro dato) {
+    public void busquedaDatosMaestro(Maestro dato) {
         MaestroDAO daoum = new MaestroDAO();
         try {
             maes = daoum.buscarCodigo(dato.getCodigo());

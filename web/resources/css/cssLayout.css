@@ -2,10 +2,9 @@
 #top {
     position: relative;
     border-radius: 10px;
-    
     background-color: #5CA36F;
     color: white;
-    height: 105px;
+    height: 100px;
     margin: 0px 0px 10px 0px;
 }
 
@@ -77,8 +76,8 @@
 }
 
 .logo{
-    height: 90;
-    margin: 10px 10px 10px 90px;
+    height: 85px;
+    margin: 10px 10px 15px 90px;
     width: 75px;
 }
 

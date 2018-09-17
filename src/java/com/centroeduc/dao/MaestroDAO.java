@@ -77,7 +77,7 @@ public class MaestroDAO extends Conexion {
                 lista.add(maes);
 
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Error" + e);
         } finally {
             this.cerrarConex();
@@ -108,7 +108,7 @@ public class MaestroDAO extends Conexion {
         ingreso = null;
         try {
             this.Conectar();
-            sql = "Update profesor set nombre=?,apellido=?,email=?,direccion=?,tel_casa=?,tel_movil=?,fechanac=?,cui=?, cod_admin=?, password=?, estado=? where cod_prof=?";
+            sql = "Update profesor set nombre=?,apellido=?,email=?,direccion=?,tel_casa=?,tel_movil=?,fechanac=?,cui=?, password=? where cod_prof=?";
             ejecutar = this.getMiconexion().prepareStatement(sql);
             ejecutar.setString(1, maes.getNombre());
             ejecutar.setString(2, maes.getApellido());
@@ -118,10 +118,8 @@ public class MaestroDAO extends Conexion {
             ejecutar.setInt(6, maes.getTelMovil());
             ejecutar.setString(7, maes.getFechanac());
             ejecutar.setLong(8, maes.getCui());
-            ejecutar.setString(9, maes.getCodigoA());
-            ejecutar.setString(10, maes.getPass());
-            ejecutar.setInt(11, maes.getEstado());
-            ejecutar.setString(12, maes.getCodigo());
+            ejecutar.setString(9, maes.getPass());
+            ejecutar.setString(10, maes.getCodigo());
             ejecutar.executeUpdate();
             ingreso = "datos editados exitosamente";
 

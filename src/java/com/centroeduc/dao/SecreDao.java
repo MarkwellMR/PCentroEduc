@@ -117,7 +117,7 @@ public class SecreDao extends Conexion {
 
         try {
             this.Conectar();
-            sql = "Update secretaria set nombre=?, apellido=?, direccion=?, email=?, tel_casa=?, tel_movil=?, fechanac=?, cui=?, password=?, estado=? where cod_secre=?";
+            sql = "Update secretaria set nombre=?, apellido=?, direccion=?, email=?, tel_casa=?, tel_movil=?, fechanac=?, cui=?, password=? where cod_secre=?";
             run = this.getMiconexion().prepareStatement(sql);
             
             
@@ -130,8 +130,7 @@ public class SecreDao extends Conexion {
             run.setString(7, secre.getFechanac());
             run.setLong(8, secre.getCui());
             run.setString(9, secre.getPass());
-            run.setInt(10, secre.getEstado());
-            run.setString(11, secre.getCodigo());
+            run.setString(10, secre.getCodigo());
             run.executeUpdate();
             
             ingreso = "Datos Actualizados con exito!";
