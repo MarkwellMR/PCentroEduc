@@ -89,7 +89,7 @@ public class AlumnoDAO extends Conexion {
             ejecutar.setString(6, dato.getFechanac());
             ejecutar.setString(7, dato.getPadecimiento());
             ejecutar.setInt(8, dato.getEstado());
-            ejecutar.setString(9, dato.getCodigo());
+            ejecutar.setInt(9, dato.getCodAlumno());
 
             ejecutar.executeUpdate();
             respuesta = "Datos actualizados correctamente";

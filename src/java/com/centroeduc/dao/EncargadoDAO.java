@@ -57,7 +57,7 @@ public class EncargadoDAO extends Conexion {
             lista = new ArrayList();
             while (resultado.next()) {
                 Encargado enc = new Encargado();
-                enc.setCodigo(resultado.getString("cod_enc"));
+                enc.setCodEnc(resultado.getInt("cod_enc"));
                 enc.setNombre(resultado.getString("nombre"));
                 enc.setApellido(resultado.getString("apellido"));
                 enc.setDireccion(resultado.getString("direccion"));
@@ -109,7 +109,7 @@ public class EncargadoDAO extends Conexion {
             run.setInt(6, encargado.getTelMovil());
             run.setString(7, encargado.getFechanac());
             run.setLong(8, encargado.getCui());
-            run.setString(9, encargado.getCodigo());
+            run.setInt(9, encargado.getCodEnc());
             run.executeUpdate();
             answer = "Registro Actualizado";
 
@@ -123,16 +123,16 @@ public class EncargadoDAO extends Conexion {
         return answer;
     }
 
-    public Encargado searchId(String codigo) {
+    public Encargado searchId(int codigo) {
         Encargado enc = new Encargado();
         try {
             this.Conectar();
             sql = "select * from encargado where cod_enc=?";
             run = this.getMiconexion().prepareStatement(sql);
-            run.setString(1, codigo);
+            run.setInt(1, codigo);
             this.resultado = this.run.executeQuery();
             if (this.resultado.next()) {
-                enc.setCodigo(this.resultado.getString("cod_enc"));
+                enc.setCodEnc(this.resultado.getInt("cod_enc"));
                 enc.setNombre(this.resultado.getString("nombre"));
                 enc.setApellido(this.resultado.getString("apellido"));
                 enc.setDireccion(this.resultado.getString("direccion"));
@@ -184,7 +184,7 @@ public class EncargadoDAO extends Conexion {
             lista = new ArrayList();
             while (resultado.next()) {
                 Encargado enc = new Encargado();
-                enc.setCodigo(resultado.getString("cod_enc"));
+                enc.setCodEnc(resultado.getInt("cod_enc"));
                 enc.setNombre(resultado.getString("nombre"));
                 enc.setApellido(resultado.getString("apellido"));
                 enc.setDireccion(resultado.getString("direccion"));

@@ -78,7 +78,7 @@ public class ControllerEnc {
     
     public void searchEnc(Encargado datos ){
         try {
-            this.enc = encdao.searchId(datos.getCodigo());
+            this.enc = encdao.searchId(datos.getCodEnc());
         } catch (Exception e) {
             System.out.println("error en el metdo SearcEnc " + e);
         }
@@ -94,7 +94,7 @@ public class ControllerEnc {
     
     public void deleteEnc(){
         try {
-            encdao.cambioEstado(Integer.parseInt(enc.getCodigo()));
+            encdao.cambioEstado(enc.getCodEnc());
         } catch (Exception e) {
             
         }

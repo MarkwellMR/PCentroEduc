@@ -16,7 +16,6 @@ public class Alumno extends Persona {
     private String padecimiento;
     private String codEncargado;
     private String codSecretaria;
-    private Integer estado;
 
     public Alumno() {
         this.codAlumno = null;
@@ -24,7 +23,6 @@ public class Alumno extends Persona {
         this.padecimiento = null;
         this.codEncargado = null;
         this.codSecretaria = null;
-        this.estado = null;
 
     }
 
@@ -68,18 +66,12 @@ public class Alumno extends Persona {
         this.padecimiento = padecimiento;
     }
 
-    public Integer getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Integer estado) {
-        this.estado = estado;
+    @Override
+    public String toString() {
+        return "Alumno{" + "codAlumno=" + codAlumno + ", telEmergencia=" + telEmergencia + ", padecimiento=" + padecimiento + ", codEncargado=" + codEncargado + ", codSecretaria=" + codSecretaria + '}';
     }
 
     
-    @Override
-    public String toString() {
-        return "Alumno{" + "codAlumno=" + codAlumno + ", telEmergencia=" + telEmergencia + ", padecimiento=" + padecimiento + ", codEncargado=" + codEncargado + ", codSecretaria=" + codSecretaria + ", estado=" + estado + '}';
-    }
+    
 }
 
