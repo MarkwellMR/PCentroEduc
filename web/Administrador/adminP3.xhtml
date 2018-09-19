@@ -13,6 +13,7 @@
             <ui:define name="content">
                 <f:event type="preRenderView" listener="#{controllerSecre.cargarSecre()}"/>
                 <f:event type="preRenderView" listener="#{controllerAlumno.cargarAlumnos()}"/>
+                <f:event type="preRenderView" listener="#{controllerEnc.cargarDatos()}"/>
                 <p id="titulo">Usuario:</p>
                 <p id="titulo">Secretaria</p>
                 <p:accordionPanel id="acordion" class="mt-1">
@@ -436,8 +437,138 @@
                                         <div class="ui-g-12 ui-md-6 ui-lg-6">
                                             <p:commandButton actionListener="#{controllerAlumno.guardarAlumno()}" value="Guardar Datos" update=":acordion:frmTablaAlumn:tblAlumn" class="ml-1"/>
                                         </div> 
-                                        <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                        <div class="ui-g-6 ui-md-6 ui-lg-6">
                                             <p:commandButton value="Ingresar Encargado" oncomplete="PF('dlgCreateEnc').show();"/>
+                                        </div>
+                                        <div class="ui-g-6 ui-md-6 ui-lg-6">
+                                            <h:form id="frmSearch">
+                                                <p:outputLabel for="txtBusc" value="Buscar:"/>
+                                                <p:inputText id="txtBusc" value="#{controllerEnc.enc.nombre}"/>
+                                                <p:commandButton actionListener="#{controllerEnc.buscarPorNombre()}" value="Buscar" oncomplete="PF('dlgSearch').show();" update=":acordion:frmIngAlumn:busqueda"/>
+                                            </h:form>
+                                            <p:dialog header="Resultados" id="busqueda" widgetVar="dlgSearch" showEffect="none" hideEffect="none" height="500" width="850">
+                                                <h:form id="frmTablaEnc">
+                                                    <p:dataTable var="enc" value="#{controllerEnc.listaEnc}" id="tblEnc">
+                                                        <p:column headerText="Codigo">
+                                                            <h:outputText value="#{enc.codEnc}" />
+                                                        </p:column>
+                                                        <p:column headerText="Nombre">
+                                                            <h:outputText value="#{enc.nombre}" />
+                                                        </p:column>
+                                                        <p:column headerText="Apellido">
+                                                            <h:outputText value="#{enc.apellido}" />
+                                                        </p:column>
+                                                        <p:column headerText="Direccion">
+                                                            <h:outputText value="#{enc.direccion}" />
+                                                        </p:column>
+                                                        <p:column headerText="Email">
+                                                            <h:outputText value="#{enc.email}" />
+                                                        </p:column>
+                                                        <p:column headerText="Tel Casa">
+                                                            <h:outputText value="#{enc.telCasa}" />
+                                                        </p:column>
+                                                        <p:column headerText="Tel Movil">
+                                                            <h:outputText value="#{enc.telMovil}" />
+                                                        </p:column>
+                                                        <p:column headerText="Fecha de Nacimiento">
+                                                            <h:outputText value="#{enc.fechanac}" />
+                                                        </p:column>
+                                                        <p:column headerText="Acciones">
+                                                            <p:commandLink title="Actualizar" actionListener="#{controllerEnc.searchEnc(enc)}" oncomplete="PF('dlgUpdateEnc').show();" update=":acordion:frmIngAlumn:updateEnc">
+                                                                <img src="../resources/img/Cr.svg" id="img-2"/>
+                                                            </p:commandLink> 
+                                                            <p:commandLink title="Eliminar" actionListener="#{controllerEnc.searchEnc(enc)}" oncomplete="PF('dlgDeleteEnc').show();" update=":acordion:frmIngAlumn:deleteEnc">
+                                                                <img src="../resources/img/DU.svg" id="img-2"/>
+                                                            </p:commandLink>
+                                                        </p:column>
+                                                    </p:dataTable>
+                                                </h:form>
+                                            </p:dialog>
+                                            <!--Cuadros de Dialogo-->
+                                            <p:dialog header="Actualizar Datos" id="updateEnc" widgetVar="dlgUpdateEnc" showEffect="explode" hideEffect="none" height="400" width="800">
+                                                <h:form>
+                                                    <div class="ui-g">
+                                                        <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                            <p:outputLabel for="txtCodigoU" value="Codigo:"/>
+                                                        </div>
+                                                        <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                            <p:outputLabel id="txtCodigoU" value="#{controllerEnc.enc.codEnc}"/>
+                                                        </div>
+                                                        <div class="ui-g-6 ui-md-6 ui-lg-6">
+                                                            &nbsp;
+                                                        </div>
+                                                        <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                            <p:outputLabel for="txtNombreU" value="Nombre:"/>
+                                                        </div>
+                                                        <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                            <p:inputText id="txtNombreU" value="#{controllerEnc.enc.nombre}"/>
+                                                        </div>
+                                                        <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                            <p:outputLabel for="txtApellidoU" value="Apellido:"/>
+                                                        </div>
+                                                        <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                            <p:inputText id="txtApellidoU" value="#{controllerEnc.enc.apellido}"/>
+                                                        </div>
+                                                        <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                            <p:outputLabel for="txtDireccionU" value="Direccion:"/>
+                                                        </div>
+                                                        <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                            <p:inputText id="txtDireccionU" value="#{controllerEnc.enc.direccion}"/>
+                                                        </div>
+                                                        <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                            <p:outputLabel for="txtEmailU" value="Email:"/>
+                                                        </div>
+                                                        <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                            <p:inputText id="txtEmailU" value="#{controllerEnc.enc.email}"/>
+                                                        </div>
+                                                        <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                            <p:outputLabel for="txtTelEmU" value="Telefono de Casa:"/>
+                                                        </div>
+                                                        <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                            <p:inputText id="txtTelEmU" value="#{controllerEnc.enc.telCasa}"/>
+                                                        </div>
+                                                        <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                            <p:outputLabel for="txtTelMU" value="Telefono Movil:"/>
+                                                        </div>
+                                                        <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                            <p:inputText id="txtTelMU" value="#{controllerEnc.enc.telMovil}"/>
+                                                        </div>
+                                                        <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                            <p:outputLabel for="txtFechanacU" value="Fecha de Nacimiento:"/>
+                                                        </div>
+                                                        <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                            <p:inputText id="txtFechanacU" value="#{controllerEnc.enc.fechanac}"/>
+                                                        </div>
+                                                        <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                            <p:outputLabel for="txtStateX" value="Estado:"/>
+                                                        </div>
+                                                        <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                            <p:outputLabel id="txtStateX" value="#{controllerEnc.enc.estado}"/>
+                                                        </div>
+                                                        <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                                            <p:commandButton actionListener="#{controllerEnc.updEnc()}" value="Actualizar" update=":acordion:frmIngAlumn:frmTablaEnc:tblEnc" oncomplete="PF('dlgUpdateEnc').hide();" class="ml-2"/>
+                                                            <p:commandButton value="Cancelar" update=":acordion:frmIngAlumn:frmTablaEnc:tblEnc" oncomplete="PF('dlgUpdateEnc').hide();" class="ml-1"/>
+                                                        </div>
+                                                    </div>
+                                                </h:form>
+                                            </p:dialog>
+                                            <p:dialog header="Eliminar Alumno" id="deleteEnc" widgetVar="dlgDeleteEnc" showEffect="explode" hideEffect="none" height="400" width="500">
+                                                <h:form>
+                                                    <h:outputText value="¿Esta seguro que desea Eliminarlo?"/>
+                                                    <br/><br/>
+                                                    <p:outputLabel for="txtCodeD" value="Codigo:"/>
+                                                    <p:outputLabel id="txtCodeD" value="#{controllerEnc.enc.codEnc}"/>
+                                                    <br/>
+                                                    <p:outputLabel for="txtNameD" value="Nombre:"/>
+                                                    <p:outputLabel id="txtNameD" value="#{controllerEnc.enc.nombre}"/>
+                                                    <br/>
+                                                    <p:outputLabel for="txtApellidoD" value="Apellido:"/>
+                                                    <p:outputLabel id="txtApellidoD" value="#{controllerEnc.enc.apellido}"/>
+                                                    <br/>
+                                                    <p:commandButton actionListener="#{controllerAlumno.cambioEstado()}" value="Eliminar" update=":acordion:frmIngAlumn:frmTablaEnc:tblEnc" oncomplete="PF('dlgDeleteEnc').hide();"/>
+                                                    <p:commandButton value="Cancelar" update=":acordion:frmIngAlumn:frmTablaEnc:tblEnc" oncomplete="PF('dlgDeleteEnc').hide();"/>
+                                                </h:form>
+                                            </p:dialog>
                                         </div>
                                     </div>
                                 </h:form>

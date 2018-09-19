@@ -66,6 +66,7 @@ public class EncargadoDAO extends Conexion {
                 enc.setTelMovil(resultado.getInt("tel_movil"));
                 enc.setFechanac(resultado.getString("fechanac"));
                 enc.setCui(resultado.getLong("cui"));
+                enc.setEstado(resultado.getInt("estado"));
                 lista.add(enc);
 
             }
@@ -141,6 +142,7 @@ public class EncargadoDAO extends Conexion {
                 enc.setTelMovil(this.resultado.getInt("tel_movil"));
                 enc.setFechanac(this.resultado.getString("fechanac"));
                 enc.setCui(this.resultado.getLong("cui"));
+                enc.setEstado(this.resultado.getInt("estado"));
             } else {
                 System.out.println("Registro no Encontrado");
             }
@@ -193,6 +195,7 @@ public class EncargadoDAO extends Conexion {
                 enc.setTelMovil(resultado.getInt("tel_movil"));
                 enc.setFechanac(resultado.getString("fechanac"));
                 enc.setCui(resultado.getLong("cui"));
+                enc.setEstado(resultado.getInt("estado"));
                 lista.add(enc);
 
             }
