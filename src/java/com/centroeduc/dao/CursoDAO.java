@@ -174,8 +174,7 @@ public class CursoDAO extends Conexion {
                 list.add(course);
             }
 
-            values.close();
-            run.close();
+            
         } catch (SQLException e) {
             System.out.println("Error en CursoDAO(Lista Nombre): " + e);
         } finally {

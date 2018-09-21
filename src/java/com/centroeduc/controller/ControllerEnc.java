@@ -3,13 +3,14 @@ package com.centroeduc.controller;
 import com.centroeduc.dao.EncargadoDAO;
 import com.centroeduc.model.Encargado;
 import com.centroeduc.model.Secretaria;
+import java.io.Serializable;
 import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 @ManagedBean
 @ViewScoped
-public class ControllerEnc {
+public class ControllerEnc implements Serializable{
     
     public String valorABuscar;
     Encargado enc = new Encargado();
@@ -78,7 +79,14 @@ public class ControllerEnc {
     
     public void searchEnc(Encargado datos ){
         try {
-            this.enc = encdao.searchId(datos.getCodEnc());
+            System.out.println("LLEGO");
+            
+            Encargado provicional = new Encargado();
+            System.out.println("CONTROLADOR: CODIGO " + datos.getCodEnc());
+            provicional = encdao.searchId(datos.getCodEnc());
+            
+            this.enc = provicional;
+            
         } catch (Exception e) {
             System.out.println("error en el metdo SearcEnc " + e);
         }

@@ -18,4 +18,11 @@ public class Encargado extends Persona {
     public void setCodEnc(Integer codEnc) {
         this.codEnc = codEnc;
     }
+
+    @Override
+    public String toString() {
+        
+        return super.toString()+"Encargado{" + "codEnc=" + codEnc + '}';
+    }
+    
 }
