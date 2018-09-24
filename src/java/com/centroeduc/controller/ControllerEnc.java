@@ -1,5 +1,6 @@
 package com.centroeduc.controller;
 
+import com.centroeduc.dao.AlumnoDAO;
 import com.centroeduc.dao.EncargadoDAO;
 import com.centroeduc.model.Encargado;
 import com.centroeduc.model.Secretaria;
@@ -79,14 +80,9 @@ public class ControllerEnc implements Serializable{
     
     public void searchEnc(Encargado datos ){
         try {
-            System.out.println("LLEGO");
-            
             Encargado provicional = new Encargado();
-            System.out.println("CONTROLADOR: CODIGO " + datos.getCodEnc());
             provicional = encdao.searchId(datos.getCodEnc());
-            
             this.enc = provicional;
-            
         } catch (Exception e) {
             System.out.println("error en el metdo SearcEnc " + e);
         }
@@ -106,7 +102,5 @@ public class ControllerEnc implements Serializable{
         } catch (Exception e) {
             
         }
-    }
-    
-    
+    }  
 }

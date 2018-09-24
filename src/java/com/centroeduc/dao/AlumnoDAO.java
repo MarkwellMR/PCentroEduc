@@ -36,7 +36,7 @@ public class AlumnoDAO extends Conexion {
             ejecutar.setString(3, alum.getDireccion());
             ejecutar.setString(4, alum.getEmail());
             ejecutar.setInt(5, alum.getTelEmergencia());
-            ejecutar.setString(6, alum.getCodEncargado());
+            ejecutar.setInt(6, alum.getCodEncargado());
             ejecutar.setString(7, alum.getCodSecretaria());
             ejecutar.setString(8, alum.getFechanac());
             ejecutar.setString(9, alum.getPadecimiento());
@@ -117,7 +117,7 @@ public class AlumnoDAO extends Conexion {
                 alum.setApellido(clonarTabla.getString("apellido"));
                 alum.setEmail(clonarTabla.getString("email"));
                 alum.setTelEmergencia(clonarTabla.getInt("tel_emergencia"));
-                alum.setCodEncargado(clonarTabla.getString("cod_enc"));
+                alum.setCodEncargado(clonarTabla.getInt("cod_enc"));
                 alum.setCodSecretaria(clonarTabla.getString("cod_secre"));
                 alum.setDireccion(clonarTabla.getString("direccion"));
                 alum.setFechanac(clonarTabla.getString("fechanac"));
@@ -153,7 +153,7 @@ public class AlumnoDAO extends Conexion {
                 alum.setApellido(clonarTabla.getString("apellido"));
                 alum.setEmail(clonarTabla.getString("email"));
                 alum.setTelEmergencia(clonarTabla.getInt("tel_emergencia"));
-                alum.setCodEncargado(clonarTabla.getString("cod_enc"));
+                alum.setCodEncargado(clonarTabla.getInt("cod_enc"));
                 alum.setCodSecretaria(clonarTabla.getString("cod_secre"));
                 alum.setDireccion(clonarTabla.getString("direccion"));
                 alum.setFechanac(clonarTabla.getString("fechanac"));

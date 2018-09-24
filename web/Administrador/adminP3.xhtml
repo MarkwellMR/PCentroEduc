@@ -132,7 +132,7 @@
                                         </div>
                                     </h:form>
                                 </p:dialog>
-                                <p:dialog header="Eliminar Maestro" id="delete" widgetVar="dlgDelete" showEffect="explode" hideEffect="none" height="400" width="500">
+                                <p:dialog header="Eliminar Secretaria" id="delete" widgetVar="dlgDelete" showEffect="explode" hideEffect="none" height="400" width="500">
                                     <h:form>
                                         <h:outputText value="¿Esta seguro que desea Eliminarlo?"/>
                                         <br/><br/>
@@ -438,21 +438,13 @@
                                             <p:commandButton actionListener="#{controllerAlumno.guardarAlumno()}" value="Guardar Datos" update=":acordion:frmTablaAlumn:tblAlumn" class="ml-1"/>
                                         </div> 
                                         <div class="ui-g-6 ui-md-6 ui-lg-6">
-                                            <p:commandButton value="Ingresar Encargado" oncomplete="PF('dlgCreateEnc').show();"/>
-                                        </div>
-                                        <div class="ui-g-6 ui-md-6 ui-lg-6">
-
+                                            <p:commandButton value="Encargados" oncomplete="PF('dlgEnc').show();"/>
                                         </div>
                                     </div>
                                 </h:form>
-                                <h:form id="frmSearch">
-                                    <p:outputLabel for="txtBusc" value="Buscar:"/>
-                                    <p:inputText id="txtBusc" value="#{controllerEnc.enc.nombre}"/>
-                                    <p:commandButton actionListener="#{controllerEnc.buscarPorNombre()}" value="Buscar" oncomplete="PF('dlgSearch').show();" update=":acordion:busqueda"/>
-                                </h:form>
-                                <p:dialog header="Resultados" id="busqueda" widgetVar="dlgSearch" showEffect="none" hideEffect="none" height="500" width="850">
+                                <p:dialog header="Encargados" id="busqueda" widgetVar="dlgEnc" showEffect="none" hideEffect="none" height="500" width="900">
                                     <h:form id="frmTablaEnc">
-                                        <p:dataTable var="enc" value="#{controllerEnc.listaBusEnc}" id="tblEnc">
+                                        <p:dataTable var="enc" value="#{controllerEnc.listaEnc}" id="tblEnc">
                                             <p:column headerText="Codigo">
                                                 <h:outputText value="#{enc.codEnc}" />
                                             </p:column>
@@ -484,8 +476,12 @@
                                                 <p:commandLink title="Eliminar" actionListener="#{controllerEnc.searchEnc(enc)}" oncomplete="PF('dlgDeleteEnc').show();" update=":acordion:deleteEnc">
                                                     <img src="../resources/img/DU.svg" id="img-2"/>
                                                 </p:commandLink>
+                                                <p:commandButton value="Asignar" update=":acordion:frmIngAlumn:txtCEncA" actionListener="#{controllerAlumno.alum.setCodEncargado(enc.codEnc)}"/>
                                             </p:column>
                                         </p:dataTable>
+                                        <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                            <p:commandButton value="Ingresar Encargado" oncomplete="PF('dlgCreateEnc').show();"/>
+                                        </div>
                                     </h:form>
                                 </p:dialog>
                                 <!--Cuadros de Dialogo-->
@@ -631,7 +627,7 @@
                                                 <p:inputText id="txtCsecre" value="#{controllerEnc.sec.codigo}"/>
                                             </div>
                                             <div class="ui-g-12 ui-md-12 ui-lg-12">
-                                                <p:commandButton actionListener="#{controllerEnc.guardarEnc()}" value="Guardar" oncomplete="PF('dlgCreateEnc').hide();"/>
+                                                <p:commandButton actionListener="#{controllerEnc.guardarEnc()}" value="Guardar" oncomplete="PF('dlgCreateEnc').hide();" update=":acordion:frmTablaEnc:tblEnc"/>
                                             </div>
                                         </div>
                                     </h:form>

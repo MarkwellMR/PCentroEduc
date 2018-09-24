@@ -14,7 +14,7 @@ public class Alumno extends Persona {
     private Integer codAlumno;
     private Integer telEmergencia;
     private String padecimiento;
-    private String codEncargado;
+    private Integer codEncargado;
     private String codSecretaria;
 
     public Alumno() {
@@ -33,15 +33,15 @@ public class Alumno extends Persona {
     public void setCodAlumno(Integer codAlumno) {
         this.codAlumno = codAlumno;
     }
-    
-    public String getCodEncargado() {
+
+    public Integer getCodEncargado() {
         return codEncargado;
     }
 
-    public void setCodEncargado(String codEncargado) {
+    public void setCodEncargado(Integer codEncargado) {
         this.codEncargado = codEncargado;
     }
-
+    
     public String getCodSecretaria() {
         return codSecretaria;
     }
