@@ -1,6 +1,5 @@
 package com.centroeduc.controller;
 
-import com.centroeduc.dao.AlumnoDAO;
 import com.centroeduc.dao.EncargadoDAO;
 import com.centroeduc.model.Encargado;
 import com.centroeduc.model.Secretaria;
@@ -12,14 +11,23 @@ import javax.faces.bean.ViewScoped;
 @ManagedBean
 @ViewScoped
 public class ControllerEnc implements Serializable{
-    
-    public String valorABuscar;
+    private ArrayList<Encargado> filtro;
     Encargado enc = new Encargado();
     Secretaria sec = new Secretaria();
     EncargadoDAO encdao = new EncargadoDAO();
     ArrayList<Encargado> listaEnc = new ArrayList();
     ArrayList<Encargado> listaBusEnc = new ArrayList();
 
+    public ArrayList<Encargado> getFiltro() {
+        return filtro;
+    }
+
+    public void setFiltro(ArrayList<Encargado> filtro) {
+        this.filtro = filtro;
+    }
+    
+    
+    
     public ArrayList<Encargado> getListaBusEnc() {
         return listaBusEnc;
     }
