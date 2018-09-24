@@ -5,6 +5,7 @@ import com.centroeduc.model.AlumnoGrado;
 import com.centroeduc.model.Notas;
 import com.centroeduc.model.Secretaria;
 import com.centroeduc.model.Unidad;
+import java.util.ArrayList;
 
 public class prueba {
 
@@ -17,15 +18,16 @@ public class prueba {
         Unidad unidad = new Unidad();
         AlumnoGrado alumGrad = new AlumnoGrado();
         NotasDAO notasdao = new NotasDAO();
+        ArrayList<Notas> listaNotas = new ArrayList();
+        listaNotas = notasdao.MostrarNotas();
         
-        unidad.setCodigo(1);
-        alumGrad.setCodAlumnoGrado(1);
-        nota.setNota(100);
+      
+       
         
-        String answ = notasdao.agregarNotas(nota, unidad, alumGrad);
+
 //  dao.nuevaSecretaria(secre, adm);
     //dao.editarSecretaria(secre);
-    dao.estado(secre);
+   // dao.estado(secre);
     
         
         

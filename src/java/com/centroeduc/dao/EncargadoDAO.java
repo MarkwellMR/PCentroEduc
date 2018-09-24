@@ -70,6 +70,8 @@ public class EncargadoDAO extends Conexion {
                 lista.add(enc);
 
             }
+            
+            resultado.close();
         } catch (SQLException e) {
             System.out.println("Error" + e);
         } finally {

@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./fAdmin.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="content">
+        <f:event type="preRenderView" listener="#{controllerNotas.mostrarNotas()}"/>
+
+
+        <h:form>
+            <h:form id="frmAddNote">
+                <div class="ui-g-3 ui-md-3ui-lg-3">
+                    <p:outputLabel for="txtCodAlumGrad" value="codigo del Alumo y grado"/>
+                </div>
+                <div class="ui-g-3 ui-md-3ui-lg-3">
+                    <p:inputText id="txtCodAlumGrad" value="#{controllerNotas.nota.codAlumGrado}"/>
+                </div>
+                <div class="ui-g-3 ui-md-3ui-lg-3">
+                    <p:outputLabel for="txtUnidad" value="Unidad"/>
+                </div>
+                <div class="ui-g-3 ui-md-3ui-lg-3">
+                    <p:inputText id="txtUnidad" value="#{controllerNotas.nota.codUnidad}"/>
+                </div>
+                <div class="ui-g-3 ui-md-3ui-lg-3">
+                    <p:outputLabel for="txtNota" value="Nota"/>
+                </div>
+                <div class="ui-g-3 ui-md-3ui-lg-3">
+                    <p:inputText id="txtNota" value="#{controllerNotas.nota.nota}"/>
+                </div>
+                <div class="ui-g-12 ui-md-3ui-lg-12">
+                    <p:commandButton actionListener="#{controllerNotas.agregarNotas()}" value="Agregar"/>
+                </div>
+            </h:form>
+            <div class="ui-g-12 ui-md-6 ui-lg-12">
+                <h:form id="frmTabla">
+                    <p:dataTable var="notas" value="#{controllerNotas.listaNotas}" id="tblA">
+                        <p:column headerText="Codigo Nota">
+                            <h:outputText value="#{notas.codNota}"/>
+                        </p:column>
+                        <p:column headerText="Codigo Alumno Grado">
+                            <h:outputText value="#{notas.codAlumGrado}"/>
+                        </p:column>
+                        <p:column headerText="unidad">
+                            <h:outputText value="#{notas.codUnidad}"/>
+                        </p:column>
+                        <p:column headerText="Nota">
+                            <h:outputText value="#{notas.nota}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
