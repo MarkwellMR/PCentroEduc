@@ -442,7 +442,7 @@
                                         </div>
                                     </div>
                                 </h:form>
-                                <p:dialog header="Encargados" id="busqueda" widgetVar="dlgEnc" showEffect="none" hideEffect="none" height="500" width="1000">
+                                <p:dialog header="Encargados" id="busqueda" widgetVar="dlgEnc" showEffect="none" hideEffect="none" height="600" width="1000">
                                     <h:form id="frmTablaEnc">
                                         <p:dataTable var="enc" value="#{controllerEnc.listaEnc}" widgetVar="EncB" id="tblEnc" reflow="true" filteredValue="#{controllerEnc.filtro}">
                                             <f:facet name="header">
@@ -451,28 +451,28 @@
                                                     <p:inputText id="globalFilter" onkeyup="PF('EncB').filter()" style="width:150px" placeholder="Enter keyword"/>
                                                 </p:outputPanel>
                                             </f:facet>
-                                            <p:column headerText="Codigo" filterMatchMode="contains">
+                                            <p:column headerText="Codigo" filterMatchMode="contains" filterBy="#{enc.codEnc}">
                                                 <h:outputText value="#{enc.codEnc}" />
                                             </p:column>
-                                            <p:column headerText="Nombre"  filterMatchMode="contains">
+                                            <p:column headerText="Nombre"  filterMatchMode="contains" filterBy="#{enc.nombre}">
                                                 <h:outputText value="#{enc.nombre}" />
                                             </p:column>
-                                            <p:column headerText="Apellido" filterMatchMode="contains">
+                                            <p:column headerText="Apellido" filterMatchMode="contains" filterBy="#{enc.apellido}">
                                                 <h:outputText value="#{enc.apellido}" />
                                             </p:column>
-                                            <p:column headerText="Direccion" filterMatchMode="contains">
+                                            <p:column headerText="Direccion" filterMatchMode="contains" filterBy="#{enc.direccion}">
                                                 <h:outputText value="#{enc.direccion}" />
                                             </p:column>
-                                            <p:column headerText="Email" filterMatchMode="contains">
+                                            <p:column headerText="Email" filterMatchMode="contains" filterBy="#{enc.email}">
                                                 <h:outputText value="#{enc.email}" />
                                             </p:column>
-                                            <p:column headerText="Tel Casa" filterMatchMode="contains">
+                                            <p:column headerText="Tel Casa" filterMatchMode="contains" filterBy="#{enc.telCasa}">
                                                 <h:outputText value="#{enc.telCasa}" />
                                             </p:column>
-                                            <p:column headerText="Tel Movil" filterMatchMode="contains">
+                                            <p:column headerText="Tel Movil" filterMatchMode="contains" filterBy="#{enc.telMovil}">
                                                 <h:outputText value="#{enc.telMovil}" />
                                             </p:column>
-                                            <p:column headerText="Fecha de Nacimiento" filterMatchMode="contains">
+                                            <p:column headerText="Fecha de Nacimiento" filterMatchMode="contains" filterBy="#{enc.fechanac}">
                                                 <h:outputText value="#{enc.fechanac}" />
                                             </p:column>
                                             <p:column headerText="Acciones">
@@ -482,7 +482,7 @@
                                                 <p:commandLink title="Eliminar" actionListener="#{controllerEnc.searchEnc(enc)}" oncomplete="PF('dlgDeleteEnc').show();" update=":acordion:deleteEnc">
                                                     <img src="../resources/img/DU.svg" id="img-2"/>
                                                 </p:commandLink>
-                                                <p:commandLink update=":acordion:frmIngAlumn:txtCEncA" actionListener="#{controllerAlumno.alum.setCodEncargado(enc.codEnc)}" oncomplete="PF('dlgEnc').hide();">
+                                                <p:commandLink title="Asignar Encargado" actionListener="#{controllerAlumno.alum.setCodEncargado(enc.codEnc)}" oncomplete="PF('dlgEnc').hide();" update=":acordion:frmIngAlumn:txtCEncA">
                                                     <img src="../resources/img/asign.svg" id="img-2"/>
                                                 </p:commandLink>
                                             </p:column>

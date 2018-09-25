@@ -25,6 +25,9 @@ public class ControllerCurso {
     public void loadCurso(){
         listCurso = dao.listCurso(course.getNombre());
     }
+    public void cargarLista(){
+        listCurso = dao.listCourse();
+    }
 
     public Curso getCourse() {
         return course;
@@ -52,7 +55,7 @@ public class ControllerCurso {
     
     public void deleteCurso(){
         try {
-            dao.deleteCourse(course.getCod());
+            dao.changeState(course.getCod());
         } catch (Exception e) {
             System.out.println("Error en ControllerCurso(delete): " + e);
         }
