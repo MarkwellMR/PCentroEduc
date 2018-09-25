@@ -442,6 +442,7 @@
                                         </div>
                                     </div>
                                 </h:form>
+                                <!--Cuadros de Dialogo-->
                                 <p:dialog header="Encargados" id="busqueda" widgetVar="dlgEnc" showEffect="none" hideEffect="none" height="600" width="1000">
                                     <h:form id="frmTablaEnc">
                                         <p:dataTable var="enc" value="#{controllerEnc.listaEnc}" widgetVar="EncB" id="tblEnc" reflow="true" filteredValue="#{controllerEnc.filtro}">
@@ -492,7 +493,6 @@
                                         </div>
                                     </h:form>
                                 </p:dialog>
-                                <!--Cuadros de Dialogo-->
                                 <p:dialog header="Actualizar Datos" id="updateEnc" widgetVar="dlgUpdateEnc" showEffect="explode" hideEffect="none" height="400" width="800">
                                     <h:form>
                                         <div class="ui-g">
