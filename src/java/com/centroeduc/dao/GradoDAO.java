@@ -28,13 +28,14 @@ public class GradoDAO extends Conexion{
         respuesta=null;
         try{
             this.Conectar();
-            sql= "insert into grado (descripcion) value(?)";
+            sql= "insert into grado (descripcion, estado) values(?,?)";
             ejecutar =this.getMiconexion().prepareStatement(sql);
             ejecutar.setString(1, grad.getDescripcion());
+            ejecutar.setInt(2, 1);
             ejecutar.executeUpdate();
             respuesta ="Registro almacenado correctamente";
         } catch(SQLException ex) {
-            System.out.println("Error en almacenar los datos"+ex);
+            System.out.println("Error en almacenar los datos: " + ex);
         }finally{
             this.cerrarConex();
          
