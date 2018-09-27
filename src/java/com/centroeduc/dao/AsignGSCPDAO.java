@@ -68,4 +68,28 @@ public class AsignGSCPDAO extends Conexion{
         return list;
     }
     
+    public String updateAsing(int cdSeccion, int cdCurso, String cdMeastro, int cdGrado){
+        answer = null;
+        try {
+            this.Conectar();
+            //(cod_grad, cod_sec, cod_curso, cod_prof)
+            sql ="update cursgradsecprof set cod_sec=?, cod_curso=?, cod_prof where cod_curs_grad_sec_prof=?";
+            run = this.getMiconexion().prepareStatement(sql);
+            run.setInt(1, cdSeccion);
+            run.setInt(2, cdCurso);
+            run.setString(3, cdMeastro);
+            run.setInt(4, cdGrado);
+            run.executeUpdate();
+            
+            answer = "Asignacion actualizada con Exito";
+            this.run.close();
+            
+        } catch (SQLException e) {
+            System.out.println("Error al Actualizar: " + e);
+            answer="No se pudo actualizar la Asignacion";
+        }finally{
+            this.cerrarConex();
+        }
+        return answer;
+    }
 }

@@ -45,7 +45,7 @@
                     </p:selectOneMenu>
                     <br/>
                     <p:selectOneMenu id="lstMaestro" value="#{controllerAsigCurso.maestro.codigo}">
-                        <f:selectItems value="#{controllerAsigCurso.listaMaestros}" var="miMaestro"  itemLabel="#{miMaestro.apellido}, #{miMaestro.nombre}" itemValue="#{miMaestro.codigo}" />
+                        <f:selectItems value="#{controllerAsigCurso.listaMaestros}" var="miMaestro"  itemLabel="#{miMaestro.nombre} #{miMaestro.apellido}" itemValue="#{miMaestro.codigo}" />
                     </p:selectOneMenu>
                     <br/>
                     <h:commandButton actionListener="#{controllerAsigCurso.asignarCurso()}" value="asignar"/>
