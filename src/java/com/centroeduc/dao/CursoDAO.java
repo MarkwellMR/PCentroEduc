@@ -121,6 +121,26 @@ public class CursoDAO extends Conexion {
         }
         return answer;
     }
+    
+    //cambiar estado
+    public String changeState(int codigo) {
+        answer = null;
+        try {
+            this.Conectar();
+            sql = "update curso set estado=? where cod_curso=?";
+            run = this.getMiconexion().prepareStatement(sql);
+            run.setInt(1, 2);
+            run.setInt(2, codigo);
+            run.executeUpdate();
+            answer = "Eliminado con Exito";
+
+            run.close();
+        } catch (SQLException e) {
+            System.out.println("Error CursoDAO(changeState): " + e);
+            answer = "No se pudo eliminar";
+        }
+        return answer;
+    }
 
     public Curso serachId(int codigo) {
         Curso course = new Curso();
