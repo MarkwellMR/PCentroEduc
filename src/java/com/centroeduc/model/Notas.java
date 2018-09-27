@@ -5,14 +5,16 @@ public class Notas {
     private Integer codUnidad;
     private Integer codNota;
     private Integer nota;
+    private Integer cusGradSecProf;
     
     public Notas(){    
     } 
-    public Notas(Integer codNota, Integer nota, Integer codAlumGrado, Integer codUnidad){
+    public Notas(Integer codNota, Integer nota, Integer codAlumGrado, Integer codUnidad,Integer cusGradSecProf){
     this.codNota= codNota;
     this.nota=nota;
     this.codAlumGrado = codAlumGrado;
     this.codUnidad = codUnidad;
+    this.cusGradSecProf = cusGradSecProf;
     }
 
     public Integer getCodAlumGrado() {
@@ -25,6 +27,14 @@ public class Notas {
 
     public Integer getCodUnidad() {
         return codUnidad;
+    }
+
+    public Integer getCusGradSecProf() {
+        return cusGradSecProf;
+    }
+
+    public void setCusGradSecProf(Integer cusGradSecProf) {
+        this.cusGradSecProf = cusGradSecProf;
     }
 
     public void setCodUnidad(Integer codUnidad) {

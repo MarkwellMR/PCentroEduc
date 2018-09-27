@@ -9,6 +9,7 @@ public class Unidad {
     private String fechaFin;
     private Integer estado;
     private Integer codigo;
+    private Integer cusGradSecProf;
 
     public Unidad() {
         this.nombre = null;
@@ -17,8 +18,17 @@ public class Unidad {
         this.fechaFin = null;
         this.estado = null;
         this.codigo = null;
+        this.cusGradSecProf= null;
     }
 
+    public Integer getCusGradSecProf() {
+        return cusGradSecProf;
+    }
+
+    public void setCusGradSecProf(Integer cusGradSecProf) {
+        this.cusGradSecProf = cusGradSecProf;
+    }
+    
     public String getNombre() {
         return nombre;
     }

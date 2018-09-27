@@ -21,11 +21,12 @@ public class NotasDAO extends Conexion {
         answer = null;
         try {
             this.Conectar();
-            sql = "insert into nota(cod_alumn_grad,nota,cod_unidad) values(?,?,?)";
+            sql = "insert into nota(cod_alumn_grad,nota,cod_unidad, cod_curs_grad_sec_prof) values(?,?,?,?)";
             run = this.getMiconexion().prepareStatement(sql);
             run.setInt(1, nota.getCodAlumGrado());
             run.setInt(2, nota.getNota());
             run.setInt(3, nota.getCodUnidad());
+            run.setInt(4, nota.getCusGradSecProf());
 
             run.executeUpdate();
             System.out.println("Dato Almacenado");
@@ -71,7 +72,7 @@ public class NotasDAO extends Conexion {
             listaNotas = new ArrayList();
             while (resultado.next()) {
                 Notas nota = new Notas();
-                nota.setCodNota(resultado.getInt("cod_nota"));
+                nota.setCodNota(resultado.getInt("cod_curs_grad_sec_prof"));
                 nota.setNota(resultado.getInt("nota"));
                 nota.setCodUnidad(resultado.getInt("cod_unidad"));
                 nota.setCodAlumGrado(resultado.getInt("cod_alumn_grad"));
