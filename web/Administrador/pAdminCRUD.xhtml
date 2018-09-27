@@ -442,7 +442,7 @@
                             <div class="ui-g-12 ui-md-12 ui-lg-12">
                                 <h:form id="frmTablaCurs">
                                     <div class="ui-g m-1">
-                                        <p:dataTable var="curs" value="#{controllerCurso.listCurso}" id="tblCurs">
+                                        <p:dataTable var="curs" value="#{controllerCurso.listCurso}" id="tblCurs" scrollable="true" scrollHeight="300">
                                             <p:column headerText="Codigo">
                                                 <h:outputText value="#{curs.cod}"/>
                                             </p:column>
