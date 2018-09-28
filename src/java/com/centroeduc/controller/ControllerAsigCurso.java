@@ -5,6 +5,7 @@ import com.centroeduc.dao.CursoDAO;
 import com.centroeduc.dao.GradoDAO;
 import com.centroeduc.dao.MaestroDAO;
 import com.centroeduc.dao.SeccionDAO;
+import com.centroeduc.model.AsignacionCurso;
 import com.centroeduc.model.AsignacionGSCP;
 import com.centroeduc.model.Curso;
 import com.centroeduc.model.Grado;
@@ -36,7 +37,25 @@ public class ControllerAsigCurso {
     ArrayList<Seccion> ListaSeccion = new ArrayList();
     ArrayList<Maestro> ListaMaestros = new ArrayList();
     ArrayList<AsignacionGSCP> ListaAsignacion = new ArrayList();
+    ArrayList<AsignacionCurso> listaAsignacionCurso = new ArrayList();
+    private ArrayList<AsignacionCurso> filtro ;
 
+    public ArrayList<AsignacionCurso> getFiltro() {
+        return filtro;
+    }
+
+    public void setFiltro(ArrayList<AsignacionCurso> filtro) {
+        this.filtro = filtro;
+    }
+        
+    public ArrayList<AsignacionCurso> getListaAsignacionCurso() {
+        return listaAsignacionCurso;
+    }
+
+    public void setListaAsignacionCurso(ArrayList<AsignacionCurso> listaAsignacionCurso) {
+        this.listaAsignacionCurso = listaAsignacionCurso;
+    }
+       
     public ArrayList<AsignacionGSCP> getListaAsignacion() {
         return ListaAsignacion;
     }
@@ -120,6 +139,8 @@ public class ControllerAsigCurso {
         this.ListaGrado = this.gradodao.mostrarGrado();
         this.ListaSeccion = this.secdao.MostrarSeccion();
         this.ListaAsignacion = this.dao.listAsign();
+        this.listaAsignacionCurso = this.dao.listaAsignacion();
+        
         
     
     }

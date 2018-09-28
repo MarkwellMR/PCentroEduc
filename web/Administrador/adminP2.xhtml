@@ -21,7 +21,7 @@
                             <div class="ui-g-12 ui-md-12 ui-lg-12">
                                 <h:form id="frmTabla">
                                     <div class="ui-g m-1">
-                                        <p:dataTable var="Maestro" value="#{controladorMaestro.mostrarMaestro}" id="tblMaestros">
+                                        <p:dataTable var="Maestro" value="#{controladorMaestro.mostrarMaestro}" id="tblMaestros" scrollable="true" scrollHeight="300">
                                             <p:column headerText="Codigo">
                                                 <h:outputText value="#{Maestro.codigo}" />
                                             </p:column>

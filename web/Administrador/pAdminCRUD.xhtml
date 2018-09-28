@@ -107,8 +107,8 @@
                                                 <div class="ui-g-12 ui-md-4 ui-lg-4">
                                                     <p:inputText id="txtDate" value="#{controllerAdmin.admin.fechanac}" class="w-1"/>
                                                 </div>
-                                                <div class="ui-g-12 ui-md-2 ui-lg-2" >
-                                                    <p:outputLabel for="txtCUI" value="CUI:" class="etiquetas"/>
+                                                <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
+                                                    <p:outputLabel for="txtCUI" value="CUI:"/>
                                                 </div>
                                                 <div class="ui-g-12 ui-md-4 ui-lg-4">
                                                     <p:inputText id="txtCUI" value="#{controllerAdmin.admin.cui}" class="w-1 "/>
@@ -565,7 +565,7 @@
                                         </div>
                                     </h:form>
                                 </p:dialog>
-                                <p:dialog header="Eliminar Administrador" id="deleteC" widgetVar="dlgDeleteC" showEffect="explode" hideEffect="none" height="200" width="300">
+                                <p:dialog header="Eliminar Curso" id="deleteC" widgetVar="dlgDeleteC" showEffect="explode" hideEffect="none" height="200" width="300">
                                     <h:form>
                                         <div class="ui-g">
                                             <div class="ui-g-12 ui-md-12 ui-lg-12">
@@ -599,12 +599,12 @@
                                 <f:event type="preRenderView" listener="#{controllerAsigCurso.cargarListas()}"/>
                                 <h:form>
                                     <div class="ui-g">
-                                        <div class="ui-g-12 ui-md-6 ui-lg-2">
+                                        <div class="ui-g-12 ui-md-6 ui-lg-3">
                                             <p:outputLabel for="lstCurso" value="Curso: " />
                                             <br/>
                                             <p:outputLabel for="lstGrado" value="Grado: " />
                                         </div>
-                                        <div class="ui-g-12 ui-md-6 ui-lg-2">
+                                        <div class="ui-g-12 ui-md-6 ui-lg-3">
                                             <p:selectOneMenu id="lstCurso" value="#{controllerAsigCurso.curso.cod}">
                                                 <f:selectItems value="#{controllerAsigCurso.listaCurso}" var="micurso"  itemLabel="#{micurso.nombre}" itemValue="#{micurso.cod}" />
                                             </p:selectOneMenu>
@@ -613,12 +613,12 @@
                                                 <f:selectItems value="#{controllerAsigCurso.listaGrado}" var="migrado"  itemLabel="#{migrado.descripcion}" itemValue="#{migrado.cod_grado}" />
                                             </p:selectOneMenu>
                                         </div>
-                                        <div class="ui-g-12 ui-md-6 ui-lg-2">
+                                        <div class="ui-g-12 ui-md-6 ui-lg-3">
                                             <p:outputLabel for="lstSeccion" value="Seccion: " />
                                             <br/>
                                             <p:outputLabel for="lstMaestro" value="Maestro: " />
                                         </div>
-                                        <div class="ui-g-12 ui-md-6 ui-lg-2">
+                                        <div class="ui-g-12 ui-md-6 ui-lg-3">
                                             <p:selectOneMenu id="lstSeccion" value="#{controllerAsigCurso.seccion.codigo}">
                                                 <f:selectItems value="#{controllerAsigCurso.listaSeccion}" var="miseccion"  itemLabel="#{miseccion.descripcion}" itemValue="#{miseccion.codigo}" />
                                             </p:selectOneMenu>
@@ -632,21 +632,27 @@
                                     </div>
                                 </h:form>
                                 <h:form id="frmTablaAC">
-                                    <p:dataTable var="asg" value="#{controllerAsigCurso.listaAsignacion}" id="tblAC">
-                                        <p:column headerText="Codigo asignacion">
+                                    <p:dataTable var="asg" value="#{controllerAsigCurso.listaAsignacionCurso}" id="tblAC" widgetVar="AsC" filteredValue="#{controllerAsigCurso.filtro}">
+                                        <f:facet name="header">
+                                                <p:outputPanel>
+                                                    <h:outputText value="Buscar:" />
+                                                    <p:inputText id="globalFilter" onkeyup="PF('AsC').filter()" style="width:150px" placeholder="Enter keyword"/>
+                                                </p:outputPanel>
+                                            </f:facet>
+                                        <p:column headerText="Codigo asignacion" filterBy="#{asg.codigo}">
                                             <h:outputText value="#{asg.codigo}"/>
                                         </p:column>
-                                        <p:column headerText="CS Grado">
-                                            <h:outputText value="#{asg.cdGrado}"/>
+                                        <p:column headerText="CS Grado" filterBy="#{asg.grado}">
+                                            <h:outputText value="#{asg.grado}"/>
                                         </p:column>
-                                        <p:column headerText="CD Seccion">
-                                            <h:outputText value="#{asg.cdSecc}"/>
+                                        <p:column headerText="CD Seccion" filterBy="#{asg.seccion}">
+                                            <h:outputText value="#{asg.seccion}"/>
                                         </p:column>
-                                        <p:column headerText="CD Curso">
-                                            <h:outputText value="#{asg.cdCurso}"/>
+                                        <p:column headerText="CD Curso" filterBy="#{asg.curso}">
+                                            <h:outputText value="#{asg.curso}"/>
                                         </p:column>
-                                        <p:column headerText="CD Maestro">
-                                            <h:outputText value="#{asg.cdMaestro}"/>
+                                        <p:column headerText="CD Maestro" filterBy="#{asg.profesor}">
+                                            <h:outputText value="#{asg.profesor}"/>
                                         </p:column>
                                     </p:dataTable>
                                 </h:form>
