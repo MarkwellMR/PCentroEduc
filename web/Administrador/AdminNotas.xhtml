@@ -8,37 +8,48 @@
 
     <ui:define name="content">
         <f:event type="preRenderView" listener="#{controllerNotas.mostrarNotas()}"/>
-
+        <f:event type="preRenderView" listener="#{controllerAsigCurso.cargarListas()}"/>
 
         <h:form>
+
             <h:form id="frmAddNote">
-                <div class="ui-g-3 ui-md-3ui-lg-3">
-                    <p:outputLabel for="txtCodAlumGrad" value="codigo del Alumo y grado"/>
+                <div class="ui-g-6 ui-md-6 ui-lg-6">
+                    <p:outputLabel for="lstMaestro" value="Maestro: " />
                 </div>
-                <div class="ui-g-3 ui-md-3ui-lg-3">
-                    <p:inputText id="txtCodAlumGrad" value="#{controllerNotas.nota.codAlumGrado}"/>
+                <div class="ui-g-6 ui-md-6 ui-lg-6"> 
+                    <p:selectOneMenu id="lstMaestro" value="#{controllerAsigCurso.maestro.codigo}">
+                        <f:selectItems value="#{controllerAsigCurso.listaMaestros}" var="miMaestro"  itemLabel="#{miMaestro.nombre} #{miMaestro.apellido}" itemValue="#{miMaestro.codigo}" />
+                    </p:selectOneMenu>
+                </div>                
+                <div class="ui-g-1 ui-md-1 ui-lg-1">
+                    <p:outputLabel for="lstGrado" value="Grado: " />
                 </div>
-                <div class="ui-g-3 ui-md-3ui-lg-3">
-                    <p:outputLabel for="txtUnidad" value="Unidad"/>
+                <div class="ui-g-2 ui-md-2 ui-lg-2">
+                    <p:selectOneMenu id="lstGrado" value="#{controllerAsigCurso.grado.cod_grado}">
+                        <f:selectItems value="#{controllerAsigCurso.listaGrado}" var="migrado"  itemLabel="#{migrado.descripcion}" itemValue="#{migrado.cod_grado}" />
+                    </p:selectOneMenu>
                 </div>
-                <div class="ui-g-3 ui-md-3ui-lg-3">
-                    <p:inputText id="txtUnidad" value="#{controllerNotas.nota.codUnidad}"/>  
+                <div class="ui-g-1 ui-md-1 ui-lg-1">
+                    <p:outputLabel for="lstSeccion" value="Seccion: " />
+
                 </div>
-                <div class="ui-g-3 ui-md-3ui-lg-3">
-                        <p:outputLabel for="txtcusGradSecProf" value="Cod Alum Grad Prof"/>
-                    </div>
-                    <div class="ui-g-3 ui-md-3ui-lg-3">
-                        <p:inputText id="txtcusGradSecProf" value="#{controllerNotas.nota.cusGradSecProf}"/>
-                    </div>
-                <div class="ui-g-3 ui-md-3ui-lg-3">
-                    <p:outputLabel for="txtNota" value="Nota"/>
+                <div class="ui-g-2 ui-md-2 ui-lg-2">
+                    <p:selectOneMenu id="lstSeccion" value="#{controllerAsigCurso.seccion.codigo}">
+                        <f:selectItems value="#{controllerAsigCurso.listaSeccion}" var="miseccion"  itemLabel="#{miseccion.descripcion}" itemValue="#{miseccion.codigo}" />
+                    </p:selectOneMenu>
                 </div>
-                <div class="ui-g-3 ui-md-3ui-lg-3">
-                    <p:inputText id="txtNota" value="#{controllerNotas.nota.nota}"/>
+
+                <div class="ui-g-1 ui-md-1 ui-lg-1">
+                    <p:outputLabel for="lstCurso" value="Curso: " />
+                    <br/>
                 </div>
-                <div class="ui-g-12 ui-md-3ui-lg-12">
-                    <p:commandButton actionListener="#{controllerNotas.agregarNotas()}" value="Agregar"/>
+
+                <div class="ui-g-12 ui-md-6 ui-lg-2">
+                    <p:selectOneMenu id="lstCurso" value="#{controllerAsigCurso.curso.cod}">
+                        <f:selectItems value="#{controllerAsigCurso.listaCurso}" var="micurso"  itemLabel="#{micurso.nombre}" itemValue="#{micurso.cod}" />
+                    </p:selectOneMenu>
                 </div>
+
             </h:form>
             <div class="ui-g-12 ui-md-6 ui-lg-12">
                 <h:form id="frmTabla">

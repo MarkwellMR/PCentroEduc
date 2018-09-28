@@ -1,6 +1,7 @@
 package com.centroeduc.dao;
 
 import com.centroeduc.model.Conexion;
+import com.centroeduc.model.Grado;
 import com.centroeduc.model.Notas;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -78,14 +79,41 @@ public class NotasDAO extends Conexion {
                 nota.setCodAlumGrado(resultado.getInt("cod_alumn_grad"));
                 listaNotas.add(nota);
             }
-        resultado.close();
-        
+            resultado.close();
+
         } catch (SQLException e) {
-            System.out.println("Error " + e );
-        }finally{
+            System.out.println("Error " + e);
+        } finally {
             this.cerrarConex();
         }
 
         return listaNotas;
+    }
+
+    // Creando los dropdown menu para notas 
+  
+    public ArrayList<Grado> MostrarGrado(String maestro) {
+          ArrayList<Grado> Mnotas = null;
+        try {
+            this.Conectar();
+            sql = "select grado, cod_grado from notas_listas where cod_prof = ?";
+            run = this.getMiconexion().prepareStatement(sql);
+            run.setString(1, maestro);
+            this.resultado = this.run.executeQuery();
+            
+            Mnotas = new ArrayList();
+            while(resultado.next()){
+                Grado grado= new Grado();
+                grado.setDescripcion(resultado.getString("grado"));
+                grado.setCod_grado(resultado.getInt("cod_grado"));
+                Mnotas.add(grado);
+            }
+               resultado.close();
+        } catch (SQLException e) {
+            System.out.println("Error en DAOnotas MostrarGrado: " + e);
+        }finally{
+            this.cerrarConex();
+        }
+        return Mnotas;
     }
 }
