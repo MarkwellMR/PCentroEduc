@@ -1,6 +1,6 @@
-
 package com.centroeduc.dao;
 
+import com.centroeduc.model.AsignacionCurso;
 import com.centroeduc.model.AsignacionGSCP;
 import com.centroeduc.model.Conexion;
 import java.sql.PreparedStatement;
@@ -8,15 +8,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class AsignGSCPDAO extends Conexion{
+public class AsignGSCPDAO extends Conexion {
+
     private String sql;
     private PreparedStatement run;
     private String answer;
     ResultSet values;
-    
+
     AsignacionGSCP asign = new AsignacionGSCP();
-    
-    public String newAsing(int cdGrado, int cdSeccion, int cdCurso, String cdMeastro){
+
+    public String newAsing(int cdGrado, int cdSeccion, int cdCurso, String cdMeastro) {
         answer = null;
         try {
             this.Conectar();
@@ -27,20 +28,20 @@ public class AsignGSCPDAO extends Conexion{
             run.setInt(3, cdCurso);
             run.setString(4, cdMeastro);
             run.executeUpdate();
-            
+
             answer = "Asignacion Realizada con Exito";
             this.run.close();
-            
+
         } catch (SQLException e) {
             System.out.println("Error al asignar: " + e);
-            answer="No se pudo realizar la Asignacion";
-        }finally{
+            answer = "No se pudo realizar la Asignacion";
+        } finally {
             this.cerrarConex();
         }
         return answer;
     }
-    
-    public ArrayList<AsignacionGSCP> listAsign(){
+
+    public ArrayList<AsignacionGSCP> listAsign() {
         ArrayList<AsignacionGSCP> list = null;
         values = null;
         try {
@@ -49,7 +50,7 @@ public class AsignGSCPDAO extends Conexion{
             run = this.getMiconexion().prepareStatement(sql);
             values = run.executeQuery();
             list = new ArrayList();
-            while(values.next()){
+            while (values.next()) {
                 AsignacionGSCP asigna = new AsignacionGSCP();
                 asigna.setCodigo(this.values.getInt(1));
                 asigna.setCdGrado(this.values.getInt("cod_grad"));
@@ -62,32 +63,59 @@ public class AsignGSCPDAO extends Conexion{
             run.close();
         } catch (SQLException e) {
             System.out.println("Error en AsignGSCPDAO(lista): " + e);
-        }finally{
+        } finally {
             this.cerrarConex();
         }
         return list;
     }
     
-    public String updateAsing(int cdSeccion, int cdCurso, String cdMeastro, int cdGrado){
+    public ArrayList<AsignacionCurso> listaAsignacion(){
+        ArrayList<AsignacionCurso> lista = null;
+        values = null;
+        try {
+            this.Conectar();
+            sql = "select * from vw_asignacion_curso order by cod_asignacion";
+            run = this.getMiconexion().prepareStatement(sql);
+            values = this.run.executeQuery();
+            lista = new ArrayList();
+            while(values.next()){
+                AsignacionCurso datos = new AsignacionCurso();
+                datos.setCodigo(this.values.getInt("cod_asignacion"));
+                datos.setGrado(this.values.getString("grado"));
+                datos.setSeccion(this.values.getString("seccion"));
+                datos.setCurso(this.values.getString("curso"));
+                datos.setProfesor(this.values.getString("profesor"));
+                lista.add(datos);
+            }
+            values.close();
+            run.close();
+        } catch (SQLException e) {
+            System.out.println("Error en Lista Asignacion: " + e);
+        }finally{
+            this.cerrarConex();
+        }
+        return lista;
+    }
+
+    public String updateAsing(int cdSeccion, int cdCurso, String cdMeastro, int cdGrado) {
         answer = null;
         try {
             this.Conectar();
-            //(cod_grad, cod_sec, cod_curso, cod_prof)
-            sql ="update cursgradsecprof set cod_sec=?, cod_curso=?, cod_prof where cod_curs_grad_sec_prof=?";
+            sql = "update cursgradsecprof set cod_sec=?, cod_curso=?, cod_prof where cod_curs_grad_sec_prof=?";
             run = this.getMiconexion().prepareStatement(sql);
             run.setInt(1, cdSeccion);
             run.setInt(2, cdCurso);
             run.setString(3, cdMeastro);
             run.setInt(4, cdGrado);
             run.executeUpdate();
-            
+
             answer = "Asignacion actualizada con Exito";
             this.run.close();
-            
+
         } catch (SQLException e) {
             System.out.println("Error al Actualizar: " + e);
-            answer="No se pudo actualizar la Asignacion";
-        }finally{
+            answer = "No se pudo actualizar la Asignacion";
+        } finally {
             this.cerrarConex();
         }
         return answer;
