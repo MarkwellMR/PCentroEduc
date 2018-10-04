@@ -4,6 +4,7 @@ package com.centroeduc.controller;
 import com.centroeduc.dao.AdminDAO;
 import com.centroeduc.model.Administrador;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -16,7 +17,16 @@ public class ControllerAdmin {
     ArrayList<Administrador> listAdmin = new ArrayList();
     AdminDAO dao = new AdminDAO();
     Administrador admin = new Administrador();
+    private Date date;
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+           
     public ArrayList<Administrador> getListAdmin() {
         return listAdmin;
     }
@@ -39,7 +49,7 @@ public class ControllerAdmin {
     
     public void saveAdmin(){
         try {
-            dao.registerAdmin(admin);
+            dao.registerAdmin(admin, date);
         } catch (Exception e) {
             System.out.println("Error ControllerAdmin(save): " + e);
         }
@@ -55,7 +65,7 @@ public class ControllerAdmin {
     public void updateAdmin(){
         
         try {
-            dao.updateAdmin(admin);
+            dao.updateAdmin(admin, date);
         } catch (Exception e) {
             System.out.println("Error ControllerAdmin(update): " + e);
         }

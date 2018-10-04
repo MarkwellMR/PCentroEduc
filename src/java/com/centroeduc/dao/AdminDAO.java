@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import com.centroeduc.model.Administrador;
 import com.centroeduc.model.Conexion;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class AdminDAO extends Conexion{
     private String sql;
@@ -19,7 +21,9 @@ public class AdminDAO extends Conexion{
     Administrador admin = new Administrador();
     
     //almacena los datos
-    public String registerAdmin(Administrador admin){
+    public String registerAdmin(Administrador admin, Date date){
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+        String fecha = formato.format(date);
         respuesta = null;
         try {
             this.Conectar();
@@ -32,7 +36,7 @@ public class AdminDAO extends Conexion{
             ejecutar.setString(5, admin.getEmail());
             ejecutar.setInt(6, admin.getTelCasa());
             ejecutar.setInt(7, admin.getTelMovil());
-            ejecutar.setString(8, admin.getFechanac());
+            ejecutar.setString(8, fecha);
             ejecutar.setLong(9, admin.getCui());
             ejecutar.setString(10, admin.getPass());
             ejecutar.setInt(11, 1);
@@ -76,7 +80,7 @@ public class AdminDAO extends Conexion{
                 lista.add(admin);
                 
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Error en AdminDAO(ListadAdmin): " + e);
         } finally{
             this.cerrarConex();
@@ -85,7 +89,9 @@ public class AdminDAO extends Conexion{
         
     }
     
-    public String updateAdmin(Administrador admin){
+    public String updateAdmin(Administrador admin, Date date){
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+        String fecha = formato.format(date);
         respuesta = null;
         try {
             this.Conectar();
@@ -98,7 +104,7 @@ public class AdminDAO extends Conexion{
             ejecutar.setString(4, admin.getEmail());
             ejecutar.setInt(5, admin.getTelCasa());
             ejecutar.setInt(6, admin.getTelMovil());
-            ejecutar.setString(7, admin.getFechanac());
+            ejecutar.setString(7, fecha);
             ejecutar.setLong(8, admin.getCui());
             ejecutar.setString(9, admin.getPass());
             ejecutar.setInt(10, admin.getEstado());
@@ -106,7 +112,7 @@ public class AdminDAO extends Conexion{
             
             
             ejecutar.executeUpdate();
-            respuesta = "datos modificados con exito";
+            respuesta = "Datos modificados con exito";
             
         } catch (SQLException ex) {
             System.out.println("Error en AdminDAO(modificar): " + ex);

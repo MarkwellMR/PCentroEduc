@@ -13,8 +13,7 @@
                 <f:event type="preRenderView" listener="#{controllerCurso.cargarLista()}"/>
                 <f:event type="preRenderView" listener="#{controllerGrado.cargarGrado()}"/>
                 <f:event type="preRenderView" listener="#{controladorSeccion.cargarSeccion()}"/>
-                <p id="titulo">Usuario:</p>
-                <p id="titulo">Administrador</p>
+                <p id="titulo">Usuario: Administrador</p>
                 <p:accordionPanel id="acordion" class="mt-1">
                     <p:tab title="Administradores">
                         <h:panelGrid columns="1" cellpadding="10">
@@ -105,7 +104,7 @@
                                                     <p:outputLabel for="txtDate" value="Fecha de Nacimiento:"/>
                                                 </div>
                                                 <div class="ui-g-12 ui-md-4 ui-lg-4">
-                                                    <p:inputText id="txtDate" value="#{controllerAdmin.admin.fechanac}" class="w-1"/>
+                                                    <p:calendar id="txtDate" value="#{controllerAdmin.date}" pattern="yyyy/MM/dd" mask="true" class="w-1"/>
                                                 </div>
                                                 <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
                                                     <p:outputLabel for="txtCUI" value="CUI:"/>
@@ -132,7 +131,8 @@
                                                     <p:inputText id="txtPass" value="#{controllerAdmin.admin.pass}" type="password" class="w-1"/>
                                                 </div>
                                                 <div class="ui-g-12 ui-md-6 ui-lg-6">
-                                                    <p:commandButton actionListener="#{controllerAdmin.saveAdmin()}" value="Guardar" update=":acordion:frmTabla:tblCl" class="ml-1"/>
+                                                    <p:commandButton actionListener="#{controllerAdmin.saveAdmin()}" value="Guardar" update=":acordion:frmTabla:tblCl" oncomplete="PF('dlgCreateA').hide();" class="ml-1"/>
+                                                    <p:commandButton value="Cancelar" update=":acordion:frmTabla:tblCl" oncomplete="PF('dlgCreateA').hide();" class="ml-1"/>
                                                 </div>
                                             </div>
                                         </h:form>
@@ -190,7 +190,7 @@
                                                 <p:outputLabel for="txtDateA" value="Fecha de Nacimiento"/>
                                             </div>
                                             <div class="ui-g-3 ui-md-3 ui-lg-3">
-                                                <p:inputText id="txtDateA" value="#{controllerAdmin.admin.fechanac}"/>
+                                                <p:calendar id="txtDateA" value="#{controllerAdmin.date}" pattern="yyyy/MM/dd" mask="true" class="w-1"/>
                                             </div>
                                             <div class="ui-g-3 ui-md-3 ui-lg-3">
                                                 <p:outputLabel for="txtCuiA" value="CUI:"/>
@@ -634,11 +634,11 @@
                                 <h:form id="frmTablaAC">
                                     <p:dataTable var="asg" value="#{controllerAsigCurso.listaAsignacionCurso}" id="tblAC" widgetVar="AsC" filteredValue="#{controllerAsigCurso.filtro}">
                                         <f:facet name="header">
-                                                <p:outputPanel>
-                                                    <h:outputText value="Buscar:" />
-                                                    <p:inputText id="globalFilter" onkeyup="PF('AsC').filter()" style="width:150px" placeholder="Enter keyword"/>
-                                                </p:outputPanel>
-                                            </f:facet>
+                                            <p:outputPanel>
+                                                <h:outputText value="Buscar:" />
+                                                <p:inputText id="globalFilter" onkeyup="PF('AsC').filter()" style="width:150px" placeholder="Enter keyword"/>
+                                            </p:outputPanel>
+                                        </f:facet>
                                         <p:column headerText="Codigo asignacion" filterBy="#{asg.codigo}">
                                             <h:outputText value="#{asg.codigo}"/>
                                         </p:column>

@@ -14,15 +14,14 @@
                 <f:event type="preRenderView" listener="#{controllerSecre.cargarSecre()}"/>
                 <f:event type="preRenderView" listener="#{controllerAlumno.cargarAlumnos()}"/>
                 <f:event type="preRenderView" listener="#{controllerEnc.cargarDatos()}"/>
-                <p id="titulo">Usuario:</p>
-                <p id="titulo">Secretaria</p>
+                <p id="titulo">Usuario:Secretaria</p>
                 <p:accordionPanel id="acordion" class="mt-1">
                     <p:tab title="Secretarias">
                         <h:panelGrid columns="1" cellpadding="10">
                             <div class="ui-g-12 ui-md-12 ui-lg-12">
                                 <h:form id="frmTabla">
                                     <div class="ui-g m-1">
-                                        <p:dataTable var="secre" value="#{controllerSecre.listaSecre}" id="tblSecre">
+                                        <p:dataTable var="secre" value="#{controllerSecre.listaSecre}" id="tblSecre" scrollable="true" scrollHeight="300">
                                             <p:column headerText="Codigo">
                                                 <h:outputText value="#{secre.codigo}" />
                                             </p:column>
@@ -245,7 +244,7 @@
                             <div class="ui-g-12 ui-md-12 ui-lg-12">
                                 <h:form id="frmTablaAlumn">
                                     <div class="ui-g m-1">
-                                        <p:dataTable var="alumn" value="#{controllerAlumno.listaAlumno}" id="tblAlumn">
+                                        <p:dataTable var="alumn" value="#{controllerAlumno.listaAlumno}" id="tblAlumn" scrollable="true" scrollHeight="300">
                                             <p:column headerText="Codigo">
                                                 <h:outputText value="#{alumn.codAlumno}" />
                                             </p:column>
@@ -445,7 +444,7 @@
                                 <!--Cuadros de Dialogo-->
                                 <p:dialog header="Encargados" id="busqueda" widgetVar="dlgEnc" showEffect="none" hideEffect="none" height="600" width="1000">
                                     <h:form id="frmTablaEnc">
-                                        <p:dataTable var="enc" value="#{controllerEnc.listaEnc}" widgetVar="EncB" id="tblEnc" reflow="true" filteredValue="#{controllerEnc.filtro}">
+                                        <p:dataTable var="enc" value="#{controllerEnc.listaEnc}" widgetVar="EncB" id="tblEnc" reflow="true" filteredValue="#{controllerEnc.filtro}" scrollable="true" scrollHeight="450">
                                             <f:facet name="header">
                                                 <p:outputPanel>
                                                     <h:outputText value="Buscar:" />
