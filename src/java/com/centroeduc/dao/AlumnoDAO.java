@@ -171,4 +171,33 @@ public class AlumnoDAO extends Conexion {
         return alumno;
     }
 
+    public Alumno ultimoAlumno() {
+        Alumno alumno = new Alumno();
+        try {
+            this.Conectar();
+            sql = "select * from alumno order by alumno.cod_alumno desc limit 1;";
+            ejecutar = this.getMiconexion().prepareStatement(sql);
+            clonarTabla = ejecutar.executeQuery();
+            if (clonarTabla.next()) {
+                alum.setCodAlumno(clonarTabla.getInt("cod_alumno"));
+                alum.setNombre(clonarTabla.getString("nombre"));
+                alum.setApellido(clonarTabla.getString("apellido"));
+                alum.setEmail(clonarTabla.getString("email"));
+                alum.setTelEmergencia(clonarTabla.getInt("tel_emergencia"));
+                alum.setCodEncargado(clonarTabla.getInt("cod_enc"));
+                alum.setCodSecretaria(clonarTabla.getString("cod_secre"));
+                alum.setDireccion(clonarTabla.getString("direccion"));
+                alum.setFechanac(clonarTabla.getString("fechanac"));
+                alum.setPadecimiento(clonarTabla.getString("padecimiento"));
+                alum.setEstado(clonarTabla.getInt("estado"));
+            }
+            ejecutar.close();
+            clonarTabla.close();
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }finally{
+            this.cerrarConex();
+        }
+        return alumno;
+    }
 }

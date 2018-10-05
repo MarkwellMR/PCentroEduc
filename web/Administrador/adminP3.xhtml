@@ -14,6 +14,8 @@
                 <f:event type="preRenderView" listener="#{controllerSecre.cargarSecre()}"/>
                 <f:event type="preRenderView" listener="#{controllerAlumno.cargarAlumnos()}"/>
                 <f:event type="preRenderView" listener="#{controllerEnc.cargarDatos()}"/>
+                <f:event type="preRenderView" listener="#{controllerGrado.cargarGrado()}"/>
+                <f:event type="preRenderView" listener="#{controladorSeccion.cargarSeccion()}"/>
                 <p id="titulo">Usuario:Secretaria</p>
                 <p:accordionPanel id="acordion" class="mt-1">
                     <p:tab title="Secretarias">
@@ -434,10 +436,54 @@
                                             <p:inputText id="txtEmailA" value="#{controllerAlumno.alum.email}" class="w-1"/>
                                         </div>
                                         <div class="ui-g-12 ui-md-6 ui-lg-6">
-                                            <p:commandButton actionListener="#{controllerAlumno.guardarAlumno()}" value="Guardar Datos" update=":acordion:frmTablaAlumn:tblAlumn" class="ml-1"/>
+                                            <p:commandButton actionListener="#{controllerAlumno.guardarAlumno()}" value="Guardar Datos" update=":acordion:frmTablaAlumn:tblAlumn :acordion:frmAsignar" class="ml-1"/>
                                         </div> 
                                         <div class="ui-g-6 ui-md-6 ui-lg-6">
                                             <p:commandButton value="Encargados" oncomplete="PF('dlgEnc').show();"/>
+                                        </div>
+                                    </div>
+                                </h:form>
+                                <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                    <p id="titulo-1">Asignar Alumno</p>
+                                </div>
+                                <h:form id="frmAsignar">
+                                    <div class="ui-g m">
+                                        <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
+                                            <p:outputLabel for="txtAlumnN" value="Alumno: "/>
+                                            <p:outputLabel for="txtAlumnC" value="Codigo: "/>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-4 ui-lg-4">
+                                            <p:outputLabel id="txtAlumnN" value="#{controllerAlumno.alum.codigo}"/>
+                                            <p:outputLabel id="txtAlumnC" value="#{controllerAlumno.alum.nombre}"/>
+                                            
+                                        </div>
+                                        <div class="ui-g-12 ui-md-6 ui-lg-6" id="etiquetas">
+                                            &nbsp;
+                                        </div>
+                                        <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
+                                            <p:outputLabel for="lstGrado" value="Grado: "/>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-4 ui-lg-4">
+                                            <p:selectOneMenu id="lstGrado" value="#{controllerGrado.grado.cod_grado}">
+                                                <f:selectItems value="#{controllerGrado.listaGrado}" var="migrado"  itemLabel="#{migrado.descripcion}" itemValue="#{migrado.cod_grado}" />
+                                            </p:selectOneMenu>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
+                                            <p:outputLabel for="lstSeccion" value="Seccion: " class="etiquetas"/>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-4 ui-lg-4">
+                                            <p:selectOneMenu id="lstSeccion" value="#{controladorSeccion.sec.codigo}">
+                                                <f:selectItems value="#{controladorSeccion.mostrarSeccion}" var="misec"  itemLabel="#{misec.descripcion}" itemValue="#{misec.codigo}" />
+                                            </p:selectOneMenu>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
+                                            <p:outputLabel for="lstCiclo" value="Ciclo: " />
+                                        </div>
+                                        <div class="ui-g-12 ui-md-4 ui-lg-4">
+                                            <p:outputLabel id="lstCiclo" value="2018"/>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-6 ui-lg-6">
+                                            <p:commandButton actionListener="#{controllerAsigCurso.asignarCurso()}" value="asignar" update=""/>
                                         </div>
                                     </div>
                                 </h:form>
