@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import com.centroeduc.model.Conexion;
 import com.centroeduc.model.Secretaria;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class SecreDao extends Conexion {
 
@@ -21,7 +23,9 @@ public class SecreDao extends Conexion {
     Secretaria secre = new Secretaria();
     Administrador admin = new Administrador();
 
-    public String nuevaSecretaria(Secretaria secretaria, Administrador adm) {
+    public String nuevaSecretaria(Secretaria secretaria, Administrador adm, Date date) {
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+        String fecha = formato.format(date);
         System.out.println(secretaria.toString());
         try {
             this.Conectar();
@@ -37,7 +41,7 @@ public class SecreDao extends Conexion {
             run.setString(5, secretaria.getEmail());
             run.setInt(6, secretaria.getTelCasa());
             run.setInt(7, secretaria.getTelMovil());
-            run.setString(8, secretaria.getFechanac());
+            run.setString(8, fecha);
             run.setLong(9, secretaria.getCui());            
             run.setString(10, adm.getCodigo());
             run.setString(11, secretaria.getPass());            
@@ -112,7 +116,9 @@ public class SecreDao extends Conexion {
 //    }
     //mandando a llamar al modelo
 
-    public String editarSecretaria(Secretaria secre) {
+    public String editarSecretaria(Secretaria secre, Date date) {
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+        String fecha = formato.format(date);
         ingreso = null;
 
         try {
@@ -127,7 +133,7 @@ public class SecreDao extends Conexion {
             run.setString(4, secre.getEmail());
             run.setInt(5, secre.getTelCasa());
             run.setInt(6, secre.getTelMovil());
-            run.setString(7, secre.getFechanac());
+            run.setString(7, fecha);
             run.setLong(8, secre.getCui());
             run.setString(9, secre.getPass());
             run.setString(10, secre.getCodigo());

@@ -5,7 +5,9 @@ import com.centroeduc.model.Maestro;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MaestroDAO extends Conexion {
 
@@ -16,7 +18,9 @@ public class MaestroDAO extends Conexion {
 
     Maestro maes = new Maestro();
 
-    public String insertarMaestro(Maestro maes) {
+    public String insertarMaestro(Maestro maes, Date date) {
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+        String fecha = formato.format(date);
         ingreso = null;
         try {
             this.Conectar();
@@ -29,7 +33,7 @@ public class MaestroDAO extends Conexion {
             ejecutar.setString(5, maes.getEmail());
             ejecutar.setInt(6, maes.getTelCasa());
             ejecutar.setInt(7, maes.getTelMovil());
-            ejecutar.setString(8, maes.getFechanac());
+            ejecutar.setString(8, fecha);
             ejecutar.setLong(9, maes.getCui());
             ejecutar.setString(10, maes.getCodigoA());
             ejecutar.setString(11, maes.getPass());
@@ -104,7 +108,9 @@ public class MaestroDAO extends Conexion {
         return ingreso;
     }
 
-    public String editarMaestro(Maestro maes) {
+    public String editarMaestro(Maestro maes, Date date) {
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+        String fecha = formato.format(date);
         ingreso = null;
         try {
             this.Conectar();
@@ -116,7 +122,7 @@ public class MaestroDAO extends Conexion {
             ejecutar.setString(4, maes.getDireccion());
             ejecutar.setInt(5, maes.getTelCasa());
             ejecutar.setInt(6, maes.getTelMovil());
-            ejecutar.setString(7, maes.getFechanac());
+            ejecutar.setString(7, fecha);
             ejecutar.setLong(8, maes.getCui());
             ejecutar.setString(9, maes.getPass());
             ejecutar.setString(10, maes.getCodigo());

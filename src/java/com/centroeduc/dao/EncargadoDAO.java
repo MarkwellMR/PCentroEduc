@@ -6,7 +6,9 @@ import com.centroeduc.model.Secretaria;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class EncargadoDAO extends Conexion {
 
@@ -19,7 +21,9 @@ public class EncargadoDAO extends Conexion {
     Encargado encargado = new Encargado();
     Secretaria secre = new Secretaria();
 
-    public String nuevoEncargado(Encargado encargado, Secretaria secre) {
+    public String nuevoEncargado(Encargado encargado, Secretaria secre, Date date) {
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+        String fecha = formato.format(date);
         answer = null;
         try {
             this.Conectar();
@@ -31,7 +35,7 @@ public class EncargadoDAO extends Conexion {
             run.setString(4, encargado.getEmail());
             run.setInt(5, encargado.getTelCasa());
             run.setInt(6, encargado.getTelMovil());
-            run.setString(7, encargado.getFechanac());
+            run.setString(7, fecha);
             run.setLong(8, encargado.getCui());
             run.setInt(9, 1);
             run.setString(10,secre.getCodigo() );
@@ -98,7 +102,9 @@ public class EncargadoDAO extends Conexion {
         return answer;
     }
 
-    public String UpEnc(Encargado encargado) {
+    public String UpEnc(Encargado encargado, Date date) {
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+        String fecha = formato.format(date);
         try {
             this.Conectar();
             sql = "update encargado set nombre=?, apellido=?, direccion=?, email=?, tel_casa=?, tel_movil=?, fechanac=?, cui=? where cod_enc=?";
@@ -110,7 +116,7 @@ public class EncargadoDAO extends Conexion {
             run.setString(4, encargado.getEmail());
             run.setInt(5, encargado.getTelCasa());
             run.setInt(6, encargado.getTelMovil());
-            run.setString(7, encargado.getFechanac());
+            run.setString(7, fecha);
             run.setLong(8, encargado.getCui());
             run.setInt(9, encargado.getCodEnc());
             run.executeUpdate();

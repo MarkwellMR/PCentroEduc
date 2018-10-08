@@ -104,7 +104,7 @@
                                                     <p:outputLabel for="txtFechanac" value="Fecha de Nacimiento: "/>
                                                 </div>
                                                 <div class="ui-g-12 ui-md-4 ui-lg-4">
-                                                    <p:inputText id="txtFechanac" value="#{controladorMaestro.maes.fechanac}" class="w-1"/>
+                                                    <p:calendar id="txtFechanac" value="#{controladorMaestro.date}" pattern="yyyy/MM/dd" mask="true" class="w-1"/>
                                                 </div>
                                                 <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
                                                     <p:outputLabel for="txtCui" value="Cui: "/>
@@ -199,7 +199,7 @@
                                                 <p:outputLabel for="txtFechanacB" value="Fecha de Nacimiento:"/>
                                             </div>
                                             <div class="ui-g-3 ui-md-3 ui-lg-3">
-                                                <p:inputText id="txtFechanacB" value="#{controladorMaestro.maes.fechanac}"/>
+                                                <p:calendar id="txtFechanacB" value="#{controladorMaestro.date}" pattern="yyyy/MM/dd" mask="true" class="w-1"/>
                                             </div>
                                             <div class="ui-g-3 ui-md-3 ui-lg-3">
                                                 <p:outputLabel for="txtCuiB" value="Cui:"/>

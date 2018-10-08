@@ -107,7 +107,7 @@
                                                     <p:outputLabel for="txtFechanac" value="Fecha de Nacimiento: "/>
                                                 </div>
                                                 <div class="ui-g-12 ui-md-4 ui-lg-4">
-                                                    <p:inputText id="txtFechanac" value="#{controllerSecre.secre.fechanac}" class="w-1"/>
+                                                    <p:calendar id="txtFechanac" value="#{controllerSecre.date}" pattern="yyyy/MM/dd" mask="true" class="w-1"/>
                                                 </div>
                                                 <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
                                                     <p:outputLabel for="txtCui" value="Cui: "/>
@@ -202,7 +202,7 @@
                                                 <p:outputLabel for="txtFechanacB" value="Fecha de Nacimiento:"/>
                                             </div>
                                             <div class="ui-g-3 ui-md-3 ui-lg-3">
-                                                <p:inputText id="txtFechanacB" value="#{controllerSecre.secre.fechanac}"/>
+                                                <p:calendar id="txtFechanacB" value="#{controllerSecre.date}" pattern="yyyy/MM/dd" mask="true" class="w-1"/>
                                             </div>
                                             <div class="ui-g-3 ui-md-3 ui-lg-3">
                                                 <p:outputLabel for="txtCuiB" value="Cui:"/>
@@ -331,7 +331,7 @@
                                                 <p:outputLabel for="txtFechanacU" value="Fecha de Nacimiento:"/>
                                             </div>
                                             <div class="ui-g-3 ui-md-3 ui-lg-3">
-                                                <p:inputText id="txtFechanacU" value="#{controllerAlumno.alum.fechanac}"/>
+                                                <p:calendar id="txtFechanacU" value="#{controllerAlumno.date}" pattern="yyyy/MM/dd" mask="true" class="w-1"/>
                                             </div>
                                             <div class="ui-g-3 ui-md-3 ui-lg-3">
                                                 <p:outputLabel for="txtPadU" value="Padecimientos:"/>
@@ -402,13 +402,16 @@
                                             <p:outputLabel for="txtFechanacA" value="Fecha de Nacimiento: "/>
                                         </div>
                                         <div class="ui-g-12 ui-md-4 ui-lg-4">
-                                            <p:inputText id="txtFechanacA" value="#{controllerAlumno.alum.fechanac}" class="w-1"/>
+                                            <p:calendar id="txtFechanacA" value="#{controllerAlumno.date}" pattern="yyyy/MM/dd" mask="true" class="w-1"/>
                                         </div>
                                         <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
                                             <p:outputLabel for="txtCEncA" value="Cod. Encargado: "/>
                                         </div>
-                                        <div class="ui-g-12 ui-md-4 ui-lg-4">
+                                        <div class="ui-g-12 ui-md-3 ui-lg-3">
                                             <p:inputText id="txtCEncA" value="#{controllerAlumno.alum.codEncargado}" class="w-1"/>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-1 ui-lg-1">
+                                            <p:commandButton value="Encargados" oncomplete="PF('dlgEnc').show();"/>
                                         </div>
                                         <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
                                             <p:outputLabel for="txtCSecreA" value="Cod. Secretaria: "/>
@@ -437,11 +440,27 @@
                                         <div class="ui-g-12 ui-md-10 ui-lg-10">
                                             <p:inputText id="txtEmailA" value="#{controllerAlumno.alum.email}" class="w-1"/>
                                         </div>
+                                        <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
+                                            <p:outputLabel for="lstGrado" value="Grado: "/>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-4 ui-lg-4">
+                                            <p:selectOneMenu id="lstGrado" value="#{controllerAlumno.grado.cod_grado}">
+                                                <f:selectItems value="#{controllerAlumno.listaGrado}" var="migrado"  itemLabel="#{migrado.descripcion}" itemValue="#{migrado.cod_grado}" />
+                                            </p:selectOneMenu>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
+                                            <p:outputLabel for="lstSeccion" value="Seccion: " class="etiquetas"/>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-4 ui-lg-4">
+                                            <p:selectOneMenu id="lstSeccion" value="#{controllerAlumno.sec.codigo}">
+                                                <f:selectItems value="#{controllerAlumno.listaSeccion}" var="misec"  itemLabel="#{misec.descripcion}" itemValue="#{misec.codigo}" />
+                                            </p:selectOneMenu>
+                                        </div>
                                         <div class="ui-g-12 ui-md-6 ui-lg-6">
                                             <p:commandButton actionListener="#{controllerAlumno.guardarAlumno()}" value="Guardar Datos" update=":acordion:frmTablaAlumn:tblAlumn :acordion:frmAsignar" class="ml-1"/>
                                         </div> 
                                         <div class="ui-g-6 ui-md-6 ui-lg-6">
-                                            <p:commandButton value="Encargados" oncomplete="PF('dlgEnc').show();"/>
+                                            &nbsp;
                                         </div>
                                     </div>
                                 </h:form>
@@ -451,10 +470,10 @@
                                 <h:form id="frmAsignar">
                                     <div class="ui-g m">
                                         <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
-                                            <p:outputLabel for="txtAlumnC" value="Codigo: "/>
+                                            <p:outputLabel for="txtAlumnCod" value="Codigo Alumno: "/>
                                         </div>
                                         <div class="ui-g-12 ui-md-4 ui-lg-4">
-                                            <p:outputLabel id="txtAlumnC" value="#{controllerAlumno.alum.codAlumno}"/>
+                                            <p:outputLabel id="txtAlumnCod" value="#{controllerAlumno.alum.codAlumno}"/>
                                         </div>
                                         <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
                                             <p:outputLabel for="txtAlumnN" value="Alumno: "/>
@@ -463,29 +482,20 @@
                                             <p:outputLabel id="txtAlumnN" value="#{controllerAlumno.alum.nombre}"/>
                                         </div>
                                         <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
-                                            <p:outputLabel for="lstGrado" value="Grado: "/>
+                                            <p:outputLabel for="txtCiclo" value="Ciclo: " />
                                         </div>
                                         <div class="ui-g-12 ui-md-4 ui-lg-4">
-                                            <p:selectOneMenu id="lstGrado" value="#{controllerGrado.grado.cod_grado}">
-                                                <f:selectItems value="#{controllerGrado.listaGrado}" var="migrado"  itemLabel="#{migrado.descripcion}" itemValue="#{migrado.cod_grado}" />
-                                            </p:selectOneMenu>
+                                            <p:outputLabel id="txtCiclo" value="2018"/>
+                                            <p:calendar id="txtDateAas" value="#{controllerAdmin.date}" pattern="yyyy" mask="true" class="w-1"/>
                                         </div>
                                         <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
-                                            <p:outputLabel for="lstSeccion" value="Seccion: " class="etiquetas"/>
+                                            <p:outputLabel for="txtCodAsign" value="Codigo Asignacion:" />
                                         </div>
                                         <div class="ui-g-12 ui-md-4 ui-lg-4">
-                                            <p:selectOneMenu id="lstSeccion" value="#{controladorSeccion.sec.codigo}">
-                                                <f:selectItems value="#{controladorSeccion.mostrarSeccion}" var="misec"  itemLabel="#{misec.descripcion}" itemValue="#{misec.codigo}" />
-                                            </p:selectOneMenu>
-                                        </div>
-                                        <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
-                                            <p:outputLabel for="lstCiclo" value="Ciclo: " />
-                                        </div>
-                                        <div class="ui-g-12 ui-md-4 ui-lg-4">
-                                            <p:outputLabel id="lstCiclo" value="2018"/>
+                                            <p:outputLabel id="txtCodAsign" value="#{controllerAlumno.asigna.codigo}"/>
                                         </div>
                                         <div class="ui-g-12 ui-md-6 ui-lg-6">
-                                            <p:commandButton actionListener="#{controllerAsigCurso.asignarCurso()}" value="asignar" update=""/>
+                                            <p:commandButton actionListener="#{controllerAlumno.saveAsign()}" value="asignar"/>
                                         </div>
                                     </div>
                                 </h:form>
@@ -537,6 +547,69 @@
                                         </p:dataTable>
                                         <div class="ui-g-12 ui-md-12 ui-lg-12">
                                             <p:commandButton value="Ingresar Encargado" oncomplete="PF('dlgCreateEnc').show();"/>
+                                        </div>
+                                    </h:form>
+                                </p:dialog>
+                                <p:dialog header="Ingrese los Datos del Encargado" id="CreateEnc" widgetVar="dlgCreateEnc" showEffect="explode" hideEffect="none" height="400" width="800">
+                                    <h:form>
+                                        <div class="ui-g">
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:outputLabel for="txtNombreEn" value="Nombre:"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:inputText id="txtNombreEn" value="#{controllerEnc.enc.nombre}"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:outputLabel for="txtApellidoEn" value="Apellido:"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:inputText id="txtApellidoEn" value="#{controllerEnc.enc.apellido}"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:outputLabel for="txtDireccionEn" value="Direccion:"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:inputText id="txtDireccionEn" value="#{controllerEnc.enc.direccion}"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:outputLabel for="txtEmailEn" value="Email:"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:inputText id="txtEmailEn" value="#{controllerEnc.enc.email}"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:outputLabel for="txtTelCEn" value="Telefono de Casa:"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:inputText id="txtTelCEn" value="#{controllerEnc.enc.telCasa}"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:outputLabel for="txtTelMEn" value="Telefono Movil:"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:inputText id="txtTelMEn" value="#{controllerEnc.enc.telMovil}"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:outputLabel for="txtFechanacEn" value="Fecha de Nacimiento:"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:calendar id="txtFechanacEn" value="#{controllerEnc.date}" pattern="yyyy/MM/dd" mask="true" class="w-1"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:outputLabel for="txtCuiEn" value="Cui:"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:inputText id="txtCuiEn" value="#{controllerEnc.enc.cui}"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:outputLabel for="txtCsecre" value="Cod Secretaria:"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:inputText id="txtCsecre" value="#{controllerEnc.sec.codigo}"/>
+                                            </div>
+                                            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                                <p:commandButton actionListener="#{controllerEnc.guardarEnc()}" value="Guardar" oncomplete="PF('dlgCreateEnc').hide();" update=":acordion:frmTablaEnc:tblEnc"/>
+                                            </div>
                                         </div>
                                     </h:form>
                                 </p:dialog>
@@ -592,7 +665,7 @@
                                                 <p:outputLabel for="txtFechanacU" value="Fecha de Nacimiento:"/>
                                             </div>
                                             <div class="ui-g-3 ui-md-3 ui-lg-3">
-                                                <p:inputText id="txtFechanacU" value="#{controllerEnc.enc.fechanac}"/>
+                                                <p:calendar id="txtFechanacU" value="#{controllerEnc.date}" pattern="yyyy/MM/dd" mask="true" class="w-1"/>
                                             </div>
                                             <div class="ui-g-3 ui-md-3 ui-lg-3">
                                                 <p:outputLabel for="txtStateX" value="Estado:"/>
@@ -622,69 +695,6 @@
                                         <br/>
                                         <p:commandButton actionListener="#{controllerAlumno.cambioEstado()}" value="Eliminar" update=":acordion:frmTablaEnc:tblEnc" oncomplete="PF('dlgDeleteEnc').hide();"/>
                                         <p:commandButton value="Cancelar" update=":acordion:frmTablaEnc:tblEnc" oncomplete="PF('dlgDeleteEnc').hide();"/>
-                                    </h:form>
-                                </p:dialog>
-                                <p:dialog header="Ingrese los Datos del Encargado" id="CreateEnc" widgetVar="dlgCreateEnc" showEffect="explode" hideEffect="none" height="400" width="800">
-                                    <h:form>
-                                        <div class="ui-g">
-                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
-                                                <p:outputLabel for="txtNombreEn" value="Nombre:"/>
-                                            </div>
-                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
-                                                <p:inputText id="txtNombreEn" value="#{controllerEnc.enc.nombre}"/>
-                                            </div>
-                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
-                                                <p:outputLabel for="txtApellidoEn" value="Apellido:"/>
-                                            </div>
-                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
-                                                <p:inputText id="txtApellidoEn" value="#{controllerEnc.enc.apellido}"/>
-                                            </div>
-                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
-                                                <p:outputLabel for="txtDireccionEn" value="Direccion:"/>
-                                            </div>
-                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
-                                                <p:inputText id="txtDireccionEn" value="#{controllerEnc.enc.direccion}"/>
-                                            </div>
-                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
-                                                <p:outputLabel for="txtEmailEn" value="Email:"/>
-                                            </div>
-                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
-                                                <p:inputText id="txtEmailEn" value="#{controllerEnc.enc.email}"/>
-                                            </div>
-                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
-                                                <p:outputLabel for="txtTelCEn" value="Telefono de Casa:"/>
-                                            </div>
-                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
-                                                <p:inputText id="txtTelCEn" value="#{controllerEnc.enc.telCasa}"/>
-                                            </div>
-                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
-                                                <p:outputLabel for="txtTelMEn" value="Telefono Movil:"/>
-                                            </div>
-                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
-                                                <p:inputText id="txtTelMEn" value="#{controllerEnc.enc.telMovil}"/>
-                                            </div>
-                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
-                                                <p:outputLabel for="txtFechanacEn" value="Fecha de Nacimiento:"/>
-                                            </div>
-                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
-                                                <p:inputText id="txtFechanacEn" value="#{controllerEnc.enc.fechanac}"/>
-                                            </div>
-                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
-                                                <p:outputLabel for="txtCuiEn" value="Cui:"/>
-                                            </div>
-                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
-                                                <p:inputText id="txtCuiEn" value="#{controllerEnc.enc.cui}"/>
-                                            </div>
-                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
-                                                <p:outputLabel for="txtCsecre" value="Cod Secretaria:"/>
-                                            </div>
-                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
-                                                <p:inputText id="txtCsecre" value="#{controllerEnc.sec.codigo}"/>
-                                            </div>
-                                            <div class="ui-g-12 ui-md-12 ui-lg-12">
-                                                <p:commandButton actionListener="#{controllerEnc.guardarEnc()}" value="Guardar" oncomplete="PF('dlgCreateEnc').hide();" update=":acordion:frmTablaEnc:tblEnc"/>
-                                            </div>
-                                        </div>
                                     </h:form>
                                 </p:dialog>
                             </div>

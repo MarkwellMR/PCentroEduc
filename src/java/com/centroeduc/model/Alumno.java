@@ -16,6 +16,7 @@ public class Alumno extends Persona {
     private String padecimiento;
     private Integer codEncargado;
     private String codSecretaria;
+    private String ciclo;
 
     public Alumno() {
         this.codAlumno = null;
@@ -23,7 +24,15 @@ public class Alumno extends Persona {
         this.padecimiento = null;
         this.codEncargado = null;
         this.codSecretaria = null;
+        this.ciclo = null;
+    }
 
+    public String getCiclo() {
+        return ciclo;
+    }
+
+    public void setCiclo(String ciclo) {
+        this.ciclo = ciclo;
     }
 
     public Integer getCodAlumno() {

@@ -3,6 +3,7 @@ package com.centroeduc.controller;
 import com.centroeduc.dao.MaestroDAO;
 import com.centroeduc.model.Maestro;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -13,6 +14,16 @@ public class ControladorMaestro {
 
     ArrayList<Maestro> mostrarMaestro = new ArrayList();
     Maestro maes = new Maestro();
+    
+    private Date date;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public Maestro getMaes() {
         return maes;
@@ -38,7 +49,7 @@ public class ControladorMaestro {
     public void guardarMaestro() {
         MaestroDAO daou = new MaestroDAO();
         try {
-            daou.insertarMaestro(maes);
+            daou.insertarMaestro(maes, date);
         } catch (Exception e) {
             System.out.println("error en controlador maestro" + e);
         }
@@ -56,7 +67,7 @@ public class ControladorMaestro {
     public void actualizarMaestro() {
         MaestroDAO dao = new MaestroDAO();
         try {
-            dao.editarMaestro(maes);
+            dao.editarMaestro(maes, date);
         } catch (Exception e) {
             System.out.println("Error en el controlador de actualizar Mestro" + e);
         }
