@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import com.centroeduc.model.Conexion;
 import com.centroeduc.model.Alumno;
+import com.centroeduc.model.AsignacionGSCP;
 
 /**
  *
@@ -171,12 +172,15 @@ public class AlumnoDAO extends Conexion {
         return alumno;
     }
 
-    public Alumno ultimoAlumno() {
-        Alumno alumno = new Alumno();
+    public Alumno searchAlumno(Alumno dato) {
+        Alumno alum = new Alumno();
         try {
             this.Conectar();
-            sql = "select * from alumno order by alumno.cod_alumno desc limit 1;";
+            sql = "select * from alumno where nombre=? and apellido=?;";
             ejecutar = this.getMiconexion().prepareStatement(sql);
+            ejecutar.setString(1, dato.getNombre());
+            ejecutar.setString(2, dato.getApellido());
+            System.out.println("Nombre: " + dato.getNombre() + "," + "Apellido: " + dato.getApellido());
             clonarTabla = ejecutar.executeQuery();
             if (clonarTabla.next()) {
                 alum.setCodAlumno(clonarTabla.getInt("cod_alumno"));
@@ -190,14 +194,44 @@ public class AlumnoDAO extends Conexion {
                 alum.setFechanac(clonarTabla.getString("fechanac"));
                 alum.setPadecimiento(clonarTabla.getString("padecimiento"));
                 alum.setEstado(clonarTabla.getInt("estado"));
+                System.out.println("Codigo: " + alum.getCodAlumno() + ", " + "Nombre: " + alum.getApellido());
             }
             ejecutar.close();
             clonarTabla.close();
         } catch (Exception e) {
-            System.out.println("Error: " + e);
-        }finally{
+            System.out.println("Error busqueda: " + e);
+        } finally {
             this.cerrarConex();
         }
-        return alumno;
+        return alum;
     }
+
+    public AsignacionGSCP searchAsignacion(AsignacionGSCP dato) {
+        AsignacionGSCP asign = new AsignacionGSCP();
+        try {
+            this.Conectar();
+            sql = "select * from alumno where nombre=? and apellido=?;";
+            ejecutar = this.getMiconexion().prepareStatement(sql);
+            ejecutar.setInt(1, dato.getCdGrado());
+            ejecutar.setInt(2, dato.getCdSecc());
+            System.out.println("Grado: " + dato.getCdGrado() + "," + "Sección: " + dato.getCdSecc());
+            clonarTabla = ejecutar.executeQuery();
+            if (clonarTabla.next()) {
+                asign.setCodigo(clonarTabla.getInt("cod_curs_grad_sec_prof"));
+                asign.setCdGrado(clonarTabla.getInt("cod_grad"));
+                asign.setCdSecc(clonarTabla.getInt("cod_sec"));
+                asign.setCdCurso(clonarTabla.getInt("cod_curso"));
+                asign.setCdMaestro(clonarTabla.getString("cod_prof"));
+                System.out.println("Codigo: " + asign.getCodigo() + ", " + "Grado: " + dato.getCdGrado() + "," + "Sección: " + dato.getCdSecc());
+            }
+            ejecutar.close();
+            clonarTabla.close();
+        } catch (Exception e) {
+            System.out.println("Error busqueda: " + e);
+        } finally {
+            this.cerrarConex();
+        }
+        return asign;
+    }
+    
 }

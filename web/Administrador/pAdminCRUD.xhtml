@@ -20,7 +20,7 @@
                             <div class="ui-g-12 ui-md-12 ui-lg-12">
                                 <h:form id="frmTabla">
                                     <div class="ui-g m-1">
-                                        <p:dataTable var="admin" value="#{controllerAdmin.listAdmin}" id="tblCl">
+                                        <p:dataTable var="admin" value="#{controllerAdmin.listAdmin}" id="tblCl"  scrollable="true" scrollHeight="300">
                                             <p:column headerText="Codigo">
                                                 <h:outputText value="#{admin.codigo}"/>
                                             </p:column>
@@ -256,7 +256,7 @@
                             <div class="ui-g-12 ui-md-12 ui-lg-12">
                                 <h:form id="frmTablaGrad">
                                     <div class="ui-g m-1">
-                                        <p:dataTable var="grad" value="#{controllerGrado.listaGrado}" id="tblGrad">
+                                        <p:dataTable var="grad" value="#{controllerGrado.listaGrado}" id="tblGrad"  scrollable="true" scrollHeight="300">
                                             <p:column headerText="Codigo">
                                                 <h:outputText value="#{grad.cod_grado}"/>
                                             </p:column>
@@ -349,7 +349,7 @@
                             <div class="ui-g-12 ui-md-12 ui-lg-12">
                                 <h:form id="frmTablaSec">
                                     <div class="ui-g m-1">
-                                        <p:dataTable var="sec" value="#{controladorSeccion.mostrarSeccion}" id="tblSec">
+                                        <p:dataTable var="sec" value="#{controladorSeccion.mostrarSeccion}" id="tblSec"  scrollable="true" scrollHeight="300">
                                             <p:column headerText="Codigo">
                                                 <h:outputText value="#{sec.codigo}"/>
                                             </p:column>
@@ -371,7 +371,7 @@
                                     </div>
                                 </h:form>
                                 <!--Cuadros de Dialogo-->
-                                <p:dialog header="Crear Grado" id="createS" widgetVar="dlgCreateS" showEffect="explode" hideEffect="none" height="150" width="600">
+                                <p:dialog header="Crear Sección" id="createS" widgetVar="dlgCreateS" showEffect="explode" hideEffect="none" height="150" width="600">
                                     <h:form>
                                         <div class="ui-g">
                                             <div class="ui-g-6 ui-md-6 ui-lg-6">
@@ -632,7 +632,7 @@
                                     </div>
                                 </h:form>
                                 <h:form id="frmTablaAC">
-                                    <p:dataTable var="asg" value="#{controllerAsigCurso.listaAsignacionCurso}" id="tblAC" widgetVar="AsC" filteredValue="#{controllerAsigCurso.filtro}">
+                                    <p:dataTable var="asg" value="#{controllerAsigCurso.listaAsignacionCurso}" id="tblAC" widgetVar="AsC" filteredValue="#{controllerAsigCurso.filtro}"  scrollable="true" scrollHeight="300">
                                         <f:facet name="header">
                                             <p:outputPanel>
                                                 <h:outputText value="Buscar:" />

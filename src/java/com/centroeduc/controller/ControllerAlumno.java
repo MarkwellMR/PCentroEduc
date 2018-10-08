@@ -39,6 +39,7 @@ public class ControllerAlumno {
         AlumnoDAO alumnodao = new AlumnoDAO();
         try {
             alumnodao.ingresarAlum(alum);
+            alumnodao.searchAlumno(alum);
             //int obtenerCodigo = alumnodao.buscarDatos();
             //int buscar codGraSecProf = grasecprof.buscarcodigo();
             // 
@@ -65,15 +66,6 @@ public class ControllerAlumno {
             System.out.println("alumno: " + alum.getNombre());
         } catch (Exception ex) {
             System.out.println("Error controlador: " + ex);
-        }
-    }
-
-    public void ultimoAlumno() {
-        AlumnoDAO dao = new AlumnoDAO();
-        try {
-            dao.ultimoAlumno();
-        } catch (Exception e) {
-            System.out.println("Error en controllerAlumno: " + e);
         }
     }
 
