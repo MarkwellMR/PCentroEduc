@@ -9,12 +9,12 @@ public class Conexion {
 
   private Connection miconexion;
   
-  private static final String URL = "jdbc:mysql://10.12.48.30:3306/centro_educativo";
-  private static final String USER = "Markwell";
-  private static final String PASSWORD = "Henry118";
-//    private static final String URL = "jdbc:mysql://localhost:3306/centro_educativo";
-//    private static final String USER = "root";
-//    private static final String PASSWORD = "";
+//  private static final String URL = "jdbc:mysql://10.12.48.30:3306/centro_educativo";
+//  private static final String USER = "Markwell";
+//  private static final String PASSWORD = "Henry118";
+    private static final String URL = "jdbc:mysql://localhost:3306/centro_educativo";
+    private static final String USER = "Markwell";
+    private static final String PASSWORD = "Markwell_MR118";
 
     public Connection getMiconexion() {
         return miconexion;

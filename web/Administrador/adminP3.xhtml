@@ -486,7 +486,6 @@
                                         </div>
                                         <div class="ui-g-12 ui-md-4 ui-lg-4">
                                             <p:outputLabel id="txtCiclo" value="2018"/>
-                                            <p:calendar id="txtDateAas" value="#{controllerAdmin.date}" pattern="yyyy" mask="true" class="w-1"/>
                                         </div>
                                         <div class="ui-g-12 ui-md-2 ui-lg-2" id="etiquetas">
                                             <p:outputLabel for="txtCodAsign" value="Codigo Asignacion:" />
@@ -495,7 +494,7 @@
                                             <p:outputLabel id="txtCodAsign" value="#{controllerAlumno.asigna.codigo}"/>
                                         </div>
                                         <div class="ui-g-12 ui-md-6 ui-lg-6">
-                                            <p:commandButton actionListener="#{controllerAlumno.saveAsign()}" value="asignar"/>
+                                            <p:commandButton actionListener="#{controllerAlumno.saveAsign()}" value="Asignar Alumno"/>
                                         </div>
                                     </div>
                                 </h:form>
