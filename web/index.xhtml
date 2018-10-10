@@ -12,10 +12,10 @@
                 <h:form id="loginAdmin">
                         <p:outputLabel for="txtUser" value="Usuario:"/>
                         <p:inputText id="txtUser" value="#{controllerAdmin.admin.email}"/>
-
+                        <br/>
                         <p:outputLabel for="txtPass" value="Contraseña"/>
                         <p:inputText id="txtPass" value="#{controllerAdmin.admin.pass}" required="true" type="password"/>
-
+                        <br/>
                         <h:column/>
                         <p:commandButton actionListener="#{controllerAdmin.autenticar()}" value="Iniciar Sesion" icon="ui-icon-key"/>
                 </h:form>
