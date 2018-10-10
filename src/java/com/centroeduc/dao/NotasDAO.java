@@ -1,8 +1,10 @@
 package com.centroeduc.dao;
 
 import com.centroeduc.model.Conexion;
+import com.centroeduc.model.Curso;
 import com.centroeduc.model.Grado;
 import com.centroeduc.model.Notas;
+import com.centroeduc.model.Seccion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -91,29 +93,86 @@ public class NotasDAO extends Conexion {
     }
 
     // Creando los dropdown menu para notas 
-  
     public ArrayList<Grado> MostrarGrado(String maestro) {
-          ArrayList<Grado> Mnotas = null;
+        ArrayList<Grado> Mnotas = null;
         try {
             this.Conectar();
-            sql = "select grado, cod_grado from notas_listas where cod_prof = ?";
+            sql = "select DISTINCT grado, cod_grado from notas_listas where cod_prof = ?";
             run = this.getMiconexion().prepareStatement(sql);
             run.setString(1, maestro);
             this.resultado = this.run.executeQuery();
-            
+
             Mnotas = new ArrayList();
-            while(resultado.next()){
-                Grado grado= new Grado();
+            while (resultado.next()) {
+                Grado grado = new Grado();
                 grado.setDescripcion(resultado.getString("grado"));
                 grado.setCod_grado(resultado.getInt("cod_grado"));
                 Mnotas.add(grado);
             }
-               resultado.close();
+            resultado.close();
         } catch (SQLException e) {
             System.out.println("Error en DAOnotas MostrarGrado: " + e);
-        }finally{
+        } finally {
             this.cerrarConex();
         }
         return Mnotas;
     }
+    //Dropdow para secciones 
+    ArrayList<Seccion> secciones = null;
+
+    public ArrayList<Seccion> MostrarSec(String codMae, int codGrad) {
+        try {
+            this.Conectar();
+            sql = "select DISTINCT cod_sec ,seccion from notas_listas where cod_prof = ? and cod_grado = ?";
+            run = this.getMiconexion().prepareStatement(sql);
+            run.setString(1, codMae);
+            run.setInt(2, codGrad);
+            this.resultado = this.run.executeQuery();
+
+            secciones = new ArrayList();
+            while (resultado.next()) {
+                Seccion sec = new Seccion();
+                sec.setCodigo(resultado.getInt("cod_sec"));
+                sec.setDescripcion(resultado.getString("seccion"));
+                secciones.add(sec);
+            }
+            resultado.close();
+        } catch (SQLException e) {
+            System.out.println("Error en DAO MostrarSec: " + e);
+        } finally {
+            this.cerrarConex();
+        }
+
+        return secciones;
+    }
+
+    ArrayList<Curso> listaCurso = null;
+
+    public ArrayList<Curso> MostrarCurso(String codMae, int codGrad, int codSec) {
+        try {
+            this.Conectar();
+            sql = "select DISTINCT cod_curso ,nombre_curso from notas_listas where cod_prof =? and cod_grado = ? and cod_sec = ?";
+            run = this.getMiconexion().prepareStatement(sql);
+            run.setString(1, codMae);
+            run.setInt(2, codGrad);
+            run.setInt(3, codSec);
+            this.resultado = this.run.executeQuery();
+
+            listaCurso = new ArrayList();
+            while (resultado.next()) {
+                Curso curso = new Curso();
+                curso.setCod(resultado.getInt("cod_curso"));
+                curso.setNombre(resultado.getString("nombre_curso"));
+                listaCurso.add(curso);
+            }
+            resultado.close();
+        } catch (SQLException e) {
+            System.out.println("Error en DAO MostrarCurso: " + e);
+        } finally {
+            this.cerrarConex();
+        }
+
+        return listaCurso;
+    }
+
 }

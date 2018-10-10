@@ -7,69 +7,31 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="content">
-        <f:event type="preRenderView" listener="#{controllerNotas.mostrarNotas()}"/>
-        <f:event type="preRenderView" listener="#{controllerAsigCurso.cargarListas()}"/>
-
-        <h:form>
-
-            <h:form id="frmAddNote">
-                <div class="ui-g-6 ui-md-6 ui-lg-6">
-                    <p:outputLabel for="lstMaestro" value="Maestro: " />
-                </div>
-                <div class="ui-g-6 ui-md-6 ui-lg-6"> 
-                    <p:selectOneMenu id="lstMaestro" value="#{controllerAsigCurso.maestro.codigo}">
-                        <f:selectItems value="#{controllerAsigCurso.listaMaestros}" var="miMaestro"  itemLabel="#{miMaestro.nombre} #{miMaestro.apellido}" itemValue="#{miMaestro.codigo}" />
-                    </p:selectOneMenu>
-                </div>                
-                <div class="ui-g-1 ui-md-1 ui-lg-1">
-                    <p:outputLabel for="lstGrado" value="Grado: " />
-                </div>
-                <div class="ui-g-2 ui-md-2 ui-lg-2">
-                    <p:selectOneMenu id="lstGrado" value="#{controllerAsigCurso.grado.cod_grado}">
-                        <f:selectItems value="#{controllerAsigCurso.listaGrado}" var="migrado"  itemLabel="#{migrado.descripcion}" itemValue="#{migrado.cod_grado}" />
-                    </p:selectOneMenu>
-                </div>
-                <div class="ui-g-1 ui-md-1 ui-lg-1">
-                    <p:outputLabel for="lstSeccion" value="Seccion: " />
-
-                </div>
-                <div class="ui-g-2 ui-md-2 ui-lg-2">
-                    <p:selectOneMenu id="lstSeccion" value="#{controllerAsigCurso.seccion.codigo}">
-                        <f:selectItems value="#{controllerAsigCurso.listaSeccion}" var="miseccion"  itemLabel="#{miseccion.descripcion}" itemValue="#{miseccion.codigo}" />
-                    </p:selectOneMenu>
-                </div>
-
-                <div class="ui-g-1 ui-md-1 ui-lg-1">
-                    <p:outputLabel for="lstCurso" value="Curso: " />
-                    <br/>
-                </div>
-
-                <div class="ui-g-12 ui-md-6 ui-lg-2">
-                    <p:selectOneMenu id="lstCurso" value="#{controllerAsigCurso.curso.cod}">
-                        <f:selectItems value="#{controllerAsigCurso.listaCurso}" var="micurso"  itemLabel="#{micurso.nombre}" itemValue="#{micurso.cod}" />
-                    </p:selectOneMenu>
-                </div>
-
-            </h:form>
-            <div class="ui-g-12 ui-md-6 ui-lg-12">
-                <h:form id="frmTabla">
-                    <p:dataTable var="notas" value="#{controllerNotas.listaNotas}" id="tblA">
-                        <p:column headerText="Codigo Nota">
-                            <h:outputText value="#{notas.codNota}"/>
-                        </p:column>
-                        <p:column headerText="Codigo Alumno Grado">
-                            <h:outputText value="#{notas.codAlumGrado}"/>
-                        </p:column>
-                        <p:column headerText="unidad">
-                            <h:outputText value="#{notas.codUnidad}"/>
-                        </p:column>
-                        <p:column headerText="Nota">
-                            <h:outputText value="#{notas.nota}"/>
-                        </p:column>
-                    </p:dataTable>
-                </h:form>
-            </div>
-        </h:form>
+        <f:event type="preRenderView" listener="#{controllerNotas.cargarMaestro()}"/>
+        
+        <h:form id="selectForm">
+            <p:selectOneMenu id="selMenProf" value="#{controllerNotas.codMae}">
+                <f:selectItems value="#{controllerNotas.listaMaestros}" var="lstMaes" itemLabel="#{lstMaes.nombre} #{lstMaes.apellido}" itemValue="#{lstMaes.codigo}"/>
+                <p:ajax listener="#{controllerNotas.ListasGrado()}" process=":selectForm:selMenProf" update=":selectForm:selMenGrad"/>
+            </p:selectOneMenu>
+            
+            <p:selectOneMenu id="selMenGrad" value="#{controllerNotas.codGrad}" >
+                <f:selectItem itemLabel="Grado"/>
+                <f:selectItems value="#{controllerNotas.listaGrado}" var="lstGrd" itemLabel="#{lstGrd.descripcion}" itemValue="#{lstGrd.cod_grado}"/> 
+                <p:ajax listener="#{controllerNotas.cargarSeccion()}" process=":selectForm:selMenGrad" update=":selectForm:selMenSec"/>
+            </p:selectOneMenu>
+            <p:selectOneMenu id="selMenSec" value="#{controllerNotas.codSec}">
+                <f:selectItem itemLabel="Seccion"/>
+                <f:selectItems value="#{controllerNotas.lstSec}" var="lstSec" itemLabel="#{lstSec.descripcion}" itemValue="#{lstSec.codigo}"/>
+                <p:ajax listener="#{controllerNotas.cargarCurso()}" process=":selectForm:selMenSec" update=":selectForm:selMenCurs"/>
+            </p:selectOneMenu>
+            
+            <p:selectOneMenu id="selMenCurs">
+                <f:selectItem itemLabel="Curso"/>
+                <f:selectItems value="#{controllerNotas.lstCurso}" var="lstCurs" itemLabel="#{lstCurs.nombre}" itemValue="#{lstCurs.cod}"/>
+            </p:selectOneMenu>
+             </h:form>
+ 
     </ui:define>
 
 </ui:composition>
