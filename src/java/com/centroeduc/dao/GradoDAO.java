@@ -34,7 +34,9 @@ public class GradoDAO extends Conexion{
             ejecutar.setInt(2, 1);
             ejecutar.executeUpdate();
             respuesta ="Registro almacenado correctamente";
+            ejecutar.close();
         } catch(SQLException ex) {
+            respuesta = "No se pudo almacenar";
             System.out.println("Error en almacenar los datos: " + ex);
         }finally{
             this.cerrarConex();
@@ -52,11 +54,11 @@ public class GradoDAO extends Conexion{
             ejecutar.setInt(2, estado.getCod_grado());
             
             ejecutar.executeUpdate();
-            respuesta ="se han acutalizado los datos correctamente";
-            
+            respuesta ="Se elimino el Registro con Exito";
+            ejecutar.close();
         }catch(SQLException ex){
-            System.out.println("Error en conexion, no se pude ejecutar el estado "+ ex);
-            respuesta = "error, no se puede cambiar el estado";
+            System.out.println("Error en EliminarGrado: "+ ex);
+            respuesta = "Error, no se puedo Eliminar";
         }finally{
             this.cerrarConex();
         }
@@ -72,10 +74,11 @@ public class GradoDAO extends Conexion{
             ejecutar.setInt(2, dato.getCod_grado());
             
             ejecutar.executeUpdate();
-            respuesta ="datos acualizados correctamente";
+            respuesta ="Datos acualizados correctamente";
+            ejecutar.close();
         }catch(SQLException ex){
-            System.out.println("error en conexion "+ ex);
-            respuesta="error en conexion, datos no se actualizaron " + ex;
+            System.out.println("Error en actualizar "+ ex);
+            respuesta="Error no se pudo Actualizar";
         }finally{
             this.cerrarConex();
         }

@@ -16,6 +16,7 @@
                 <p id="titulo">Usuario: Administrador</p>
                 <p:accordionPanel id="acordion" class="mt-1">
                     <p:tab title="Administradores">
+                        <p:growl id="growl" showDetail="true" sticky="true" />
                         <h:panelGrid columns="1" cellpadding="10">
                             <div class="ui-g-12 ui-md-12 ui-lg-12">
                                 <h:form id="frmTabla">
@@ -131,7 +132,7 @@
                                                     <p:inputText id="txtPass" value="#{controllerAdmin.admin.pass}" type="password" class="w-1"/>
                                                 </div>
                                                 <div class="ui-g-12 ui-md-6 ui-lg-6">
-                                                    <p:commandButton actionListener="#{controllerAdmin.saveAdmin()}" value="Guardar" update=":acordion:frmTabla:tblCl" oncomplete="PF('dlgCreateA').hide();" class="ml-1"/>
+                                                    <p:commandButton actionListener="#{controllerAdmin.saveAdmin()}" value="Guardar" update=":acordion:frmTabla:tblCl :acordion:growl" oncomplete="PF('dlgCreateA').hide();" class="ml-1"/>
                                                     <p:commandButton value="Cancelar" update=":acordion:frmTabla:tblCl" oncomplete="PF('dlgCreateA').hide();" class="ml-1"/>
                                                 </div>
                                             </div>
@@ -211,7 +212,7 @@
                                                 <p:outputLabel id="txtState" value="#{controllerAdmin.admin.estado}"/>
                                             </div>
                                             <div class="ui-g-12 ui-md-12 ui-lg-12">
-                                                <p:commandButton actionListener="#{controllerAdmin.updateAdmin()}" value="Actualizar" update=":acordion:frmTabla:tblCl" oncomplete="PF('dlgUpdate').hide();" class="ml-2"/>
+                                                <p:commandButton actionListener="#{controllerAdmin.updateAdmin()}" value="Actualizar" update=":acordion:frmTabla:tblCl :acordion:growl" oncomplete="PF('dlgUpdate').hide();" class="ml-2"/>
                                                 <p:commandButton value="Cancelar" update=":acordion:frmTabla:tblCl" oncomplete="PF('dlgUpdate').hide();" class="ml-1"/>
                                             </div>
                                         </div>
@@ -242,7 +243,7 @@
                                                 <p:outputLabel id="txtApellidoE" value="#{controllerAdmin.admin.apellido}"/>
                                             </div>
                                             <div class="ui-g-12 ui-md-12 ui-lg-12">
-                                                <p:commandButton actionListener="#{controllerAdmin.changeState()}" value="Eliminar" update=":acordion:frmTabla:tblCl" oncomplete="PF('dlgDelete').hide();" class="ml-1"/>
+                                                <p:commandButton actionListener="#{controllerAdmin.changeState()}" value="Eliminar" update=":acordion:frmTabla:tblCl :acordion:growl" oncomplete="PF('dlgDelete').hide();" class="ml-1"/>
                                                 <p:commandButton value="Cancelar" update=":acordion:frmTabla:tblCl" oncomplete="PF('dlgDelete').hide();" class="ml-1"/>
                                             </div>
                                         </div>
@@ -288,7 +289,7 @@
                                                 <p:inputText id="txtNameGU" value="#{controllerGrado.grado.descripcion}"/>
                                             </div>
                                             <div class="ui-g-12 ui-md-12 ui-lg-12">
-                                                <p:commandButton actionListener="#{controllerGrado.guardarGrado()}" value="Guardar" update=":acordion:frmTablaGrad:tblGrad" oncomplete="PF('dlgCreateG').hide();" class="ml-2"/>
+                                                <p:commandButton actionListener="#{controllerGrado.guardarGrado()}" value="Guardar" update=":acordion:frmTablaGrad:tblGrad :acordion:growl" oncomplete="PF('dlgCreateG').hide();" class="ml-2"/>
                                                 <p:commandButton value="Cancelar" oncomplete="PF('dlgCreateG').hide();" class="ml-1"/>
                                             </div>
                                         </div>
@@ -310,7 +311,7 @@
                                                 <p:inputText id="txtNameGrU" value="#{controllerGrado.grado.descripcion}"/>
                                             </div>
                                             <div class="ui-g-12 ui-md-12 ui-lg-12">
-                                                <p:commandButton actionListener="#{controllerGrado.actualizarDatosGrado()}" value="Actualizar" update=":acordion:frmTablaGrad:tblGrad" oncomplete="PF('dlgUpdateG').hide();" class="ml-2"/>
+                                                <p:commandButton actionListener="#{controllerGrado.actualizarDatosGrado()}" value="Actualizar" update=":acordion:frmTablaGrad:tblGrad :acordion:growl" oncomplete="PF('dlgUpdateG').hide();" class="ml-2"/>
                                                 <p:commandButton value="Cancelar" oncomplete="PF('dlgUpdateG').hide();" class="ml-1"/>
                                             </div>
                                         </div>
@@ -335,7 +336,7 @@
                                                 <p:outputLabel id="txtNameGD" value="#{controllerGrado.grado.descripcion}"/>
                                             </div>
                                             <div class="ui-g-12 ui-md-12 ui-lg-12">
-                                                <p:commandButton actionListener="#{controllerGrado.elimGrado()}" value="Eliminar" update=":acordion:frmTablaGrad:tblGrad" oncomplete="PF('dlgDeleteC').hide();" class="ml-1"/>
+                                                <p:commandButton actionListener="#{controllerGrado.elimGrado()}" value="Eliminar" update=":acordion:frmTablaGrad:tblGrad :acordion:growl" oncomplete="PF('dlgDeleteC').hide();" class="ml-1"/>
                                                 <p:commandButton value="Cancelar" oncomplete="PF('dlgDeleteG').hide();" class="ml-1"/>
                                             </div>
                                         </div>
@@ -366,7 +367,7 @@
                                             </p:column>
                                         </p:dataTable>
                                         <div class="ui-g-12 ui-md-12 ui-lg-12">
-                                            <p:commandButton value="Crear Nuevo Curso" oncomplete="PF('dlgCreateS').show();"/>
+                                            <p:commandButton value="Crear Nueva Sección" oncomplete="PF('dlgCreateS').show();"/>
                                         </div>
                                     </div>
                                 </h:form>
@@ -381,7 +382,7 @@
                                                 <p:inputText id="txtNameGU" value="#{controladorSeccion.sec.descripcion}"/>
                                             </div>
                                             <div class="ui-g-12 ui-md-12 ui-lg-12">
-                                                <p:commandButton actionListener="#{controladorSeccion.guardarSeccion()}" value="Guardar" update=":acordion:frmTablaSec:tblSec" oncomplete="PF('dlgCreateS').hide();" class="ml-2"/>
+                                                <p:commandButton actionListener="#{controladorSeccion.guardarSeccion()}" value="Guardar" update=":acordion:frmTablaSec:tblSec :acordion:growl" oncomplete="PF('dlgCreateS').hide();" class="ml-2"/>
                                                 <p:commandButton value="Cancelar" oncomplete="PF('dlgCreateS').hide();" class="ml-1"/>
                                             </div>
                                         </div>
@@ -403,7 +404,7 @@
                                                 <p:inputText id="txtNameGrU" value="#{controladorSeccion.sec.descripcion}"/>
                                             </div>
                                             <div class="ui-g-12 ui-md-12 ui-lg-12">
-                                                <p:commandButton actionListener="#{controladorSeccion.actualizarSeccion()}" value="Actualizar" update=":acordion:frmTablaSec:tblSec" oncomplete="PF('dlgUpdateS').hide();" class="ml-2"/>
+                                                <p:commandButton actionListener="#{controladorSeccion.actualizarSeccion()}" value="Actualizar" update=":acordion:frmTablaSec:tblSec :acordion:growl" oncomplete="PF('dlgUpdateS').hide();" class="ml-2"/>
                                                 <p:commandButton value="Cancelar" oncomplete="PF('dlgUpdateS').hide();" class="ml-1"/>
                                             </div>
                                         </div>
@@ -428,7 +429,7 @@
                                                 <p:outputLabel id="txtNameGD" value="#{controladorSeccion.sec.descripcion}"/>
                                             </div>
                                             <div class="ui-g-12 ui-md-12 ui-lg-12">
-                                                <p:commandButton actionListener="#{controladorSeccion.eliminarSeccion()}" value="Eliminar" update=":acordion:frmTablaSec:tblSec" oncomplete="PF('dlgDeleteS').hide();" class="ml-1"/>
+                                                <p:commandButton actionListener="#{controladorSeccion.eliminarSeccion()}" value="Eliminar" update=":acordion:frmTablaSec:tblSec :acordion:growl" oncomplete="PF('dlgDeleteS').hide();" class="ml-1"/>
                                                 <p:commandButton value="Cancelar" oncomplete="PF('dlgDeleteS').hide();" class="ml-1"/>
                                             </div>
                                         </div>
@@ -510,7 +511,7 @@
                                                 <p:inputText id="txtTelHU" value="#{controllerCurso.course.cupo}"/>
                                             </div>
                                             <div class="ui-g-12 ui-md-12 ui-lg-12">
-                                                <p:commandButton actionListener="#{controllerCurso.saveCurso()}" value="Guardar" update=":acordion:frmTablaCurs:tblCurs" oncomplete="PF('dlgCreate').hide();" class="ml-2"/>
+                                                <p:commandButton actionListener="#{controllerCurso.saveCurso()}" value="Guardar" update=":acordion:frmTablaCurs:tblCurs :acordion:growl" oncomplete="PF('dlgCreate').hide();" class="ml-2"/>
                                                 <p:commandButton value="Cancelar" oncomplete="PF('dlgCreate').hide();" class="ml-1"/>
                                             </div>
                                         </div>
@@ -559,7 +560,7 @@
                                                 <p:inputText id="txtTelHU" value="#{controllerCurso.course.cupo}"/>
                                             </div>
                                             <div class="ui-g-12 ui-md-12 ui-lg-12">
-                                                <p:commandButton actionListener="#{controllerCurso.updateCurso()}" value="Actualizar" update=":acordion:frmTablaCurs:tblCurs" oncomplete="PF('dlgUpdateC').hide();" class="ml-2"/>
+                                                <p:commandButton actionListener="#{controllerCurso.updateCurso()}" value="Actualizar" update=":acordion:frmTablaCurs:tblCurs :acordion:growl" oncomplete="PF('dlgUpdateC').hide();" class="ml-2"/>
                                                 <p:commandButton value="Cancelar" update=":acordion:frmTablaCurs:tblCurs" oncomplete="PF('dlgUpdateC').hide();" class="ml-1"/>
                                             </div>
                                         </div>
@@ -584,7 +585,7 @@
                                                 <p:outputLabel id="txtNameD" value="#{controllerCurso.course.nombre}"/>
                                             </div>
                                             <div class="ui-g-12 ui-md-12 ui-lg-12">
-                                                <p:commandButton actionListener="#{controllerCurso.deleteCurso()}" value="Eliminar" update=":acordion:frmTablaCurs:tblCurs" oncomplete="PF('dlgDeleteC').hide();" class="ml-1"/>
+                                                <p:commandButton actionListener="#{controllerCurso.deleteCurso()}" value="Eliminar" update=":acordion:frmTablaCurs:tblCurs :acordion:growl" oncomplete="PF('dlgDeleteC').hide();" class="ml-1"/>
                                                 <p:commandButton value="Cancelar" update=":acordion:frmTablaCurs:tblCurs" oncomplete="PF('dlgDeleteC').hide();" class="ml-1"/>
                                             </div>
                                         </div>
@@ -599,35 +600,44 @@
                                 <f:event type="preRenderView" listener="#{controllerAsigCurso.cargarListas()}"/>
                                 <h:form>
                                     <div class="ui-g">
-                                        <div class="ui-g-12 ui-md-6 ui-lg-3">
-                                            <p:outputLabel for="lstCurso" value="Curso: " />
-                                            <br/>
+                                        <div class="ui-g-12 ui-md-3 ui-lg-3">
                                             <p:outputLabel for="lstGrado" value="Grado: " />
                                         </div>
-                                        <div class="ui-g-12 ui-md-6 ui-lg-3">
-                                            <p:selectOneMenu id="lstCurso" value="#{controllerAsigCurso.curso.cod}">
-                                                <f:selectItems value="#{controllerAsigCurso.listaCurso}" var="micurso"  itemLabel="#{micurso.nombre}" itemValue="#{micurso.cod}" />
-                                            </p:selectOneMenu>
-                                            <br/>
+                                        <div class="ui-g-12 ui-md-3 ui-lg-3">
                                             <p:selectOneMenu id="lstGrado" value="#{controllerAsigCurso.grado.cod_grado}">
+                                                <f:selectItem itemLabel="Seleccionar Grado" itemValue="" noSelectionOption="true" />
                                                 <f:selectItems value="#{controllerAsigCurso.listaGrado}" var="migrado"  itemLabel="#{migrado.descripcion}" itemValue="#{migrado.cod_grado}" />
                                             </p:selectOneMenu>
                                         </div>
-                                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                                        <div class="ui-g-12 ui-md-3 ui-lg-3">
                                             <p:outputLabel for="lstSeccion" value="Seccion: " />
-                                            <br/>
-                                            <p:outputLabel for="lstMaestro" value="Maestro: " />
                                         </div>
-                                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                                        <div class="ui-g-12 ui-md-3 ui-lg-3">
                                             <p:selectOneMenu id="lstSeccion" value="#{controllerAsigCurso.seccion.codigo}">
+                                                <f:selectItem itemLabel="Seleccionar Seccion" itemValue="" noSelectionOption="true" />
                                                 <f:selectItems value="#{controllerAsigCurso.listaSeccion}" var="miseccion"  itemLabel="#{miseccion.descripcion}" itemValue="#{miseccion.codigo}" />
                                             </p:selectOneMenu>
-                                            <br/>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-3 ui-lg-3">
+                                            <p:outputLabel for="lstCurso" value="Curso: " />
+                                        </div>
+                                        <div class="ui-g-12 ui-md-3 ui-lg-3">
+                                            <p:selectOneMenu id="lstCurso" value="#{controllerAsigCurso.curso.cod}">
+                                                <f:selectItem itemLabel="Seleccionar Curso" itemValue="" noSelectionOption="true" />
+                                                <f:selectItems value="#{controllerAsigCurso.listaCurso}" var="micurso"  itemLabel="#{micurso.nombre}" itemValue="#{micurso.cod}" />
+                                            </p:selectOneMenu>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-3 ui-lg-3">
+                                            <p:outputLabel for="lstMaestro" value="Maestro: " />
+                                        </div>
+                                        <div class="ui-g-12 ui-md-3 ui-lg-3">
                                             <p:selectOneMenu id="lstMaestro" value="#{controllerAsigCurso.maestro.codigo}">
+                                                <f:selectItem itemLabel="Seleccionar Maestro" itemValue="" noSelectionOption="true" />
                                                 <f:selectItems value="#{controllerAsigCurso.listaMaestros}" var="miMaestro"  itemLabel="#{miMaestro.nombre} #{miMaestro.apellido}" itemValue="#{miMaestro.codigo}" />
                                             </p:selectOneMenu>
-                                            <br/>
-                                            <p:commandButton actionListener="#{controllerAsigCurso.asignarCurso()}" value="asignar" update=":acordion:frmTablaAC:tblAC"/>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                            <p:commandButton actionListener="#{controllerAsigCurso.asignarCurso()}" value="Asignar" update=":acordion:frmTablaAC:tblAC :acordion:growl" class="ml-1"/>
                                         </div>
                                     </div>
                                 </h:form>
@@ -654,8 +664,68 @@
                                         <p:column headerText="CD Maestro" filterBy="#{asg.profesor}">
                                             <h:outputText value="#{asg.profesor}"/>
                                         </p:column>
+                                        <p:column headerText="Acciones">
+                                            <p:commandLink title="Actualizar" actionListener="#{controllerAsigCurso.searchAsignacion(asg)}" oncomplete="PF('dlgUpdateAsigna').show();" update=":acordion:updateAsigna">
+                                                <img src="../resources/img/Cr.svg" id="img-2"/>
+                                            </p:commandLink>
+                                        </p:column>
                                     </p:dataTable>
                                 </h:form>
+                                <p:dialog header="Actualizar Datos" id="updateAsigna" widgetVar="dlgUpdateAsigna" showEffect="explode" hideEffect="none" height="400" width="800">
+                                    <h:form>
+                                        <div class="ui-g">
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:outputLabel for="txtCodigoB" value="Codigo:"/>
+                                            </div>
+                                            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                                                <p:outputLabel id="txtCodigoB" value="#{controllerAsigCurso.asign.codigo}"/>
+                                            </div>
+                                            <div class="ui-g-6 ui-md-6 ui-lg-6">
+                                                &nbsp;
+                                            </div>
+                                            <div class="ui-g-12 ui-md-3 ui-lg-3">
+                                                <p:outputLabel for="lstGrado" value="Grado: " />
+                                            </div>
+                                            <div class="ui-g-12 ui-md-3 ui-lg-3">
+                                                <p:selectOneMenu id="lstGrado" value="#{controllerAsigCurso.grado.cod_grado}">
+                                                    <f:selectItem itemLabel="Seleccionar Grado" itemValue="" noSelectionOption="true" />
+                                                    <f:selectItems value="#{controllerAsigCurso.listaGrado}" var="migrado"  itemLabel="#{migrado.descripcion}" itemValue="#{migrado.cod_grado}" />
+                                                </p:selectOneMenu>
+                                            </div>
+                                            <div class="ui-g-12 ui-md-3 ui-lg-3">
+                                                <p:outputLabel for="lstSeccion" value="Seccion: " />
+                                            </div>
+                                            <div class="ui-g-12 ui-md-3 ui-lg-3">
+                                                <p:selectOneMenu id="lstSeccion" value="#{controllerAsigCurso.seccion.codigo}">
+                                                    <f:selectItem itemLabel="Seleccionar Seccion" itemValue="" noSelectionOption="true" />
+                                                    <f:selectItems value="#{controllerAsigCurso.listaSeccion}" var="miseccion"  itemLabel="#{miseccion.descripcion}" itemValue="#{miseccion.codigo}" />
+                                                </p:selectOneMenu>
+                                            </div>
+                                            <div class="ui-g-12 ui-md-3 ui-lg-3">
+                                                <p:outputLabel for="lstCurso" value="Curso: " />
+                                            </div>
+                                            <div class="ui-g-12 ui-md-3 ui-lg-3">
+                                                <p:selectOneMenu id="lstCurso" value="#{controllerAsigCurso.curso.cod}">
+                                                    <f:selectItem itemLabel="Seleccionar Curso" itemValue="" noSelectionOption="true" />
+                                                    <f:selectItems value="#{controllerAsigCurso.listaCurso}" var="micurso"  itemLabel="#{micurso.nombre}" itemValue="#{micurso.cod}" />
+                                                </p:selectOneMenu>
+                                            </div>
+                                            <div class="ui-g-12 ui-md-3 ui-lg-3">
+                                                <p:outputLabel for="lstMaestro" value="Maestro: " />
+                                            </div>
+                                            <div class="ui-g-12 ui-md-3 ui-lg-3">
+                                                <p:selectOneMenu id="lstMaestro" value="#{controllerAsigCurso.maestro.codigo}">
+                                                    <f:selectItem itemLabel="Seleccionar Maestro" itemValue="" noSelectionOption="true" />
+                                                    <f:selectItems value="#{controllerAsigCurso.listaMaestros}" var="miMaestro"  itemLabel="#{miMaestro.nombre} #{miMaestro.apellido}" itemValue="#{miMaestro.codigo}" />
+                                                </p:selectOneMenu>
+                                            </div>
+                                            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                                <p:commandButton actionListener="#{controllerAsigCurso.updateAsignacion()}" value="Actualizar" update=":acordion:frmTablaAC:tblAC :acordion:growl" oncomplete="PF('dlgUpdateAsigna').hide();" class="ml-2"/>
+                                                <p:commandButton value="Cancelar" oncomplete="PF('dlgUpdateAsigna').hide();" class="ml-1"/>
+                                            </div>
+                                        </div>
+                                    </h:form>
+                                </p:dialog>
                             </div>
                         </h:panelGrid>
                     </p:tab>

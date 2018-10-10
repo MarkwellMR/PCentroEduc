@@ -3,8 +3,10 @@ package com.centroeduc.controller;
 import com.centroeduc.dao.SeccionDAO;
 import com.centroeduc.model.Seccion;
 import java.util.ArrayList;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 @ManagedBean
 @ViewScoped
@@ -13,6 +15,8 @@ public class ControladorSeccion {
 
     ArrayList<Seccion> mostrarSeccion = new ArrayList();
     Seccion sec = new Seccion();
+    
+    String mensaje = null;
 
     public Seccion getSec() {
         return sec;
@@ -36,10 +40,14 @@ public class ControladorSeccion {
     }
 
     public void guardarSeccion() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        mensaje = null;
         SeccionDAO secd = new SeccionDAO();
         try {
-            secd.insertarSeccion(sec);
+            mensaje = secd.insertarSeccion(sec);
+            context.addMessage(null, new FacesMessage(mensaje) );
         } catch (Exception e) {
+            context.addMessage(null, new FacesMessage(mensaje) );
             System.out.println("error en controlador maestro" + e);
         }
     }
@@ -54,10 +62,14 @@ public class ControladorSeccion {
     }
 
     public void actualizarSeccion() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        mensaje = null;
         SeccionDAO daos = new SeccionDAO();
         try {
-            daos.editarSeccion(sec);
+            mensaje = daos.editarSeccion(sec);
+            context.addMessage(null, new FacesMessage(mensaje) );
         } catch (Exception e) {
+            context.addMessage(null, new FacesMessage(mensaje) );
             System.out.println("error en controlador actualizar seccion" + e);
         }
     }
@@ -75,10 +87,14 @@ public class ControladorSeccion {
     }
 
     public void eliminarSeccion() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        mensaje = null;
         SeccionDAO secd = new SeccionDAO();
         try {
-            secd.eliminarSeccion(sec.getCodigo());
+            mensaje = secd.eliminarSeccion(sec.getCodigo());
+            context.addMessage(null, new FacesMessage(mensaje) );
         } catch (Exception e) {
+            context.addMessage(null, new FacesMessage(mensaje) );
             System.out.println("error en controlador eliminar" + e);
         }
     }

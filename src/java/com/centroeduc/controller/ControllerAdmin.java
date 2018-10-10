@@ -17,7 +17,9 @@ public class ControllerAdmin {
     ArrayList<Administrador> listAdmin = new ArrayList();
     AdminDAO dao = new AdminDAO();
     Administrador admin = new Administrador();
+    
     private Date date;
+    String mensaje = null;
 
     public Date getDate() {
         return date;
@@ -48,9 +50,13 @@ public class ControllerAdmin {
     }
     
     public void saveAdmin(){
+        FacesContext context = FacesContext.getCurrentInstance();
+        mensaje = null;
         try {
-            dao.registerAdmin(admin, date);
+            mensaje = dao.registerAdmin(admin, date);
+            context.addMessage(null, new FacesMessage(mensaje) );
         } catch (Exception e) {
+            context.addMessage(null, new FacesMessage(mensaje) );
             System.out.println("Error ControllerAdmin(save): " + e);
         }
     }
@@ -63,18 +69,25 @@ public class ControllerAdmin {
         }
     }
     public void updateAdmin(){
-        
+        FacesContext context = FacesContext.getCurrentInstance();
+        mensaje = null;
         try {
-            dao.updateAdmin(admin, date);
+            mensaje = dao.updateAdmin(admin, date);
+            context.addMessage(null, new FacesMessage(mensaje) );
         } catch (Exception e) {
+            context.addMessage(null, new FacesMessage(mensaje) );
             System.out.println("Error ControllerAdmin(update): " + e);
         }
     }
     
     public void changeState(){
+        FacesContext context = FacesContext.getCurrentInstance();
+        mensaje = null;
         try {
-            dao.changeState(admin);
+            mensaje = dao.changeState(admin);
+            context.addMessage(null, new FacesMessage(mensaje) );
         } catch (Exception e) {
+            context.addMessage(null, new FacesMessage(mensaje) );
             System.out.println("Error ControllerAdmin(change): " + e);
         }
 }

@@ -19,6 +19,7 @@
                 <p id="titulo">Usuario:Secretaria</p>
                 <p:accordionPanel id="acordion" class="mt-1">
                     <p:tab title="Secretarias">
+                        <p:growl id="growl" showDetail="true" sticky="true" />
                         <h:panelGrid columns="1" cellpadding="10">
                             <div class="ui-g-12 ui-md-12 ui-lg-12">
                                 <h:form id="frmTabla">
@@ -143,7 +144,7 @@
                                                     <p:inputText type="password" id="txtPass" value="#{controllerSecre.secre.pass}" class="w-1"/>
                                                 </div>
                                                 <div class="ui-g-12 ui-md-6 ui-lg-6">
-                                                    <p:commandButton actionListener="#{controllerSecre.guardarSecre()}" value="Guardar Datos" update=":acordion:frmTabla:tblSecre" oncomplete="PF('dlgCreateS').hide();" class="ml-1"/>
+                                                    <p:commandButton actionListener="#{controllerSecre.guardarSecre()}" value="Guardar Datos" update=":acordion:frmTabla:tblSecre :acordion:growl" oncomplete="PF('dlgCreateS').hide();" class="ml-1"/>
                                                     <p:commandButton value="Cancelar" update=":acordion:frmTabla:tblSecre" oncomplete="PF('dlgCreateS').hide();" class="ml-1"/>
                                                 </div> 
                                             </div>
@@ -217,27 +218,41 @@
                                                 <p:inputText type="password" id="txtPasswordB" value="#{controllerSecre.secre.pass}"/>
                                             </div>
                                             <div class="ui-g-12 ui-md-12 ui-lg-12">
-                                                <p:commandButton actionListener="#{controllerSecre.editarSecre()}" value="Actualizar" update=":acordion:frmTabla:tblSecre" oncomplete="PF('dlgUpdate').hide();" class="ml-2"/>
+                                                <p:commandButton actionListener="#{controllerSecre.editarSecre()}" value="Actualizar" update=":acordion:frmTabla:tblSecre :acordion:growl" oncomplete="PF('dlgUpdate').hide();" class="ml-2"/>
                                                 <p:commandButton value="Cancelar" update=":acordion:frmTabla:tblSecre" oncomplete="PF('dlgUpdate').hide();" class="ml-1"/>
                                             </div>
                                         </div>
                                     </h:form>
                                 </p:dialog>
-                                <p:dialog header="Eliminar Secretaria" id="delete" widgetVar="dlgDelete" showEffect="explode" hideEffect="none" height="400" width="500">
+                                <p:dialog header="Eliminar Secretaria" id="delete" widgetVar="dlgDelete" showEffect="explode" hideEffect="none" height="250" width="300">
                                     <h:form>
-                                        <h:outputText value="¿Esta seguro que desea Eliminarlo?"/>
-                                        <br/><br/>
-                                        <p:outputLabel for="txtCodeE" value="Codigo:"/>
-                                        <p:outputLabel id="txtCodeE" value="#{controllerSecre.secre.codigo}"/>
-                                        <br/>
-                                        <p:outputLabel for="txtNameE" value="Nombre:"/>
-                                        <p:outputLabel id="txtNameE" value="#{controllerSecre.secre.nombre}"/>
-                                        <br/>
-                                        <p:outputLabel for="txtApellidoE" value="Apellido:"/>
-                                        <p:outputLabel id="txtApellidoE" value="#{controllerSecre.secre.apellido}"/>
-                                        <br/>
-                                        <p:commandButton actionListener="#{controllerSecre.estado()}" value="Eliminar" update=":acordion:frmTabla:tblSecre" oncomplete="PF('dlgDelete').hide();"/>
-                                        <p:commandButton value="Cancelar" update=":acordion:frmTabla:tblSecre" oncomplete="PF('dlgDelete').hide();"/>
+                                        <div class="ui-g">
+                                            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                                <h:outputText value="¿Esta seguro que desea Eliminarlo?"/>
+                                            </div>
+                                            <div class="ui-g-6 ui-md-6 ui-lg-6">
+                                                <p:outputLabel for="txtCodeE" value="Codigo:"/>
+                                            </div>
+                                            <div class="ui-g-6 ui-md-6 ui-lg-6">
+                                                <p:outputLabel id="txtCodeE" value="#{controllerSecre.secre.codigo}"/>
+                                            </div>
+                                            <div class="ui-g-6 ui-md-6 ui-lg-6">
+                                                <p:outputLabel for="txtNameE" value="Nombre:"/>
+                                            </div>
+                                            <div class="ui-g-6 ui-md-6 ui-lg-6">
+                                                <p:outputLabel id="txtNameE" value="#{controllerSecre.secre.nombre}"/>
+                                            </div>
+                                            <div class="ui-g-6 ui-md-6 ui-lg-6">
+                                                <p:outputLabel for="txtApellidoE" value="Apellido:"/>
+                                            </div>
+                                            <div class="ui-g-6 ui-md-6 ui-lg-6">
+                                                <p:outputLabel id="txtApellidoE" value="#{controllerSecre.secre.apellido}"/>
+                                            </div>
+                                            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                                <p:commandButton actionListener="#{controllerSecre.estado()}" value="Eliminar" update=":acordion:frmTabla:tblSecre :acordion:growl" oncomplete="PF('dlgDelete').hide();" class="ml-1"/>
+                                                <p:commandButton value="Cancelar" update=":acordion:frmTabla:tblSecre" oncomplete="PF('dlgDelete').hide();" class="ml-1"/>
+                                            </div>
+                                        </div>
                                     </h:form>
                                 </p:dialog>
                             </div>
@@ -346,27 +361,42 @@
                                                 <p:outputLabel id="txtStateU" value="#{controllerAlumno.alum.estado}"/>
                                             </div>
                                             <div class="ui-g-12 ui-md-12 ui-lg-12">
-                                                <p:commandButton actionListener="#{controllerAlumno.actualizarDatosAlumno()}" value="Actualizar" update=":acordion:frmTablaAlumn:tblAlumn" oncomplete="PF('dlgUpdateAlumn').hide();" class="ml-2"/>
+                                                <p:commandButton actionListener="#{controllerAlumno.actualizarDatosAlumno()}" value="Actualizar" update=":acordion:frmTablaAlumn:tblAlumn :acordion:growl" oncomplete="PF('dlgUpdateAlumn').hide();" class="ml-2"/>
                                                 <p:commandButton value="Cancelar" update=":acordion:frmTablaAlumn:tblAlumn" oncomplete="PF('dlgUpdateAlumn').hide();" class="ml-1"/>
                                             </div>
                                         </div>
                                     </h:form>
                                 </p:dialog>
-                                <p:dialog header="Eliminar Alumno" id="deleteAlumn" widgetVar="dlgDeleteAlumn" showEffect="explode" hideEffect="none" height="400" width="500">
+                                <p:dialog header="Eliminar Alumno" id="deleteAlumn" widgetVar="dlgDeleteAlumn" showEffect="explode" hideEffect="none" height="250" width="300">
                                     <h:form>
-                                        <h:outputText value="¿Esta seguro que desea Eliminarlo?"/>
-                                        <br/><br/>
-                                        <p:outputLabel for="txtCodeD" value="Codigo:"/>
-                                        <p:outputLabel id="txtCodeD" value="#{controllerAlumno.alum.codAlumno}"/>
-                                        <br/>
-                                        <p:outputLabel for="txtNameD" value="Nombre:"/>
-                                        <p:outputLabel id="txtNameD" value="#{controllerAlumno.alum.nombre}"/>
-                                        <br/>
-                                        <p:outputLabel for="txtApellidoD" value="Apellido:"/>
-                                        <p:outputLabel id="txtApellidoD" value="#{controllerAlumno.alum.apellido}"/>
-                                        <br/>
-                                        <p:commandButton actionListener="#{controllerAlumno.cambioEstado()}" value="Eliminar" update=":acordion:frmTablaAlumn:tblAlumn" oncomplete="PF('dlgDeleteAlumn').hide();"/>
-                                        <p:commandButton value="Cancelar" update=":acordion:frmTablaAlumn:tblAlumn" oncomplete="PF('dlgDeleteAlumn').hide();"/>
+                                        <div class="ui-g">
+                                            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                                <h:outputText value="¿Esta seguro que desea Eliminarlo?"/>
+                                            </div>
+                                            <div class="ui-g-6 ui-md-6 ui-lg-6">
+                                                <p:outputLabel for="txtCodeE" value="Codigo:"/>
+                                            </div>
+                                            <div class="ui-g-6 ui-md-6 ui-lg-6">
+                                                <p:outputLabel id="txtCodeE" value="#{controllerAlumno.alum.codAlumno}"/>
+                                            </div>
+                                            <div class="ui-g-6 ui-md-6 ui-lg-6">
+                                                <p:outputLabel for="txtNameE" value="Nombre:"/>
+                                            </div>
+                                            <div class="ui-g-6 ui-md-6 ui-lg-6">
+                                                <p:outputLabel id="txtNameE" value="#{controllerAlumno.alum.nombre}"/>
+                                            </div>
+                                            <div class="ui-g-6 ui-md-6 ui-lg-6">
+                                                <p:outputLabel for="txtApellidoE" value="Apellido:"/>
+                                            </div>
+                                            <div class="ui-g-6 ui-md-6 ui-lg-6">
+                                                <p:outputLabel id="txtApellidoE" value="#{controllerAlumno.alum.apellido}"/>
+                                            </div>
+                                            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                                <p:commandButton actionListener="#{controllerAlumno.cambioEstado()}" value="Eliminar" update=":acordion:frmTablaAlumn:tblAlumn :acordion:growl" oncomplete="PF('dlgDeleteAlumn').hide();" class="ml-1"/>
+                                                <p:commandButton value="Cancelar" update=":acordion:frmTablaAlumn:tblAlumn" oncomplete="PF('dlgDeleteAlumn').hide();" class="ml-1"/>
+                                            </div>
+                                        </div>
+
                                     </h:form>
                                 </p:dialog>
                             </div>
@@ -445,6 +475,7 @@
                                         </div>
                                         <div class="ui-g-12 ui-md-4 ui-lg-4">
                                             <p:selectOneMenu id="lstGrado" value="#{controllerAlumno.grado.cod_grado}">
+                                                <f:selectItem itemLabel="Seleccionar Grado" itemValue="" noSelectionOption="true" />
                                                 <f:selectItems value="#{controllerAlumno.listaGrado}" var="migrado"  itemLabel="#{migrado.descripcion}" itemValue="#{migrado.cod_grado}" />
                                             </p:selectOneMenu>
                                         </div>
@@ -453,11 +484,12 @@
                                         </div>
                                         <div class="ui-g-12 ui-md-4 ui-lg-4">
                                             <p:selectOneMenu id="lstSeccion" value="#{controllerAlumno.sec.codigo}">
+                                                <f:selectItem itemLabel="Seleccionar Seccion" itemValue="" noSelectionOption="true" />
                                                 <f:selectItems value="#{controllerAlumno.listaSeccion}" var="misec"  itemLabel="#{misec.descripcion}" itemValue="#{misec.codigo}" />
                                             </p:selectOneMenu>
                                         </div>
                                         <div class="ui-g-12 ui-md-6 ui-lg-6">
-                                            <p:commandButton actionListener="#{controllerAlumno.guardarAlumno()}" value="Guardar Datos" update=":acordion:frmTablaAlumn:tblAlumn :acordion:frmAsignar" class="ml-1"/>
+                                            <p:commandButton actionListener="#{controllerAlumno.guardarAlumno()}" value="Guardar Datos" update=":acordion:frmTablaAlumn:tblAlumn :acordion:frmAsignar :acordion:growl" class="ml-1"/>
                                         </div> 
                                         <div class="ui-g-6 ui-md-6 ui-lg-6">
                                             &nbsp;
@@ -494,7 +526,7 @@
                                             <p:outputLabel id="txtCodAsign" value="#{controllerAlumno.asigna.codigo}"/>
                                         </div>
                                         <div class="ui-g-12 ui-md-6 ui-lg-6">
-                                            <p:commandButton actionListener="#{controllerAlumno.saveAsign()}" value="Asignar Alumno"/>
+                                            <p:commandButton actionListener="#{controllerAlumno.saveAsign()}" value="Asignar Alumno" update=":acordion:growl"/>
                                         </div>
                                     </div>
                                 </h:form>
@@ -607,7 +639,7 @@
                                                 <p:inputText id="txtCsecre" value="#{controllerEnc.sec.codigo}"/>
                                             </div>
                                             <div class="ui-g-12 ui-md-12 ui-lg-12">
-                                                <p:commandButton actionListener="#{controllerEnc.guardarEnc()}" value="Guardar" oncomplete="PF('dlgCreateEnc').hide();" update=":acordion:frmTablaEnc:tblEnc"/>
+                                                <p:commandButton actionListener="#{controllerEnc.guardarEnc()}" value="Guardar" oncomplete="PF('dlgCreateEnc').hide();" update=":acordion:frmTablaEnc:tblEnc :acordion:growl"/>
                                             </div>
                                         </div>
                                     </h:form>
@@ -673,7 +705,7 @@
                                                 <p:outputLabel id="txtStateX" value="#{controllerEnc.enc.estado}"/>
                                             </div>
                                             <div class="ui-g-12 ui-md-12 ui-lg-12">
-                                                <p:commandButton actionListener="#{controllerEnc.updEnc()}" value="Actualizar" update=":acordion:frmTablaEnc:tblEnc" oncomplete="PF('dlgUpdateEnc').hide();" class="ml-2"/>
+                                                <p:commandButton actionListener="#{controllerEnc.updEnc()}" value="Actualizar" update=":acordion:frmTablaEnc:tblEnc :acordion:growl" oncomplete="PF('dlgUpdateEnc').hide();" class="ml-2"/>
                                                 <p:commandButton value="Cancelar" update=":acordion:frmTablaEnc:tblEnc" oncomplete="PF('dlgUpdateEnc').hide();" class="ml-1"/>
                                             </div>
                                         </div>
@@ -692,7 +724,7 @@
                                         <p:outputLabel for="txtApellidoD" value="Apellido:"/>
                                         <p:outputLabel id="txtApellidoD" value="#{controllerEnc.enc.apellido}"/>
                                         <br/>
-                                        <p:commandButton actionListener="#{controllerAlumno.cambioEstado()}" value="Eliminar" update=":acordion:frmTablaEnc:tblEnc" oncomplete="PF('dlgDeleteEnc').hide();"/>
+                                        <p:commandButton actionListener="#{controllerAlumno.cambioEstado()}" value="Eliminar" update=":acordion:frmTablaEnc:tblEnc :acordion:growl" oncomplete="PF('dlgDeleteEnc').hide();"/>
                                         <p:commandButton value="Cancelar" update=":acordion:frmTablaEnc:tblEnc" oncomplete="PF('dlgDeleteEnc').hide();"/>
                                     </h:form>
                                 </p:dialog>

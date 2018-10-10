@@ -9,8 +9,10 @@ import com.centroeduc.model.Grado;
 import com.centroeduc.model.Seccion;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 @ManagedBean
 @ViewScoped
@@ -26,6 +28,7 @@ public class ControllerAlumno {
     AsignacionGSCP asigna = new AsignacionGSCP();
 
     private Date date;
+    String mensaje = null;
 
     public Date getDate() {
         return date;
@@ -101,18 +104,20 @@ public class ControllerAlumno {
     }
 
     public void guardarAlumno() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        mensaje = null;
         AlumnoDAO alumnodao = new AlumnoDAO();
         try {
             Alumno alumno = new Alumno();
             AsignacionGSCP asign = new AsignacionGSCP();
-            alumnodao.ingresarAlum(alum, date);
+             mensaje = alumnodao.ingresarAlum(alum, date);
             alumno = alumnodao.searchAlumno(alum);
             alum = alumno;
             asign = alumnodao.searchAsignacion(grado, sec);
             asigna = asign;
-            //int obtenerCodigo = alumnodao.buscarDatos();
-            //int buscar codGraSecProf = grasecprof.buscarcodigo();
+            context.addMessage(null, new FacesMessage(mensaje) );
         } catch (Exception e) {
+            context.addMessage(null, new FacesMessage(mensaje) );
             System.out.println("Error en el controlador de guardar alumno" + e);
         }
     }
@@ -132,35 +137,46 @@ public class ControllerAlumno {
             Alumno provisional = new Alumno();
             provisional = alum1.busquedaDatos(alum.getCodAlumno());
             alum = provisional;
-            System.out.println("alumno: " + alum.getNombre());
         } catch (Exception ex) {
             System.out.println("Error controlador: " + ex);
         }
     }
 
     public void actualizarDatosAlumno() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        mensaje = null;
         AlumnoDAO alumdao = new AlumnoDAO();
         try {
-            alumdao.modificarAlumno(alum, date);
+            mensaje = alumdao.modificarAlumno(alum, date);
+            context.addMessage(null, new FacesMessage(mensaje) );
         } catch (Exception e) {
+            context.addMessage(null, new FacesMessage(mensaje) );
             System.out.println("Error controlador actualizar Alumno" + e);
         }
     }
 
     public void cambioEstado() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        mensaje = null;
         AlumnoDAO alumn = new AlumnoDAO();
         try {
-            alumn.estadoAlumno(alum);
+            mensaje = alumn.estadoAlumno(alum);
+            context.addMessage(null, new FacesMessage(mensaje) );
         } catch (Exception e) {
+            context.addMessage(null, new FacesMessage(mensaje) );
             System.out.println("error en el controlador de cambio de estado" + e);
         }
     }
 
     public void saveAsign() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        mensaje = null;
         AlumnoDAO dao = new AlumnoDAO();
         try {
-            dao.nuevaAsign(alum, asigna);
+            mensaje = dao.nuevaAsign(alum, asigna);
+            context.addMessage(null, new FacesMessage(mensaje) );
         } catch (Exception e) {
+            context.addMessage(null, new FacesMessage(mensaje) );
             System.out.println("Error en saveAsign: " + e);
         }
     }

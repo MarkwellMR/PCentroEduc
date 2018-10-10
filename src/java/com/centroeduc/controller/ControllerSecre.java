@@ -6,8 +6,10 @@ import com.centroeduc.model.Administrador;
 import com.centroeduc.model.Secretaria;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import org.primefaces.event.ToggleEvent;
 
@@ -23,6 +25,7 @@ public class ControllerSecre {
 
     AdminDAO adminDao = new AdminDAO();
     private Date date;
+    String mensaje = null;
 
     public Date getDate() {
         return date;
@@ -64,16 +67,16 @@ public class ControllerSecre {
 
     /*INGRESO CLIENTE*/
     public void guardarSecre() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        mensaje = null;
         SecreDao secretariaDao = new SecreDao();
         Administrador admin = new Administrador();
         admin.setCodigo("A0001");
         try {
-            System.out.println("CONTROLADOR: ");
-            System.out.println(secre.toString());
-            secretariaDao.nuevaSecretaria(secre, admin, date);
-            System.out.println("LLEGO AL CONTROLADOR CLIENTE");
-
+            mensaje = secretariaDao.nuevaSecretaria(secre, admin, date);
+            context.addMessage(null, new FacesMessage(mensaje) );
         } catch (Exception e) {
+            context.addMessage(null, new FacesMessage(mensaje) );
             System.out.println("Error EN CONTROLADORSECRE:" + e);
         }
     }
@@ -88,18 +91,25 @@ public class ControllerSecre {
     }
 
     public void editarSecre() {
-
+        FacesContext context = FacesContext.getCurrentInstance();
+        mensaje = null;
         try {
-            secretariaDao.editarSecretaria(secre, date);
+            mensaje = secretariaDao.editarSecretaria(secre, date);
+            context.addMessage(null, new FacesMessage(mensaje) );
         } catch (Exception e) {
+            context.addMessage(null, new FacesMessage(mensaje) );
             System.out.println("Error en Actualizar, ControladoCliente" + e);
         }
     }
 
     public void estado() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        mensaje = null;
         try {
-            secretariaDao.estado(secre);
+            mensaje = secretariaDao.estado(secre);
+            context.addMessage(null, new FacesMessage(mensaje) );
         } catch (Exception e) {
+            context.addMessage(null, new FacesMessage(mensaje) );
             System.out.println("Errr en Cambio de Estado,Controlador Estado");
         }
 

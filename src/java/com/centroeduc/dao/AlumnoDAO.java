@@ -53,7 +53,8 @@ public class AlumnoDAO extends Conexion {
             respuesta = "Registro almacenado con Exito";
 
         } catch (SQLException ex) {
-            respuesta = "Error al almacenar los datos" + ex;
+            respuesta = "Error al almacenar los datos";
+            System.out.println("Error ingresarAlum: " + ex);
 
         } finally {
             this.cerrarConex();
@@ -71,12 +72,12 @@ public class AlumnoDAO extends Conexion {
             ejecutar.setInt(2, estado.getCodAlumno());
 
             ejecutar.executeUpdate();
-            respuesta = "Se han actualizado los datos correctamente";
+            respuesta = "Se ha eliminado exitosamente";
 
         } catch (SQLException ex) {
             //Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Error en Conexion: " + ex);
-            respuesta = "Error, no se puede cambiar el estado del registro";
+            respuesta = "Error, no se pudo eliminar el registro";
         }
         return respuesta;
     }
@@ -103,7 +104,7 @@ public class AlumnoDAO extends Conexion {
             respuesta = "Datos actualizados correctamente";
         } catch (SQLException ex) {
             System.out.println("error en conexion" + ex);
-            respuesta = "error en conexion, datos no se actualizaron" + ex;
+            respuesta = "No se pudo actualizar";
         } finally {
             this.cerrarConex();
         }
@@ -257,6 +258,7 @@ public class AlumnoDAO extends Conexion {
             System.out.println("Codigo alumno: " + dato.getCodAlumno() + "," + "Codigo Asignacion: " + asign.getCodigo());
             this.ejecutar.close();
         } catch (SQLException e) {
+            respuesta = "No se pudo asignar";
             System.out.println("Error al Asignar(nuevaAsign): " + e);
         }finally{
             this.cerrarConex();

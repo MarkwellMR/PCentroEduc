@@ -41,10 +41,10 @@ public class EncargadoDAO extends Conexion {
             run.setString(10,secre.getCodigo() );
             
             run.executeUpdate();
-            answer = "Dato almacenado";
+            answer = "Registro almacenado";
         } catch (SQLException e) {
-            answer = "dato no guardado" + e;
-            System.out.println("error "+e);
+            answer = "Error, no se pudo almacenar el Registro";
+            System.out.println("Error al guardarEnc: " + e);
         } finally {
             this.cerrarConex();
         }
@@ -123,8 +123,8 @@ public class EncargadoDAO extends Conexion {
             answer = "Registro Actualizado";
 
         } catch (SQLException ex) {
-            System.out.println("Error en conexion " + ex);
-            answer = "error en conexion " + ex;
+            System.out.println("Error al actualizar registro: " + ex);
+            answer = "No se pudo actualizar el Registro";
         } finally {
             this.cerrarConex();
         }
@@ -170,12 +170,12 @@ public class EncargadoDAO extends Conexion {
             run = this.getMiconexion().prepareStatement(sql);
              run.setInt(1, codigo);
              run.executeUpdate();
-             answer = "registro eliminado exitosamente";
+             answer = "Registro eliminado exitosamente";
              
              run.close();    
         } catch (SQLException e) {
-            answer = "No se pudo actualizar ";
-            System.out.println("Error en actualizar " + e);
+            answer = "No se pudo eliminar";
+            System.out.println("Error en cambioEstdao: " + e);
         }finally{
             this.cerrarConex();
            

@@ -4,8 +4,10 @@ import com.centroeduc.dao.MaestroDAO;
 import com.centroeduc.model.Maestro;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 @ManagedBean
 @ViewScoped
@@ -16,6 +18,7 @@ public class ControladorMaestro {
     Maestro maes = new Maestro();
     
     private Date date;
+    String mensaje = null;
 
     public Date getDate() {
         return date;
@@ -47,10 +50,14 @@ public class ControladorMaestro {
     }
 
     public void guardarMaestro() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        mensaje = null;
         MaestroDAO daou = new MaestroDAO();
         try {
-            daou.insertarMaestro(maes, date);
+            mensaje = daou.insertarMaestro(maes, date);
+            context.addMessage(null, new FacesMessage(mensaje) );
         } catch (Exception e) {
+            context.addMessage(null, new FacesMessage(mensaje) );
             System.out.println("error en controlador maestro" + e);
         }
     }
@@ -65,10 +72,14 @@ public class ControladorMaestro {
     }
 
     public void actualizarMaestro() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        mensaje = null;
         MaestroDAO dao = new MaestroDAO();
         try {
-            dao.editarMaestro(maes, date);
+            mensaje = dao.editarMaestro(maes, date);
+            context.addMessage(null, new FacesMessage(mensaje) );
         } catch (Exception e) {
+            context.addMessage(null, new FacesMessage(mensaje) );
             System.out.println("Error en el controlador de actualizar Mestro" + e);
         }
     }
@@ -86,10 +97,14 @@ public class ControladorMaestro {
     }
 
     public void elEstado() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        mensaje = null;
         MaestroDAO maest = new MaestroDAO();
         try {
-            maest.estadoMaestro(maes);
+            mensaje = maest.estadoMaestro(maes);
+            context.addMessage(null, new FacesMessage(mensaje) );
         } catch (Exception e) {
+            context.addMessage(null, new FacesMessage(mensaje) );
             System.out.println("error en controlador estado" + e);
         }
     }

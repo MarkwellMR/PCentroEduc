@@ -6,8 +6,10 @@ import com.centroeduc.model.Secretaria;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 @ManagedBean
 @ViewScoped
@@ -21,6 +23,7 @@ public class ControllerEnc implements Serializable {
     ArrayList<Encargado> listaBusEnc = new ArrayList();
 
     private Date date;
+    String mensaje = null;
 
     public Date getDate() {
         return date;
@@ -88,10 +91,13 @@ public class ControllerEnc implements Serializable {
     }
 
     public void guardarEnc() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        mensaje = null;
         try {
-            encdao.nuevoEncargado(enc, sec, date);
-
+            mensaje = encdao.nuevoEncargado(enc, sec, date);
+            context.addMessage(null, new FacesMessage(mensaje) );
         } catch (Exception e) {
+            context.addMessage(null, new FacesMessage(mensaje) );
             System.out.println("Error en Guardar " + e);
         }
     }
@@ -107,18 +113,26 @@ public class ControllerEnc implements Serializable {
     }
 
     public void updEnc() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        mensaje = null;
         try {
-            encdao.UpEnc(enc, date);
+            mensaje = encdao.UpEnc(enc, date);
+            context.addMessage(null, new FacesMessage(mensaje) );
         } catch (Exception e) {
+            context.addMessage(null, new FacesMessage(mensaje) );
             System.out.println("Error en Actualizar " + e);
         }
     }
 
     public void deleteEnc() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        mensaje = null;
         try {
-            encdao.cambioEstado(enc.getCodEnc());
+            mensaje = encdao.cambioEstado(enc.getCodEnc());
+            context.addMessage(null, new FacesMessage(mensaje) );
         } catch (Exception e) {
-
+            context.addMessage(null, new FacesMessage(mensaje) );
+            System.out.println("Erroe en DeleteEnc: " + e);
         }
     }
 }

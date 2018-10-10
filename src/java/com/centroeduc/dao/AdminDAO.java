@@ -113,10 +113,11 @@ public class AdminDAO extends Conexion{
             
             ejecutar.executeUpdate();
             respuesta = "Datos modificados con exito";
+            this.ejecutar.close();
             
         } catch (SQLException ex) {
             System.out.println("Error en AdminDAO(modificar): " + ex);
-            respuesta="No se pudo modificar";
+            respuesta="No se pudo modificar el Registro";
         } finally{
             this.cerrarConex();
         }
@@ -203,11 +204,11 @@ public class AdminDAO extends Conexion{
             
             
             ejecutar.executeUpdate();
-            respuesta = "Se dio de Baja con Exito";
+            respuesta = "Administrador eliminado con Exito";
             ejecutar.close();
         } catch (SQLException ex) {
             System.out.println("Error en AdminDAO(changeState): " + ex);
-            respuesta="No se pudo dar de Baja";
+            respuesta="No se pudo eliminar";
         } finally{
             this.cerrarConex();
         }

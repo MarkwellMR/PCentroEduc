@@ -26,10 +26,12 @@ public class SeccionDAO extends Conexion {
             ejecutar.setString(1, sec.getDescripcion());
 
             ejecutar.executeUpdate();
-            ingreso = "datos almacenados";
+            ingreso = "Datos almacenados exitosamente";
+            ejecutar.close();
 
         } catch (SQLException ex) {
-            ingreso = "error al almacenar los datos";
+            ingreso = "Error al almacenar el registro";
+            System.out.println("Error al guardarSeccion: " + ex);
 
         } finally {
             this.cerrarConex();
@@ -75,11 +77,12 @@ public class SeccionDAO extends Conexion {
             ejecutar.setInt(2, sec.getCodigo());
 
             ejecutar.executeUpdate();
-            ingreso = "dato editados exitosamente";
+            ingreso = "Dato actualizados exitosamente";
+            ejecutar.close();
 
         } catch (SQLException ex) {
-            System.out.println("error al editar los datos" + ex);
-            ingreso = "no se puede modificar";
+            System.out.println("error en editarSecion: " + ex);
+            ingreso = "No se pudo actualizar";
 
         } finally {
             this.cerrarConex();
@@ -120,11 +123,11 @@ public class SeccionDAO extends Conexion {
             ejecutar = this.getMiconexion().prepareStatement(sql);
             ejecutar.setInt(1, Codigo);
             ejecutar.executeUpdate();
-            ingreso = "regristro eliminado";
+            ingreso = "Registro eliminado exitosamente";
 
         } catch (SQLException ex) {
-            System.out.println("error en conexion: " + ex);
-            ingreso = "error, no se puede eliminar el registro";
+            System.out.println("error en eliminarSecion: " + ex);
+            ingreso = "Error, No se puedo eliminar el registro";
         }
         return ingreso;
     }

@@ -32,10 +32,9 @@ public class CursoDAO extends Conexion {
 
             run.executeUpdate();
 
-            answer = "Curso Almacenado";
+            answer = "Curso Almacenado exitosamente";
 
             run.close();
-            values.close();
         } catch (SQLException e) {
             System.out.println("Error CursoDAO(almacenar): " + e);
             answer = "No se pudo Almacenar el Curso";
@@ -91,12 +90,12 @@ public class CursoDAO extends Conexion {
             run.setInt(6, courso.getCod());
 
             run.executeUpdate();
-            answer = "Curso actualizado";
+            answer = "Curso actualizado exitosamente";
 
             run.close();
         } catch (SQLException e) {
             System.out.println("Error en CursoDAO(update): " + e);
-            answer = "No se pudo modificar";
+            answer = "No se pudo actualizar";
         } finally {
             this.cerrarConex();
         }
@@ -193,8 +192,8 @@ public class CursoDAO extends Conexion {
                 course.setEstado(this.values.getInt("estado"));
                 list.add(course);
             }
-
-            
+            run.close();
+            this.values.close();
         } catch (SQLException e) {
             System.out.println("Error en CursoDAO(Lista Nombre): " + e);
         } finally {

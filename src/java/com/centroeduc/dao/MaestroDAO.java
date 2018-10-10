@@ -40,11 +40,12 @@ public class MaestroDAO extends Conexion {
             ejecutar.setInt(12, 1);
 
             ejecutar.executeUpdate();
-            ingreso = "datos almacenados exitosamente";
+            ingreso = "Datos almacenados exitosamente";
 
         } catch (SQLException ex) {
 
-            ingreso = "Error al almacenar los datos" + ex;
+            ingreso = "Error al almacenar los datos";
+            System.out.println("Error Guardar Maestro: " + ex);
 
         } finally {
             this.cerrarConex();
@@ -127,12 +128,11 @@ public class MaestroDAO extends Conexion {
             ejecutar.setString(9, maes.getPass());
             ejecutar.setString(10, maes.getCodigo());
             ejecutar.executeUpdate();
-            ingreso = "datos editados exitosamente";
+            ingreso = "Datos editados exitosamente";
 
         } catch (SQLException ex) {
-
             System.out.println("Error al editar los datos" + ex);
-            ingreso = "no se puede modificar";
+            ingreso = "No se puede modificar";
 
         } finally {
             this.cerrarConex();
@@ -190,11 +190,13 @@ public class MaestroDAO extends Conexion {
             ejecutar.setString(2, maes.getCodigo());
 
             ejecutar.executeUpdate();
-            ingreso = "se han actualizado los datos correctamente";
-
+            ingreso = "Se ha eliminado exitosamente";
+            ejecutar.close();
         } catch (SQLException ex) {
             System.out.println("error en conexion" + ex);
-            ingreso = "error, no se puede cambiar el estado del registro";
+            ingreso = "No se pudo eliminar";
+        } finally {
+            this.cerrarConex();
         }
         return ingreso;
     }

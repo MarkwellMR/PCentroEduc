@@ -97,16 +97,17 @@ public class AsignGSCPDAO extends Conexion {
         return lista;
     }
 
-    public String updateAsing(int cdSeccion, int cdCurso, String cdMeastro, int cdGrado) {
+    public String updateAsing(int cdGrado, int cdSeccion, int cdCurso,String cdMeastro, int codasig) {
         answer = null;
         try {
             this.Conectar();
-            sql = "update cursgradsecprof set cod_sec=?, cod_curso=?, cod_prof where cod_curs_grad_sec_prof=?";
+            sql = "update cursgradsecprof set cod_grad, cod_sec=?, cod_curso=?, cod_prof=? where cod_curs_grad_sec_prof=?";
             run = this.getMiconexion().prepareStatement(sql);
-            run.setInt(1, cdSeccion);
-            run.setInt(2, cdCurso);
-            run.setString(3, cdMeastro);
-            run.setInt(4, cdGrado);
+            run.setInt(1, cdGrado);
+            run.setInt(2, cdSeccion);
+            run.setInt(3, cdCurso);
+            run.setString(4, cdMeastro);
+            run.setInt(5, codasig);
             run.executeUpdate();
 
             answer = "Asignacion actualizada con Exito";
@@ -119,5 +120,30 @@ public class AsignGSCPDAO extends Conexion {
             this.cerrarConex();
         }
         return answer;
+    }
+    
+    public AsignacionGSCP seachAsignacion(AsignacionCurso codigo){
+        AsignacionGSCP asign = new AsignacionGSCP();
+        try {
+            this.Conectar();
+            sql = "select * from cursgradsecprof where cod_curs_grad_sec_prof=?";
+            run = this.getMiconexion().prepareStatement(sql);
+            run.setInt(1, codigo.getCodigo());
+            values = run.executeQuery();
+            if (values.next()) {
+                asign.setCodigo(values.getInt("cod_curs_grad_sec_prof"));
+                asign.setCdGrado(values.getInt("cod_grad"));
+                asign.setCdSecc(values.getInt("cod_sec"));
+                asign.setCdCurso(values.getInt("cod_curso"));
+                asign.setCdMaestro(values.getString("cod_prof"));
+            }
+            run.close();
+            values.close();
+        } catch (SQLException e) {
+            System.out.println("Error en searchAsignacion: " + e);
+        }finally{
+            this.cerrarConex();
+        }
+        return asign;
     }
 }

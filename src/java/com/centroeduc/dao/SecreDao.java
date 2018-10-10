@@ -26,12 +26,9 @@ public class SecreDao extends Conexion {
     public String nuevaSecretaria(Secretaria secretaria, Administrador adm, Date date) {
         SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
         String fecha = formato.format(date);
-        System.out.println(secretaria.toString());
         try {
             this.Conectar();
-            System.out.println("DAO SECRETARIA");
             sql = "INSERT INTO secretaria values(?,?,?,?,?,?,?,?,?,?,MD5(?),?)"; 
-            System.out.println(sql);
             run = this.getMiconexion().prepareStatement(sql);
             
             run.setString(1, secretaria.getCodigo());
@@ -51,8 +48,8 @@ public class SecreDao extends Conexion {
             ingreso = "Datos Almacenados Exitosamente!";
 
         } catch (SQLException e) {
-            ingreso = "Error al almacenar datos" + e;
-            System.out.println("Error en Almacenar los Datos de Secretaria");
+            ingreso = "Error al almacenar datos";
+            System.out.println("Error en Almacenar los Datos de Secretaria" + e);
         } finally {
             this.cerrarConex();
         }
@@ -142,6 +139,7 @@ public class SecreDao extends Conexion {
             ingreso = "Datos Actualizados con exito!";
             
         } catch (SQLException e) {
+            ingreso = "No se pudo Actualizar los datos";
             System.out.println("Error al actualizar los datos" + e);
         } finally {
             this.cerrarConex();
@@ -197,10 +195,12 @@ public class SecreDao extends Conexion {
             run.setInt(1, 2);
             run.setString(2, secre.getCodigo());
             run.executeUpdate();
+            ingreso = "Se ha eliminado con Exito";
             run.close();
             
         }catch(Exception e){
             System.out.println("Error en el Estado, DAO" + e);
+            ingreso ="No se pudo eliminar";
         
         }finally{
             this.cerrarConex();           

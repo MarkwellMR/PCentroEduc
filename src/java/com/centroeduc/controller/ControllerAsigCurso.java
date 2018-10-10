@@ -13,12 +13,16 @@ import com.centroeduc.model.Maestro;
 import com.centroeduc.model.Seccion;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+
 @ManagedBean
 @ViewScoped
 
 public class ControllerAsigCurso {
+
     // Instancia DAOs
     CursoDAO cursodao = new CursoDAO();
     GradoDAO gradodao = new GradoDAO();
@@ -38,7 +42,9 @@ public class ControllerAsigCurso {
     ArrayList<Maestro> ListaMaestros = new ArrayList();
     ArrayList<AsignacionGSCP> ListaAsignacion = new ArrayList();
     ArrayList<AsignacionCurso> listaAsignacionCurso = new ArrayList();
-    private ArrayList<AsignacionCurso> filtro ;
+    private ArrayList<AsignacionCurso> filtro;
+
+    String mensaje = null;
 
     public ArrayList<AsignacionCurso> getFiltro() {
         return filtro;
@@ -47,7 +53,7 @@ public class ControllerAsigCurso {
     public void setFiltro(ArrayList<AsignacionCurso> filtro) {
         this.filtro = filtro;
     }
-        
+
     public ArrayList<AsignacionCurso> getListaAsignacionCurso() {
         return listaAsignacionCurso;
     }
@@ -55,7 +61,7 @@ public class ControllerAsigCurso {
     public void setListaAsignacionCurso(ArrayList<AsignacionCurso> listaAsignacionCurso) {
         this.listaAsignacionCurso = listaAsignacionCurso;
     }
-       
+
     public ArrayList<AsignacionGSCP> getListaAsignacion() {
         return ListaAsignacion;
     }
@@ -63,10 +69,9 @@ public class ControllerAsigCurso {
     public void setListaAsignacion(ArrayList<AsignacionGSCP> ListaAsignacion) {
         this.ListaAsignacion = ListaAsignacion;
     }
-    
-    
+
     List<String> nombreCurso;
-    
+
     public Curso getCurso() {
         return curso;
     }
@@ -130,37 +135,56 @@ public class ControllerAsigCurso {
     public void setListaMaestros(ArrayList<Maestro> ListaMaestros) {
         this.ListaMaestros = ListaMaestros;
     }
+
+    public AsignacionGSCP getAsign() {
+        return asign;
+    }
+
+    public void setAsign(AsignacionGSCP asign) {
+        this.asign = asign;
+    }
     
-    
-    
-    public void cargarListas(){
+
+    public void cargarListas() {
         this.ListaMaestros = this.maesdao.Mostrarprofesor();
         this.ListaCurso = this.cursodao.listCourse();
         this.ListaGrado = this.gradodao.mostrarGrado();
         this.ListaSeccion = this.secdao.MostrarSeccion();
         this.ListaAsignacion = this.dao.listAsign();
         this.listaAsignacionCurso = this.dao.listaAsignacion();
-        
-        
-    
+
     }
-    
-    public void asignarCurso(){
-        System.out.println("Codigo: " + this.asign.getCodigo());
-        System.out.println("Grado: " + this.grado.getCod_grado());
-        System.out.println("Sección: " + this.seccion.getCodigo());
-        System.out.println("Curso: " + this.curso.getCod());
-        System.out.println("Maestro: " + this.maestro.getCodigo());
-         try {
-            dao.newAsing(this.grado.getCod_grado(), this.seccion.getCodigo(), this.curso.getCod(), this.maestro.getCodigo());
+
+    public void asignarCurso() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        mensaje = null;
+        try {
+            mensaje = dao.newAsing(this.grado.getCod_grado(), this.seccion.getCodigo(), this.curso.getCod(), this.maestro.getCodigo());
+            context.addMessage(null, new FacesMessage(mensaje));
         } catch (Exception e) {
-             System.out.println("Error en ControllerAsignCurso: " + e);
+            context.addMessage(null, new FacesMessage(mensaje));
+            System.out.println("Error en ControllerAsignCurso: " + e);
         }
-        
-        
-        
     }
-    
-    
-    
+
+    public void updateAsignacion() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        mensaje = null;
+        try {
+            mensaje = dao.updateAsing(this.grado.getCod_grado(), this.seccion.getCodigo(), this.curso.getCod(), this.maestro.getCodigo(), this.asign.getCodigo());
+            context.addMessage(null, new FacesMessage(mensaje));
+        } catch (Exception e) {
+            context.addMessage(null, new FacesMessage(mensaje));
+            System.out.println("Error en ControllerAsigCurso: " + e);
+        }
+    }
+
+    public void searchAsignacion(AsignacionCurso dato) {
+        try {
+            dao.seachAsignacion(dato);
+        } catch (Exception e) {
+            System.out.println("Error en ControllerAsignCurso: " + e);
+        }
+    }
+
 }
