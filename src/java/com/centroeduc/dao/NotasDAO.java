@@ -1,5 +1,6 @@
 package com.centroeduc.dao;
 
+import com.centroeduc.model.Alumno;
 import com.centroeduc.model.Conexion;
 import com.centroeduc.model.Curso;
 import com.centroeduc.model.Grado;
@@ -20,16 +21,15 @@ public class NotasDAO extends Conexion {
     private String answer;
     ResultSet resultado;
 
-    public String agregarNotas(Notas nota) {
+    public String agregarNotas(int codAlumGrado, int nota, int codUn) {
         answer = null;
         try {
             this.Conectar();
-            sql = "insert into nota(cod_alumn_grad,nota,cod_unidad, cod_curs_grad_sec_prof) values(?,?,?,?)";
+            sql = "insert into nota(cod_alumn_grad,nota,cod_unidad, cod_curs_grad_sec_prof) values(?,?,?,1)";
             run = this.getMiconexion().prepareStatement(sql);
-            run.setInt(1, nota.getCodAlumGrado());
-            run.setInt(2, nota.getNota());
-            run.setInt(3, nota.getCodUnidad());
-            run.setInt(4, nota.getCusGradSecProf());
+            run.setInt(1, codAlumGrado);
+            run.setInt(2, nota);
+            run.setInt(3, codUn);
 
             run.executeUpdate();
             System.out.println("Dato Almacenado");
@@ -174,5 +174,60 @@ public class NotasDAO extends Conexion {
 
         return listaCurso;
     }
+  ArrayList<Alumno> listaAlumno = null;
 
+    public ArrayList<Alumno> MostrarAlumno(String codMae, int codGrad, int codSec,int codCurs) {
+        try {
+            this.Conectar();
+            sql = "select DISTINCT cod_alumno ,alumno from notas_listas where cod_prof =? and cod_grado = ? and cod_sec = ? and cod_curso = ?";
+            run = this.getMiconexion().prepareStatement(sql);
+            run.setString(1, codMae);
+            run.setInt(2, codGrad);
+            run.setInt(3, codSec);
+            run.setInt(4, codCurs);
+            this.resultado = this.run.executeQuery();
+
+            listaAlumno = new ArrayList();
+            while (resultado.next()) {
+                Alumno alumno = new Alumno();
+                alumno.setCodAlumno(resultado.getInt("cod_alumno"));
+                alumno.setNombre(resultado.getString("alumno"));
+                listaAlumno.add(alumno);
+            }
+            resultado.close();
+        } catch (SQLException e) {
+            System.out.println("Error en DAO MostarAlumno: " + e);
+        } finally {
+            this.cerrarConex();
+        }
+
+        return listaAlumno;
+    }
+    
+    public int AgregarNotas(String codMae, int codGrad, int codSec,int codCurs,int codAlum){
+            int rst=0;
+        try {
+            this.Conectar();
+            sql = "select cod_alumn_grad from notas_listas where cod_prof=? and cod_grado=? and cod_sec=? and cod_curso=? and cod_alumno=?";
+            run = this.getMiconexion().prepareStatement(sql);
+            run.setString(1, codMae);
+            run.setInt(2, codGrad);
+            run.setInt(3, codSec);
+            run.setInt(4, codCurs);
+            run.setInt(5, codAlum);
+            
+            this.resultado = this.run.executeQuery();
+            this.resultado.next();
+            rst = this.resultado.getInt("cod_alumn_grad");
+            
+            resultado.close();
+         }catch(SQLException e){
+             System.out.println("Error en DAO AgregarNotas " + e);   
+         }finally{
+            this.cerrarConex();
+        }
+         return rst;
+    }
+    
+   
 }

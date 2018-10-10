@@ -8,13 +8,14 @@
 
     <ui:define name="content">
         <f:event type="preRenderView" listener="#{controllerNotas.cargarMaestro()}"/>
-        
+
         <h:form id="selectForm">
             <p:selectOneMenu id="selMenProf" value="#{controllerNotas.codMae}">
+                <f:selectItem itemLabel="Maestro"/>
                 <f:selectItems value="#{controllerNotas.listaMaestros}" var="lstMaes" itemLabel="#{lstMaes.nombre} #{lstMaes.apellido}" itemValue="#{lstMaes.codigo}"/>
                 <p:ajax listener="#{controllerNotas.ListasGrado()}" process=":selectForm:selMenProf" update=":selectForm:selMenGrad"/>
             </p:selectOneMenu>
-            
+
             <p:selectOneMenu id="selMenGrad" value="#{controllerNotas.codGrad}" >
                 <f:selectItem itemLabel="Grado"/>
                 <f:selectItems value="#{controllerNotas.listaGrado}" var="lstGrd" itemLabel="#{lstGrd.descripcion}" itemValue="#{lstGrd.cod_grado}"/> 
@@ -25,13 +26,31 @@
                 <f:selectItems value="#{controllerNotas.lstSec}" var="lstSec" itemLabel="#{lstSec.descripcion}" itemValue="#{lstSec.codigo}"/>
                 <p:ajax listener="#{controllerNotas.cargarCurso()}" process=":selectForm:selMenSec" update=":selectForm:selMenCurs"/>
             </p:selectOneMenu>
-            
-            <p:selectOneMenu id="selMenCurs">
+
+            <p:selectOneMenu id="selMenCurs" value="#{controllerNotas.codCurso}">
                 <f:selectItem itemLabel="Curso"/>
                 <f:selectItems value="#{controllerNotas.lstCurso}" var="lstCurs" itemLabel="#{lstCurs.nombre}" itemValue="#{lstCurs.cod}"/>
+                <p:ajax listener="#{controllerNotas.cargarAlumno()}" update=":tblAlumnos:dtTblAlum"/>
             </p:selectOneMenu>
-             </h:form>
- 
+        </h:form>
+        <h:form id="tblAlumnos">
+            <p:dataTable var="lstAlum" value="#{controllerNotas.lstAl}" id="dtTblAlum" >
+                <p:column headerText="Codigo Alumno">
+                    <h:outputText value="#{lstAlum.codAlumno}"/>
+                </p:column>
+                <p:column headerText="Nombre">
+                    <h:outputText value="#{lstAlum.nombre}"/>
+                </p:column>
+                <p:column headerText="Unidad">
+                    <h:inputText value="#{controllerNotas.codUnidad}"/>
+                </p:column>
+                <p:column headerText="Nota">
+                    <h:inputText value="#{controllerNotas.nota.nota}"/>
+                    <p:commandButton value="Agregar Nota"  actionListener="#{controllerNotas.mostrarCodAlum(lstAlum.codAlumno,controllerNotas.nota.nota ,controllerNotas.codUnidad)}" />
+                </p:column>
+            </p:dataTable>          
+        </h:form>
+
     </ui:define>
 
 </ui:composition>

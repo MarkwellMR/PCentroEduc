@@ -2,6 +2,7 @@ package com.centroeduc.controller;
 
 import com.centroeduc.dao.MaestroDAO;
 import com.centroeduc.dao.NotasDAO;
+import com.centroeduc.model.Alumno;
 import com.centroeduc.model.Curso;
 import com.centroeduc.model.Grado;
 import com.centroeduc.model.Maestro;
@@ -22,16 +23,48 @@ public class ControllerNotas implements Serializable{
     ArrayList<Maestro> ListaMaestros = new ArrayList();
     ArrayList<Seccion> lstSec = new ArrayList();
     ArrayList<Curso> lstCurso = new ArrayList();
+    ArrayList<Alumno> lstAl = new ArrayList();
     
     private String codMae;
     private int codSec;
     private int codGrad;
     private int codCurso;
+    private int codAlum;
+    private Integer codUnidad;
     
     
     MaestroDAO maesdao = new MaestroDAO();
     
         // Getter y Setters
+
+    public Integer getCodUnidad() {
+        return codUnidad;
+    }
+
+    public void setCodUnidad(Integer codUnidad) {
+        this.codUnidad = codUnidad;
+    }
+    
+    
+
+    public int getCodAlum() {
+        return codAlum;
+    }
+
+    public void setCodAlum(int codAlum) {
+        this.codAlum = codAlum;
+    }
+    
+    
+    public ArrayList<Alumno> getLstAl() {
+        return lstAl;
+    }
+
+    public void setLstAl(ArrayList<Alumno> lstAl) {
+        this.lstAl = lstAl;
+    }
+    
+    
     public int getCodCurso() {
         return codCurso;
     }
@@ -134,13 +167,6 @@ public class ControllerNotas implements Serializable{
             System.out.println("Erro en Metodo Mostrar Notas " + e);
         }
     }
-    public void agregarNotas(){
-        try {
-            notasdao.agregarNotas(nota);
-        } catch (Exception e) {
-            System.out.println("Error en El Metodo AgregarNotas: " + e);
-        }
-    }
     
     public ArrayList<Grado> ListasGrado(){
         try {
@@ -166,6 +192,30 @@ public class ControllerNotas implements Serializable{
         } catch (Exception e) {
             System.out.println("Erroer en CargarCurso " + e);
         }
+    }
+    
+    public void cargarAlumno(){
+        try {
+            this.lstAl = notasdao.MostrarAlumno(codMae, codGrad, codSec, codCurso);
+            
+        } catch (Exception e) {
+            System.out.println("Error en cargarAlumno" + e);
+        }
+    }
+    
+    public void mostrarCodAlum(int cda, int nta, int und){
+        int rs = notasdao.AgregarNotas(codMae, codGrad, codSec, codCurso, cda);
+        String ResultadoNotas;
+        try {
+            
+            System.out.println("rs " + rs);
+            ResultadoNotas = notasdao.agregarNotas(rs,nta, und);
+            
+        } catch (Exception e) {
+            System.out.println("error xD");
+        }
+        
+        
     }
     
     
