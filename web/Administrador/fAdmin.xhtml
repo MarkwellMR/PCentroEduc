@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -16,15 +17,17 @@
         <div id="top" class="top">
             <ui:insert name="top">
                 <h:panelGrid columns="4">
-                    <h:column><img src="../resources/img/logo.png" class="logo" /></h:column>
+                    <h:column>
+                        <img src="../resources/img/logo.png" class="logo" />
+                    </h:column>
                     <h:column>
                         <div class="top2"><h2 class="ml-2">Bienvenido</h2></div>
                     </h:column>
                     <h:column>
-                        <div class="top2"><h2 class="ml-2">Busqueda</h2></div>
+                        <div class="top2"><h2 class="ml-2">&nbsp;</h2></div>
                     </h:column>
-                    <h:column>
-                        <div class="top2"><h2 class="ml-2">Cerrrar Sesion</h2></div>
+                    <h:column class="top3">
+                        <div class="top3"><p:commandButton value="Cerrar Sesión"/></div>
                     </h:column>
                 </h:panelGrid>
             </ui:insert>
@@ -33,14 +36,17 @@
             <div id="left" class="opciones">
                 <ui:insert name="left">
                     <h:form>
-                        <h:commandLink action="Padmin" id="enlace1">
+                        <h:commandLink action="Padmin" id="enlace1" title="Administradores">
                             <img src="../resources/img/Admin.svg" class="img"/>
                         </h:commandLink>
-                        <h:commandLink action="caso3" id="enlace2">
+                        <h:commandLink action="caso3" id="enlace2" title="Profesores">
                             <img src="../resources/img/Prof.svg" class="img"/>
                         </h:commandLink>
-                        <h:commandLink action="caso4" id="enlace3">
+                        <h:commandLink action="caso4" id="enlace3" title="Secretarias">
                             <img src="../resources/img/Secre.svg" class="img"/>
+                        </h:commandLink>
+                        <h:commandLink action="caso5" id="enlace4" title="Asignacion de Notas">
+                            <img src="../resources/img/notas.svg" class="img"/>
                         </h:commandLink>
                     </h:form>
                 </ui:insert>

@@ -87,6 +87,12 @@
     margin-left: 40px;
 }
 
+.top3{
+    margin-bottom: 20px;
+    float: right;
+    text-align: right;
+}
+
 #titulo{
     font-size: 30px;
     color: black;
@@ -114,6 +120,7 @@
 .ml-2{
     margin-left: 50px;
 }
+
 
 #etiquetas{
     text-align: left;
