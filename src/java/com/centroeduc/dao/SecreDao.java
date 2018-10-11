@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import com.centroeduc.model.Conexion;
 import com.centroeduc.model.Secretaria;
 import java.text.SimpleDateFormat;
 import java.util.Date;

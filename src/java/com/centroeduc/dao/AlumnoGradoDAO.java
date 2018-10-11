@@ -1,7 +1,6 @@
 package com.centroeduc.dao;
 
 import com.centroeduc.model.AlumnoGrado;
-import com.centroeduc.model.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

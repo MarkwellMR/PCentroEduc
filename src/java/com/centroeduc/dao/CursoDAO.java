@@ -1,6 +1,5 @@
 package com.centroeduc.dao;
 
-import com.centroeduc.model.Conexion;
 import com.centroeduc.model.Curso;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

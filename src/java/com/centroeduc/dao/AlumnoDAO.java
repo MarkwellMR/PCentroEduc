@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import com.centroeduc.model.Conexion;
 import com.centroeduc.model.Alumno;
 import com.centroeduc.model.AsignacionGSCP;
 import com.centroeduc.model.Grado;

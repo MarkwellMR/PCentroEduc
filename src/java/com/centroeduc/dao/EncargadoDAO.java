@@ -1,6 +1,5 @@
 package com.centroeduc.dao;
 
-import com.centroeduc.model.Conexion;
 import com.centroeduc.model.Encargado;
 import com.centroeduc.model.Secretaria;
 import java.sql.PreparedStatement;

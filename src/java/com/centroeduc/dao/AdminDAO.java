@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import com.centroeduc.model.Administrador;
-import com.centroeduc.model.Conexion;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

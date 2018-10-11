@@ -1,7 +1,6 @@
 package com.centroeduc.dao;
 
 import com.centroeduc.model.Alumno;
-import com.centroeduc.model.Conexion;
 import com.centroeduc.model.Curso;
 import com.centroeduc.model.Grado;
 import com.centroeduc.model.Notas;

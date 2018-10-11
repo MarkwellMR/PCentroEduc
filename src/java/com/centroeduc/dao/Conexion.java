@@ -1,4 +1,4 @@
-package com.centroeduc.model;
+package com.centroeduc.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
